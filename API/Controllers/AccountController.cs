@@ -19,7 +19,7 @@ public class AccountController(DataContext context) : BaseApiController
 
         var newUser = new User
         {
-            UserName = registerDto.Username,
+            UserName = registerDto.Username.ToLower(),
             PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
             PasswordSalt = hmac.Key,
         };
