@@ -30,6 +30,9 @@ public class AccountController(DataContext context) : BaseApiController
         return newUser;
     }
 
+    [HttpPost("login")]
+    public async Task<ActionResult<User>> Login() { }
+
     public async Task<bool> UsernameExists(string username)
     {
         return await context.Users.AnyAsync(user => user.UserName == username.ToLower());
