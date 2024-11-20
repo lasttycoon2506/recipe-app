@@ -30,8 +30,27 @@ public class AccountController(DataContext context) : BaseApiController
         return newUser;
     }
 
-    [HttpPost("login")]
-    public async Task<ActionResult<User>> Login() { }
+    [HttpGet("login")]
+    public async Task<ActionResult<User>> Login(LoginDto loginDto)
+    {
+        var user = await context.Users.FirstOrDefaultAsync(user =>
+            user.UserName == loginDto.Username.ToLower()
+        );
+
+        if (user == null)
+            return Unauthorized("invalid username");
+
+        using var hmac = new HMACSHA512(user.PasswordSalt);
+
+        var loginAttemptHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
+
+        for (int i = 0; i < loginAttemptHash.Length; i++)
+        {
+            if (user.PasswordHash[i] != loginAttemptHash[i])
+                return Unauthorized("invalid pw");
+        }
+        return user;
+    }
 
     public async Task<bool> UsernameExists(string username)
     {
