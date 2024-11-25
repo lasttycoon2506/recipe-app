@@ -9,15 +9,16 @@
         <li class="nav-item">
           <a class="nav-link">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" (click)="logout()">logout</a>
-        </li>
       </ul>
     }
     @if (loggedIn) {
-      <div class="dropdown">
-        <a class="dropdown-toggle text-light">Welcome user!</a>
-        <div class="dropdown-menu">
+      <div class="dropdown" dropdown>
+        <a
+          class="dropdown-toggle text-light text-decoration-none"
+          dropdownToggle
+          >Welcome user!</a
+        >
+        <div class="dropdown-menu" *dropdownMenu>
           <a class="dropdown-item"> edit profile </a>
           <a class="dropdown-item" (click)="logout()"> logout</a>
         </div>
