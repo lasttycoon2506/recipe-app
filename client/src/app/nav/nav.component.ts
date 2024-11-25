@@ -23,4 +23,8 @@ export class NavComponent {
       error: (err) => console.log(err),
     });
   }
+
+  logout() {
+    this.loggedIn = false;
+  }
 }
