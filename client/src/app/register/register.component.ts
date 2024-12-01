@@ -17,9 +17,13 @@ export class RegisterComponent {
   register() {
     this.accountService.register(this.model).subscribe({
       next: () => {
-        this.cancelRegister;
+        this.cancel();
       },
       error: (error) => console.log(error),
     });
+  }
+
+  cancel() {
+    this.cancelRegister.emit(false);
   }
 }
