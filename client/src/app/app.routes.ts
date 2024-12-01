@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { MessagesComponent } from './messages/messages.component';
-import { RecipesListComponent } from './recipes-list/recipes-list.component';
-import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
+import { MessagesComponent } from './components/messages/messages.component';
+import { RecipesListComponent } from './components/recipes-list/recipes-list.component';
+import { RecipeDetailComponent } from './components/recipe-detail/recipe-detail.component';
+import { HomeComponent } from './components/home/home.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
