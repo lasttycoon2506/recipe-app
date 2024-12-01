@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavComponent } from './components/nav/nav.component';
-import { AccountService } from './_services/account.service';
+import { AccountService } from './services/account.service';
 
 @Component({
   selector: 'app-root',
