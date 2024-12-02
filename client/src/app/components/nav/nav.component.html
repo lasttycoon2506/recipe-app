@@ -20,7 +20,7 @@
         <a
           class="dropdown-toggle text-light text-decoration-none"
           dropdownToggle
-          >Welcome user!</a
+          >{{ accountService.currentUser()?.username }}</a
         >
         <div class="dropdown-menu" *dropdownMenu>
           <a class="dropdown-item"> edit profile </a>
