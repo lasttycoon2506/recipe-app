@@ -13,13 +13,15 @@ export class RegisterComponent {
   private accountService = inject(AccountService);
   cancelRegister = output<boolean>();
   model: any = {};
+  inputValidationErrors: [] = [];
 
   register() {
     this.accountService.register(this.model).subscribe({
-      next: () => {
-        this.cancel();
+      next: () => this.cancel(),
+      error: (error) => {
+        console.log(error);
+        this.inputValidationErrors = error;
       },
-      error: (error) => console.log(error),
     });
   }
 
