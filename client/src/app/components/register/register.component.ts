@@ -20,8 +20,8 @@ export class RegisterComponent {
       next: () => this.cancel(),
       error: (error) => {
         console.log(error);
-        this.inputValidationErrors.push(error.error.errors['Username']);
-        this.inputValidationErrors.push(error.error.errors['Password']);
+        this.inputValidationErrors.push(error.error.errors['Username'].flat());
+        this.inputValidationErrors.push(error.error.errors['Password'].flat());
       },
     });
   }
