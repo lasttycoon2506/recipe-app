@@ -12,7 +12,7 @@ public class Seed
     {
         if (await context.Users.AnyAsync())
             return;
-        var userData = await File.ReadAllTextAsync("UserSeedData.json");
+        var userData = await File.ReadAllTextAsync("Data/UserSeedData.json");
         var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
         var users = JsonSerializer.Deserialize<List<User>>(userData, options);
 
@@ -27,7 +27,7 @@ public class Seed
             user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("password"));
             user.PasswordSalt = hmac.Key;
 
-            await context.Users.AddAsync(user);
+            context.Users.Add(user);
         }
         await context.SaveChangesAsync();
     }
