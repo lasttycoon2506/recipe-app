@@ -9,5 +9,3 @@ public class MemberDto
     public DateOnly Created { get; set; }
     public DateTime LastActive { get; set; }
 }
-
-public class PhotoDto { }
