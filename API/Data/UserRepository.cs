@@ -1,22 +1,23 @@
 using API.Entities;
 using API.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Data;
 
 public class UserRepository(DataContext context) : IUserRepository
 {
-    public async Task<User> GetUserAsync(int id)
+    public async Task<User?> GetUserAsync(int id)
     {
         return await context.Users.FindAsync(id);
     }
 
-    public Task<IEnumerable<User>> GetUsersAsync()
+    public async Task<IEnumerable<User>> GetUsersAsync()
     {
-        throw new NotImplementedException();
+        return await context.Users.ToListAsync();
     }
 
-    public Task<bool> SaveAsync()
+    public async Task<bool> SaveAsync()
     {
-        throw new NotImplementedException();
+        return await context.SaveChangesAsync() > 0;
     }
 }
