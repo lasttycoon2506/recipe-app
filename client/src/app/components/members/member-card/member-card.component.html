@@ -1,5 +1,9 @@
 <div class="card" style="width: 18rem">
-  <img src="{{ member().photoUrl }}" class="card-img-top" />
+  <img
+    src="{{ member().photoUrl }}"
+    class="card-img-top"
+    alt="{{ member().created }}"
+  />
   <div class="card-body">
     <h5 class="card-title">{{ member().username }}</h5>
     <p class="card-text">
