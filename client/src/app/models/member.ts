@@ -1,4 +1,6 @@
-type Member = {
+import { Photo } from './photo';
+
+export type Member = {
   id: number;
   username: string;
   photoUrl: string;

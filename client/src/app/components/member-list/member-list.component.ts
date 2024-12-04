@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { MemberService } from '../../services/member.service';
+import { Member } from '../../models/member';
 
 @Component({
   selector: 'app-recipes-list',
