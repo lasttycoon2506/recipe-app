@@ -1,0 +1,8 @@
+type Member = {
+  id: number;
+  username: string;
+  photoUrl: string;
+  photos: Photo[];
+  created: Date;
+  lastActive: Date;
+};
