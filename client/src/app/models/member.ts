@@ -5,4 +5,5 @@ type Member = {
   photos: Photo[];
   created: Date;
   lastActive: Date;
+  experience: string;
 };
