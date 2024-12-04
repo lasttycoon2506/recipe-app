@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { MessagesComponent } from './components/messages/messages.component';
-import { RecipesListComponent } from './components/recipes-list/recipes-list.component';
+import { RecipesListComponent } from './components/member-list/member-list.component';
 import { RecipeDetailComponent } from './components/recipe-detail/recipe-detail.component';
 import { HomeComponent } from './components/home/home.component';
 import { authGuard } from './guards/auth.guard';
