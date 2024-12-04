@@ -9,4 +9,5 @@ public class User
     public List<Photo> Photos { get; set; } = [];
     public DateOnly Created { get; set; }
     public DateTime LastActive { get; set; } = DateTime.UtcNow;
+    public string? Experience { get; set; }
 }

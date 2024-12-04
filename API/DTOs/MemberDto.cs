@@ -8,4 +8,5 @@ public class MemberDto
     public List<PhotoDto>? Photos { get; set; } = [];
     public DateOnly Created { get; set; }
     public DateTime LastActive { get; set; }
+    public string? Experience { get; set; }
 }

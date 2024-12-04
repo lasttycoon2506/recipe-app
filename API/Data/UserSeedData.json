@@ -8,7 +8,8 @@
         "Url": "https://randomrecipe.me/api/portraits/recipe/54.jpg",
         "IsMain": true
       }
-    ]
+    ],
+    "Experience": "novice"
   },
   {
     "UserName": "johhnny52",
@@ -19,7 +20,8 @@
         "Url": "https://randomrecipe.me/api/portraits/recipe/3.jpg",
         "IsMain": true
       }
-    ]
+    ],
+    "Experience": "expert"
   },
   {
     "UserName": "aggy19",
@@ -30,7 +32,8 @@
         "Url": "https://randomrecipe.me/api/portraits/recipe/29.jpg",
         "IsMain": true
       }
-    ]
+    ],
+    "Experience": "pro"
   },
   {
     "UserName": "yibbs437",
@@ -41,6 +44,7 @@
         "Url": "https://randomrecipe.me/api/portraits/recipe/75.jpg",
         "IsMain": true
       }
-    ]
+    ],
+    "Experience": "home-cook"
   }
 ]
