@@ -1,12 +1,12 @@
-<div class="card" style="width: 18rem">
-  <img
-    src="{{ member().photoUrl }}"
-    class="card-img-top"
-    alt="{{ member().created }}"
-  />
+<div class="card mb-4">
+  <div class="card-img-wrapper">
+    <img src="{{ member().photoUrl }}" class="card-img-top" />
+  </div>
   <div class="card-body">
-    <h5 class="card-title">{{ member().username }}</h5>
-    <p class="card-text">
+    <h5 class="card-title text-center mb-1">
+      <i class="fa fa-user me-2"></i>{{ member().username }}
+    </h5>
+    <p class="card-text text-muted text-center">
       {{ member().experience }}
     </p>
   </div>
