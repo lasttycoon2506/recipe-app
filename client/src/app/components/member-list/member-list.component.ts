@@ -3,7 +3,7 @@ import { MemberService } from '../../services/member.service';
 import { Member } from '../../models/member';
 
 @Component({
-  selector: 'app-recipes-list',
+  selector: 'app-member-list',
   standalone: true,
   imports: [],
   templateUrl: './member-list.component.html',
@@ -14,12 +14,12 @@ export class MemberListComponent implements OnInit {
   members: Member[] = [];
 
   ngOnInit(): void {
-    this.getMembers();
+    this.loadMembers();
   }
 
-  getMembers(): void {
+  loadMembers(): void {
     this.memberService.getMembers().subscribe({
-      next: (members) => (members = this.members),
+      next: (members) => (this.members = members),
       error: (error) => console.log(error),
     });
   }
