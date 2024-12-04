@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { MemberService } from '../../services/member.service';
 
 @Component({
   selector: 'app-recipes-list',
@@ -7,4 +8,18 @@ import { Component } from '@angular/core';
   templateUrl: './member-list.component.html',
   styleUrl: './member-list.component.css',
 })
-export class MemberListComponent {}
+export class MemberListComponent implements OnInit {
+  private memberService = inject(MemberService);
+  members: Member[] = [];
+
+  ngOnInit(): void {
+    this.getMembers();
+  }
+
+  getMembers(): void {
+    this.memberService.getMembers().subscribe({
+      next: (members) => (members = this.members),
+      error: (error) => console.log(error),
+    });
+  }
+}

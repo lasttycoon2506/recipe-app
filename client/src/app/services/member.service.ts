@@ -12,11 +12,11 @@ export class MemberService {
   private accountService = inject(AccountService);
   private baseUrl = environment.apiUrl;
 
-  getUser(id: number): Observable<Member> {
+  getMember(id: number): Observable<Member> {
     return this.http.get<Member>(this.baseUrl + 'users/' + id, this.getToken());
   }
 
-  getUsers(): Observable<Member[]> {
+  getMembers(): Observable<Member[]> {
     return this.http.get<Member[]>(this.baseUrl + 'users', this.getToken());
   }
 
