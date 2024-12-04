@@ -1,1 +1,9 @@
-<p>member-card works!</p>
+<div class="card" style="width: 18rem">
+  <img src="{{ member().photoUrl }}" class="card-img-top" />
+  <div class="card-body">
+    <h5 class="card-title">{{ member().username }}</h5>
+    <p class="card-text">
+      {{ member().experience }}
+    </p>
+  </div>
+</div>
