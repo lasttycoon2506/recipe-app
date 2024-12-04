@@ -14,25 +14,26 @@ public class UserRepository(DataContext context, IMapper mapper) : IUserReposito
     //     return await context.Users.FindAsync(id);
     // }
 
-    public async Task<IEnumerable<User>> GetUsersAsync()
-    {
-        return await context.Users.Include(x => x.Photos).ToListAsync();
-    }
+    // public async Task<IEnumerable<User>> GetUsersAsync()
+    // {
+    //     return await context.Users.Include(x => x.Photos).ToListAsync();
+    // }
 
     public async Task<bool> SaveAsync()
     {
         return await context.SaveChangesAsync() > 0;
     }
 
-    async Task<UserDto?> GetUserAsync(int id)
+    public async Task<MemberDto?> GetUserAsync(int id)
     {
         return await context
             .Users.Where(x => x.Id == id)
-            .ProjectTo<UserDto>(mapper.ConfigurationProvider);
+            .ProjectTo<MemberDto>(mapper.ConfigurationProvider)
+            .SingleOrDefaultAsync();
     }
 
-    Task<IEnumerable<UserDto>> IUserRepository.GetUsersAsync()
+    public async Task<IEnumerable<MemberDto>> GetUsersAsync()
     {
-        throw new NotImplementedException();
+        return await context.Users.ProjectTo<MemberDto>(mapper.ConfigurationProvider).ToListAsync();
     }
 }
