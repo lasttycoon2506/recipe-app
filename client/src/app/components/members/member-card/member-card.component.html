@@ -1,27 +1,29 @@
 <div class="card border-dark mb-4">
-  <div class="card-img-wrapper">
-    <img src="{{ member().photoUrl }}" class="card-img-top" />
-  </div>
-  <div class="card-body">
-    <h5 class="card-title text-center mb-1">
-      <i class="fa fa-user me-2"></i>{{ member().username }}
-    </h5>
-    <p class="card-text text-muted text-center">
-      {{ member().experience }}
-    </p>
-    <ul class="list-inline text-center mb-0">
-      <button
-        class="btn btn-primary me-2"
-        routerLink="/members/{{ member().id }}"
-      >
-        <li class="list-inline-item"><i class="fa fa-info mb-1 me-1"></i></li>
-      </button>
-      <button class="btn btn-primary me-2">
-        <li class="list-inline-item"><i class="fa fa-heart"></i></li>
-      </button>
-      <button class="btn btn-primary">
-        <li class="list-inline-item"><i class="fa fa-envelope"></i></li>
-      </button>
-    </ul>
-  </div>
+	<div class="card-img-wrapper">
+		<img src="{{ member().photoUrl }}" class="card-img-top" />
+	</div>
+	<div class="card-body">
+		<h5 class="card-title text-center mb-1">
+			<i class="fa fa-user me-2"></i>{{ member().username }}
+		</h5>
+		<p class="card-text text-muted text-center">
+			{{ member().experience }}
+		</p>
+		<ul class="list-inline text-center mb-0">
+			<button
+				class="btn btn-primary me-2"
+				routerLink="/members/{{ member().id }}"
+			>
+				<li class="list-inline-item">
+					<i class="fa fa-info mb-1 me-1"></i>
+				</li>
+			</button>
+			<button class="btn btn-primary me-2">
+				<li class="list-inline-item"><i class="fa fa-heart"></i></li>
+			</button>
+			<button class="btn btn-primary">
+				<li class="list-inline-item"><i class="fa fa-envelope"></i></li>
+			</button>
+		</ul>
+	</div>
 </div>

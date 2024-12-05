@@ -1,18 +1,21 @@
 <div class="container mt-5">
-  <div class="container">
-    @if (!registerMode) {
-      <div class="text-center">
-        <button (click)="registerToggle()" class="btn btn-primary btn-lg">
-          Register
-        </button>
-      </div>
-    } @else {
-      <div class="row justify-content-center">
-        <div class="col-5">
-          <app-register (cancelRegister)="cancelRegisterMode($event)">
-          </app-register>
-        </div>
-      </div>
-    }
-  </div>
+	<div class="container">
+		@if (!registerMode) {
+			<div class="text-center">
+				<button
+					(click)="registerToggle()"
+					class="btn btn-primary btn-lg"
+				>
+					Register
+				</button>
+			</div>
+		} @else {
+			<div class="row justify-content-center">
+				<div class="col-5">
+					<app-register (cancelRegister)="cancelRegisterMode($event)">
+					</app-register>
+				</div>
+			</div>
+		}
+	</div>
 </div>

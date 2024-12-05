@@ -5,17 +5,17 @@ import { Observable } from 'rxjs';
 import { Member } from '../models/member';
 
 @Injectable({
-  providedIn: 'root',
+	providedIn: 'root',
 })
 export class MemberService {
-  private http = inject(HttpClient);
-  private baseUrl = environment.apiUrl;
+	private http = inject(HttpClient);
+	private baseUrl = environment.apiUrl;
 
-  getMember(id: string): Observable<Member> {
-    return this.http.get<Member>(this.baseUrl + 'users/' + id);
-  }
+	getMember(id: string): Observable<Member> {
+		return this.http.get<Member>(this.baseUrl + 'users/' + id);
+	}
 
-  getMembers(): Observable<Member[]> {
-    return this.http.get<Member[]>(this.baseUrl + 'users');
-  }
+	getMembers(): Observable<Member[]> {
+		return this.http.get<Member[]>(this.baseUrl + 'users');
+	}
 }

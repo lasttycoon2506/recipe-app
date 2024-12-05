@@ -3,10 +3,10 @@ import { CanActivateFn } from '@angular/router';
 import { AccountService } from '../services/account.service';
 
 export const authGuard: CanActivateFn = () => {
-  const accountService = inject(AccountService);
+	const accountService = inject(AccountService);
 
-  if (accountService.currentUser()) {
-    return true;
-  }
-  return false;
+	if (accountService.currentUser()) {
+		return true;
+	}
+	return false;
 };

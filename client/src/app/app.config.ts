@@ -7,10 +7,10 @@ import { provideToastr } from 'ngx-toastr';
 import { jwtInterceptor } from './interceptors/jwt.interceptor';
 
 export const appConfig: ApplicationConfig = {
-  providers: [
-    provideRouter(routes),
-    provideHttpClient(withInterceptors([jwtInterceptor])),
-    provideAnimations(),
-    provideToastr({ positionClass: 'toast-bottom-left' }),
-  ],
+	providers: [
+		provideRouter(routes),
+		provideHttpClient(withInterceptors([jwtInterceptor])),
+		provideAnimations(),
+		provideToastr({ positionClass: 'toast-bottom-left' }),
+	],
 };
