@@ -1,10 +1,20 @@
 @if (member) {
   <div class="col-4">
-    <div class="card">
+    <div class="card border-dark">
       <img src="{{ member.photoUrl }}" />
       <div class="card-body">
-        <p>{{ member.created }}</p>
-        <p>{{ member.lastActive }}</p>
+        <strong>User: </strong>
+        <p>{{ member.username }}</p>
+        <strong>Experience: </strong>
+        <p>{{ member.experience }}</p>
+        <p><strong>Created: </strong>{{ member.created }}</p>
+        <p><strong>Last Active: </strong>{{ member.lastActive }}</p>
+      </div>
+      <div class="card-footer">
+        <div class="btn-group d-flex">
+          <button class="btn btn-danger">Like</button>
+          <button class="btn btn-success">Message</button>
+        </div>
       </div>
     </div>
   </div>
