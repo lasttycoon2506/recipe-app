@@ -9,12 +9,12 @@ export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'messages', component: MessagesComponent, canActivate: [authGuard] },
   {
-    path: 'users',
+    path: 'members',
     component: MemberListComponent,
     canActivate: [authGuard],
   },
   {
-    path: 'users/:id',
+    path: 'members/:id',
     component: RecipeDetailComponent,
     canActivate: [authGuard],
   },
