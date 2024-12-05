@@ -10,8 +10,11 @@
       {{ member().experience }}
     </p>
     <ul class="list-inline text-center mb-0">
-      <button class="btn btn-primary me-2">
-        <li class="list-inline-item"><i class="fa fa-info"></i></li>
+      <button
+        class="btn btn-primary me-2"
+        routerLink="/members/{{ member().id }}"
+      >
+        <li class="list-inline-item"><i class="fa fa-info mb-1 me-1"></i></li>
       </button>
       <button class="btn btn-primary me-2">
         <li class="list-inline-item"><i class="fa fa-heart"></i></li>
