@@ -4,6 +4,7 @@ import { MemberDetailComponent } from './components/members/member-detail/member
 import { HomeComponent } from './components/home/home.component';
 import { authGuard } from './guards/auth.guard';
 import { MemberListComponent } from './components/members/member-list/member-list.component';
+import { MemberEditComponent } from './components/members/member-edit/member-edit.component';
 
 export const routes: Routes = [
 	{ path: '', component: HomeComponent },
@@ -20,6 +21,11 @@ export const routes: Routes = [
 	{
 		path: 'members/:id',
 		component: MemberDetailComponent,
+		canActivate: [authGuard],
+	},
+	{
+		path: 'member/edit',
+		component: MemberEditComponent,
 		canActivate: [authGuard],
 	},
 ];

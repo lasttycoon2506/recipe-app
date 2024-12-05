@@ -29,7 +29,9 @@
 					>{{ accountService.currentUser()?.username }}</a
 				>
 				<div class="dropdown-menu" *dropdownMenu>
-					<a class="dropdown-item"> edit profile </a>
+					<a class="dropdown-item" routerLink="/member/edit">
+						edit profile
+					</a>
 					<a class="dropdown-item" (click)="logout()"> logout</a>
 				</div>
 			</div>
