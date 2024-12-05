@@ -18,14 +18,14 @@ export class NavComponent {
 	private toastr = inject(ToastrService);
 	model: any = {};
 
-	login() {
+	login(): void {
 		this.accountService.login(this.model).subscribe({
 			next: () => this.router.navigateByUrl('/members'),
 			error: (err) => this.toastr.error(err.error),
 		});
 	}
 
-	logout() {
+	logout(): void {
 		this.accountService.logout();
 		this.router.navigateByUrl('/');
 	}
