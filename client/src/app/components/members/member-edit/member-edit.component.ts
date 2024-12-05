@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { AccountService } from '../../../services/account.service';
 import { MemberService } from '../../../services/member.service';
+import { Member } from '../../../models/member';
 
 @Component({
 	selector: 'app-member-edit',
@@ -12,12 +13,17 @@ import { MemberService } from '../../../services/member.service';
 export class MemberEditComponent implements OnInit {
 	private accountService = inject(AccountService);
 	private memberService = inject(MemberService);
+	member?: Member;
 
 	ngOnInit(): void {
-		throw new Error('Method not implemented.');
+		this.loadMember();
 	}
 
 	loadMember(): void {
-		var user = this.accountService.currentUser();
+		var username = this.accountService.currentUser()?.username;
+		if (!username) return;
+		this.memberService.getMember(username).subscribe({
+			next: (member) => (this.member = member),
+		});
 	}
 }
