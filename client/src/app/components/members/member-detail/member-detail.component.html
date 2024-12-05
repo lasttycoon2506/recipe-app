@@ -1,24 +1,34 @@
 @if (member) {
-	<div class="col-4">
-		<div class="card border-dark">
-			<img src="{{ member.photoUrl }}" />
-			<div class="card-body">
-				<strong>User: </strong>
-				<p class="member-details">{{ member.username }}</p>
-				<strong>Experience: </strong>
-				<p class="member-details">{{ member.experience }}</p>
-				<p class="member-details">
-					<strong>Created: </strong>{{ member.created }}
-				</p>
-				<p class="member-details">
-					<strong>Last Active: </strong>{{ member.lastActive }}
-				</p>
-			</div>
-			<div class="card-footer">
-				<div class="btn-group d-flex">
-					<button class="btn btn-danger">Like</button>
-					<button class="btn btn-success">Message</button>
+	<div class="row">
+		<div class="col-4">
+			<div class="card border-dark">
+				<img src="{{ member.photoUrl }}" />
+				<div class="card-body">
+					<strong>User: </strong>
+					<p class="member-details">{{ member.username }}</p>
+					<strong>Experience: </strong>
+					<p class="member-details">{{ member.experience }}</p>
+					<p class="member-details">
+						<strong>Created: </strong>{{ member.created }}
+					</p>
+					<p class="member-details">
+						<strong>Last Active: </strong>{{ member.lastActive }}
+					</p>
 				</div>
+				<div class="card-footer">
+					<div class="btn-group d-flex">
+						<button class="btn btn-danger">Like</button>
+						<button class="btn btn-success">Message</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-8">
+			<div>
+				<tabset>
+					<tab heading="Pictures">pics here</tab>
+					<tab heading="Recipe">recipe here</tab>
+				</tabset>
 			</div>
 		</div>
 	</div>
