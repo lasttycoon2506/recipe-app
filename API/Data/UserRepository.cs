@@ -13,10 +13,10 @@ public class UserRepository(DataContext context, IMapper mapper) : IUserReposito
         return await context.SaveChangesAsync() > 0;
     }
 
-    public async Task<MemberDto?> GetUserAsync(int id)
+    public async Task<MemberDto?> GetUserAsync(string username)
     {
         return await context
-            .Users.Where(x => x.Id == id)
+            .Users.Where(x => x.UserName == username)
             .ProjectTo<MemberDto>(mapper.ConfigurationProvider)
             .SingleOrDefaultAsync();
     }

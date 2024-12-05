@@ -19,6 +19,5 @@ export class MemberEditComponent implements OnInit {
 
 	loadMember(): void {
 		var user = this.accountService.currentUser();
-		this.memberService.getMember();
 	}
 }

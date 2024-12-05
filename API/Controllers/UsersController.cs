@@ -16,10 +16,10 @@ namespace API.Controllers
             return Ok(users);
         }
 
-        [HttpGet("{id:int}")]
-        public async Task<ActionResult<MemberDto>> GetUser(int id)
+        [HttpGet("username")]
+        public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
-            var user = await userRepository.GetUserAsync(id);
+            var user = await userRepository.GetUserAsync(username);
 
             if (user == null)
                 return NotFound();
