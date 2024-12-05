@@ -24,6 +24,7 @@ export class MemberEditComponent implements OnInit {
 		if (!username) return;
 		this.memberService.getMember(username).subscribe({
 			next: (member) => (this.member = member),
+			error: (err) => console.log(err),
 		});
 	}
 }
