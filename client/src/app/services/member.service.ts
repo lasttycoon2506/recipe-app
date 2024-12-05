@@ -11,7 +11,7 @@ export class MemberService {
   private http = inject(HttpClient);
   private baseUrl = environment.apiUrl;
 
-  getMember(id: number): Observable<Member> {
+  getMember(id: string): Observable<Member> {
     return this.http.get<Member>(this.baseUrl + 'users/' + id);
   }
 
