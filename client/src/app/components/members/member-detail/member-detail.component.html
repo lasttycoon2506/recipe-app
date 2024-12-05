@@ -4,11 +4,15 @@
       <img src="{{ member.photoUrl }}" />
       <div class="card-body">
         <strong>User: </strong>
-        <p>{{ member.username }}</p>
+        <p class="member-details">{{ member.username }}</p>
         <strong>Experience: </strong>
-        <p>{{ member.experience }}</p>
-        <p><strong>Created: </strong>{{ member.created }}</p>
-        <p><strong>Last Active: </strong>{{ member.lastActive }}</p>
+        <p class="member-details">{{ member.experience }}</p>
+        <p class="member-details">
+          <strong>Created: </strong>{{ member.created }}
+        </p>
+        <p class="member-details">
+          <strong>Last Active: </strong>{{ member.lastActive }}
+        </p>
       </div>
       <div class="card-footer">
         <div class="btn-group d-flex">
