@@ -10,4 +10,5 @@ public class User
     public DateOnly Created { get; set; }
     public DateTime LastActive { get; set; } = DateTime.UtcNow;
     public string? Experience { get; set; }
+    public string? Speciality { get; set; }
 }

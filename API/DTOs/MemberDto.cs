@@ -9,4 +9,5 @@ public class MemberDto
     public DateOnly Created { get; set; }
     public DateTime LastActive { get; set; }
     public string? Experience { get; set; }
+    public string? Speciality { get; set; }
 }
