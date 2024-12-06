@@ -22,7 +22,8 @@ namespace API.Migrations
                     PasswordSalt = table.Column<byte[]>(type: "BLOB", nullable: false),
                     Created = table.Column<DateOnly>(type: "TEXT", nullable: false),
                     LastActive = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Experience = table.Column<string>(type: "TEXT", nullable: true)
+                    Experience = table.Column<string>(type: "TEXT", nullable: true),
+                    Specialty = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {

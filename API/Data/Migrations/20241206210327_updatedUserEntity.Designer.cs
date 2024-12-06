@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20241204204413_updatedUserEntity")]
+    [Migration("20241206210327_updatedUserEntity")]
     partial class updatedUserEntity
     {
         /// <inheritdoc />
@@ -68,6 +68,9 @@ namespace API.Migrations
                     b.Property<byte[]>("PasswordSalt")
                         .IsRequired()
                         .HasColumnType("BLOB");
+
+                    b.Property<string>("Specialty")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("UserName")
                         .IsRequired()
