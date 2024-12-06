@@ -4,6 +4,7 @@ import { MemberService } from '../../../services/member.service';
 import { Member } from '../../../models/member';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FormsModule } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
 	selector: 'app-member-edit',
@@ -15,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 export class MemberEditComponent implements OnInit {
 	private accountService = inject(AccountService);
 	private memberService = inject(MemberService);
+	private toastr = inject(ToastrService);
 	member?: Member;
 
 	ngOnInit(): void {
@@ -28,5 +30,9 @@ export class MemberEditComponent implements OnInit {
 			next: (member) => (this.member = member),
 			error: (err) => console.log(err),
 		});
+	}
+
+	editMember(): void {
+		this.toastr.success('works');
 	}
 }
