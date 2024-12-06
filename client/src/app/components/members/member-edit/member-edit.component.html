@@ -45,6 +45,12 @@
 							#editForm="ngForm"
 							(ngSubmit)="updateMember()"
 						>
+							<h4 class="mt-3 mb-2">Specialty</h4>
+							<input
+								type="text"
+								name="specialty"
+								[(ngModel)]="member.specialty"
+							/>
 							<h4 class="mt-3 mb-2">Experience</h4>
 							<input
 								type="text"
