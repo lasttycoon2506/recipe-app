@@ -1,6 +1,6 @@
 @if (member) {
 	<div class="row">
-		<div class="col-4">
+		<div class="col-4 text-center">
 			<h1>Your Profile</h1>
 		</div>
 		<div class="col-8">
@@ -24,18 +24,24 @@
 					</p>
 				</div>
 				<div class="card-footer">
-					<div class="btn-group d-flex">
-						<button class="btn btn-danger">Like</button>
-						<button class="btn btn-success">Message</button>
-					</div>
+					<button class="btn btn-danger col-12">Save</button>
 				</div>
 			</div>
 		</div>
 		<div class="col-8">
 			<div>
-				<tabset class="member-tabset">
-					<tab heading="Pictures">pics here</tab>
-					<tab heading="Recipe">recipe here</tab>
+				<tabset>
+					<tab heading="About">
+						<form>
+							<h4 class="mt-3 mb-2">Experience</h4>
+							<input
+								type="text"
+								name="experience"
+								[(ngModel)]="member.experience"
+							/>
+						</form>
+					</tab>
+					<tab heading="Pictures">recipe here</tab>
 				</tabset>
 			</div>
 		</div>
