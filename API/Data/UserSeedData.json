@@ -9,7 +9,8 @@
         "IsMain": true
       }
     ],
-    "Experience": "novice"
+    "Experience": "novice",
+    "Specialty": "african"
   },
   {
     "UserName": "johhnny52",
@@ -21,7 +22,8 @@
         "IsMain": true
       }
     ],
-    "Experience": "expert"
+    "Experience": "expert",
+    "Specialty": "french"
   },
   {
     "UserName": "aggy19",
@@ -33,7 +35,8 @@
         "IsMain": true
       }
     ],
-    "Experience": "pro"
+    "Experience": "pro",
+    "Specialty": "brazilian"
   },
   {
     "UserName": "yibbs437",
@@ -45,7 +48,8 @@
         "IsMain": true
       }
     ],
-    "Experience": "home-cook"
+    "Experience": "home-cook",
+    "Specialty": "italian"
   },
   {
     "UserName": "donny90",
@@ -57,7 +61,8 @@
         "IsMain": true
       }
     ],
-    "Experience": "semi-pro"
+    "Experience": "semi-pro",
+    "Specialty": "russian"
   },
   {
     "UserName": "tacoes",
@@ -69,7 +74,8 @@
         "IsMain": true
       }
     ],
-    "Experience": "pro"
+    "Experience": "pro",
+    "Specialty": "japanese"
   },
   {
     "UserName": "aaa",
@@ -81,7 +87,8 @@
         "IsMain": true
       }
     ],
-    "Experience": "novice"
+    "Experience": "novice",
+    "Specialty": "chinese"
   },
   {
     "UserName": "yummy",
@@ -93,6 +100,7 @@
         "IsMain": true
       }
     ],
-    "Experience": "home-cook"
+    "Experience": "home-cook",
+    "Specialty": "mexican"
   }
 ]
