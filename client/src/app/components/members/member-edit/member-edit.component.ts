@@ -1,9 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { AccountService } from '../../../services/account.service';
 import { MemberService } from '../../../services/member.service';
 import { Member } from '../../../models/member';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -17,6 +17,7 @@ export class MemberEditComponent implements OnInit {
 	private accountService = inject(AccountService);
 	private memberService = inject(MemberService);
 	private toastr = inject(ToastrService);
+	@ViewChild('editForm') editForm?: NgForm;
 	member?: Member;
 
 	ngOnInit(): void {
