@@ -8,4 +8,5 @@ export type Member = {
 	created: Date;
 	lastActive: Date;
 	experience: string;
+	specialty: string;
 };
