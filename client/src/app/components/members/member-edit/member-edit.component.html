@@ -26,7 +26,11 @@
 					</p>
 				</div>
 				<div class="card-footer">
-					<button form="editForm" class="btn btn-success col-12">
+					<button
+						[disabled]="!editForm.dirty"
+						form="editForm"
+						class="btn btn-success col-12"
+					>
 						Save
 					</button>
 				</div>
