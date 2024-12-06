@@ -1,4 +1,10 @@
-import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import {
+	Component,
+	HostListener,
+	inject,
+	OnInit,
+	ViewChild,
+} from '@angular/core';
 import { AccountService } from '../../../services/account.service';
 import { MemberService } from '../../../services/member.service';
 import { Member } from '../../../models/member';
@@ -18,6 +24,11 @@ export class MemberEditComponent implements OnInit {
 	private memberService = inject(MemberService);
 	private toastr = inject(ToastrService);
 	@ViewChild('editForm') editForm?: NgForm;
+	@HostListener('window:beforeunload', ['$event']) notify($event: any) {
+		if (this.editForm?.dirty) {
+			$event.returnValue = true;
+		}
+	}
 	member?: Member;
 
 	ngOnInit(): void {
