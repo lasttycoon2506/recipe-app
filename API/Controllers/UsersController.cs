@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+using System.Security.Claims;
 using API.DTOs;
 using API.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -25,6 +27,12 @@ namespace API.Controllers
                 return NotFound();
 
             return user;
+        }
+
+        [HttpPut("{username}")]
+        public async Task<AsyncVoidMethodBuilder> UpdateUser(MemberUpdateDto memberUpdateDto)
+        {
+            var username = User.FindFirstValue(ClaimTypes.NameIdentifier);
         }
     }
 }
