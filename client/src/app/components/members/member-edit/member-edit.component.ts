@@ -33,7 +33,7 @@ export class MemberEditComponent implements OnInit {
 		});
 	}
 
-	editMember(): void {
+	updateMember(): void {
 		this.editForm?.reset(this.member);
 		this.toastr.success('Profile Updated!');
 	}
