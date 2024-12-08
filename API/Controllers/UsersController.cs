@@ -36,12 +36,9 @@ namespace API.Controllers
             var username = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             if (username == null)
-                return BadRequest("username dne");
+                return BadRequest("username not found in token");
 
             var user = await userRepository.GetUserAsync(username);
-
-            if (user == null)
-                return BadRequest("user dne in db");
 
             mapper.Map(memberUpdateDto, user);
 
