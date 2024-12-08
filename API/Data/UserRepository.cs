@@ -13,7 +13,7 @@ public class UserRepository(DataContext context, IMapper mapper) : IUserReposito
         return await context.SaveChangesAsync() > 0;
     }
 
-    public async Task<MemberDto?> GetUserAsync(string username)
+    public async Task<MemberDto?> GetMemberAsync(string username)
     {
         return await context
             .Users.Where(x => x.UserName == username)
@@ -21,8 +21,18 @@ public class UserRepository(DataContext context, IMapper mapper) : IUserReposito
             .SingleOrDefaultAsync();
     }
 
-    public async Task<IEnumerable<MemberDto>> GetUsersAsync()
+    public async Task<IEnumerable<MemberDto>> GetMembersAsync()
     {
         return await context.Users.ProjectTo<MemberDto>(mapper.ConfigurationProvider).ToListAsync();
+    }
+
+    public Task<IEnumerable<MemberDto>> GetUsersAsync()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<MemberDto?> GetUserAsync(string username)
+    {
+        throw new NotImplementedException();
     }
 }

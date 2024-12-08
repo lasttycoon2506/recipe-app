@@ -34,12 +34,10 @@ namespace API.Controllers
         public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
         {
             var username = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
             if (username == null)
                 return BadRequest("username not found in token");
 
             var user = await userRepository.GetUserAsync(username);
-
             mapper.Map(memberUpdateDto, user);
 
             if (await userRepository.SaveAsync())
