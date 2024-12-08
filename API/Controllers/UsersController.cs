@@ -10,14 +10,6 @@ namespace API.Controllers
     [Authorize]
     public class UsersController(IUserRepository userRepository, IMapper mapper) : BaseApiController
     {
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<MemberDto>>> GetMembers()
-        {
-            var users = await userRepository.GetMembersAsync();
-
-            return Ok(users);
-        }
-
         [HttpGet("{username}")]
         public async Task<ActionResult<MemberDto>> GetMember(string username)
         {
@@ -29,6 +21,14 @@ namespace API.Controllers
             return user;
         }
 
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<MemberDto>>> GetMembers()
+        {
+            var users = await userRepository.GetMembersAsync();
+
+            return Ok(users);
+        }
+
         [HttpPut]
         public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
         {
@@ -37,8 +37,10 @@ namespace API.Controllers
                 return BadRequest("username not found in token");
 
             var user = await userRepository.GetUserAsync(username);
-            mapper.Map(memberUpdateDto, user);
+            if (user == null)
+                return BadRequest("user dne in db");
 
+            mapper.Map(memberUpdateDto, user);
             if (await userRepository.SaveAsync())
                 return NoContent();
 
