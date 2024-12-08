@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Member } from '../models/member';
 
 @Injectable({
@@ -12,7 +12,10 @@ export class MemberService {
 	private baseUrl = environment.apiUrl;
 	members = signal<Member[]>([]);
 
-	getMember(username: string): Observable<Member> {
+	getMember(username: string) {
+		const member = this.members().find((m) => m.username === username);
+		if (member) return of(member);
+
 		return this.http.get<Member>(this.baseUrl + 'users/' + username);
 	}
 
