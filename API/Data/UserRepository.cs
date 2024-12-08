@@ -1,4 +1,6 @@
+using System.Diagnostics.Tracing;
 using API.DTOs;
+using API.Entities;
 using API.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -8,11 +10,6 @@ namespace API.Data;
 
 public class UserRepository(DataContext context, IMapper mapper) : IUserRepository
 {
-    public async Task<bool> SaveAsync()
-    {
-        return await context.SaveChangesAsync() > 0;
-    }
-
     public async Task<MemberDto?> GetMemberAsync(string username)
     {
         return await context
@@ -26,13 +23,20 @@ public class UserRepository(DataContext context, IMapper mapper) : IUserReposito
         return await context.Users.ProjectTo<MemberDto>(mapper.ConfigurationProvider).ToListAsync();
     }
 
-    public Task<IEnumerable<MemberDto>> GetUsersAsync()
+    public async Task<User?> GetUserAsync(string username)
     {
-        throw new NotImplementedException();
+        return await context
+            .Users.Include(x => x.Photos)
+            .SingleOrDefaultAsync(x => x.UserName == username);
     }
 
-    public Task<MemberDto?> GetUserAsync(string username)
+    public async Task<IEnumerable<User>> GetUsersAsync()
     {
-        throw new NotImplementedException();
+        return await context.Users.Include(x => x.Photos).ToListAsync();
+    }
+
+    public async Task<bool> SaveAsync()
+    {
+        return await context.SaveChangesAsync() > 0;
     }
 }
