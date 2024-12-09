@@ -56,6 +56,9 @@ namespace API.Controllers
 
             var result = await photoService.UploadImgAsync(file);
 
+            if (result.Error != null)
+                return BadRequest(result.Error.Message);
+
             var pic = new Photo { Url = result.SecureUrl.AbsoluteUri, PublicId = result.PublicId };
 
             user.Photos.Add(pic);
