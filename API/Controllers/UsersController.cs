@@ -65,7 +65,11 @@ namespace API.Controllers
             user.Photos.Add(pic);
 
             if (await userRepository.SaveAsync())
-                return mapper.Map<PhotoDto>(pic);
+                return CreatedAtAction(
+                    nameof(GetMember),
+                    new { username = user.UserName },
+                    mapper.Map<PhotoDto>(pic)
+                );
 
             return BadRequest("unable to save pic to db");
         }
