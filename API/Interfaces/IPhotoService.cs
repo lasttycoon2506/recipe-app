@@ -1,6 +1,9 @@
+using CloudinaryDotNet.Actions;
+
 namespace API.Interfaces;
 
 public interface IPhotoService
 {
-    public Task MyProperty { get; set; }
+    public Task<ImageUploadResult> UploadImgAsync(IFormFile img);
+    public Task<DeletionResult> DeleteImgAsync(string imgId);
 }
