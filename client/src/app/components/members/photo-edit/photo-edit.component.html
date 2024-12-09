@@ -1,7 +1,17 @@
+<head>
+	<link
+		href="https://fonts.googleapis.com/icon?family=Material+Icons"
+		rel="stylesheet"
+	/>
+</head>
+
 <div class="row">
 	@for (pic of member().photos; track pic.id) {
-		<div class="col-2">
-			<img src="{{ pic.url }}" />
+		<div class="col-2 text-center">
+			<img src="{{ pic.url }}" class="img-thumbnail mb-1" />
+			<button class="btn btn-danger btn-sm">
+				<i class="material-icons">delete</i>
+			</button>
 		</div>
 	}
 </div>
