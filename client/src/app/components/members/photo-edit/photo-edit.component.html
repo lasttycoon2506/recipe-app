@@ -1,0 +1,7 @@
+<div class="row">
+	@for (pic of member().photos; track pic.id) {
+		<div class="col-2">
+			<img src="{{ pic.url }}" />
+		</div>
+	}
+</div>
