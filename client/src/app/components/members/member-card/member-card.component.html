@@ -19,18 +19,22 @@
 		</p>
 		<ul class="list-inline text-center mb-0">
 			<button
-				class="btn btn-primary me-2"
+				class="btn btn-dark btn-sm me-2"
 				routerLink="/members/{{ member().username }}"
 			>
 				<li class="list-inline-item">
-					<i class="fa fa-info mb-1 me-1"></i>
+					<i class="material-icons">info</i>
 				</li>
 			</button>
-			<button class="btn btn-primary me-2">
-				<li class="list-inline-item"><i class="fa fa-heart"></i></li>
+			<button class="btn btn-danger btn-sm me-2">
+				<li class="list-inline-item">
+					<i class="material-icons">favorite</i>
+				</li>
 			</button>
-			<button class="btn btn-primary">
-				<li class="list-inline-item"><i class="fa fa-envelope"></i></li>
+			<button class="btn btn-primary btn-sm">
+				<li class="list-inline-item">
+					<i class="material-icons">mail</i>
+				</li>
 			</button>
 		</ul>
 	</div>
