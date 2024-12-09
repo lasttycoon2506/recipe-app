@@ -1,5 +1,5 @@
-using System.Security.Claims;
 using API.DTOs;
+using API.Extensions;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -32,11 +32,7 @@ namespace API.Controllers
         [HttpPut]
         public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
         {
-            var username = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (username == null)
-                return BadRequest("username not found in token");
-
-            var user = await userRepository.GetUserAsync(username);
+            var user = await userRepository.GetUserAsync(User.GetUsername());
             if (user == null)
                 return BadRequest("user dne in db");
 
