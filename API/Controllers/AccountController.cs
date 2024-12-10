@@ -4,7 +4,6 @@ using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Interfaces;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -41,9 +40,9 @@ public class AccountController(DataContext context, ITokenService tokenService) 
     [HttpPost("login")]
     public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
     {
-        var user = await context.Users.FirstOrDefaultAsync(user =>
-            user.UserName == loginDto.Username.ToLower()
-        );
+        var user = await context
+            .Users.Include(user => user.Photos)
+            .FirstOrDefaultAsync(user => user.UserName == loginDto.Username.ToLower());
 
         if (user == null)
             return Unauthorized("invalid username");
@@ -57,7 +56,12 @@ public class AccountController(DataContext context, ITokenService tokenService) 
             if (user.PasswordHash[i] != loginAttemptHash[i])
                 return Unauthorized("invalid pw");
         }
-        return new UserDto { Username = user.UserName, token = tokenService.CreateToken(user) };
+        return new UserDto
+        {
+            Username = user.UserName,
+            Token = tokenService.CreateToken(user),
+            PhotoUrl = user.Photos.FirstOrDefault(pic => pic.IsMain)?.Url,
+        };
     }
 
     public async Task<bool> UsernameExists(string username)
