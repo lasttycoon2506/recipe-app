@@ -20,14 +20,14 @@ export class PhotoEditComponent implements OnInit {
 	private accountService = inject(AccountService);
 
 	ngOnInit(): void {
-		throw new Error('Method not implemented.');
+		this.uploadInit();
 	}
 
 	fileOverBase(event: any) {
 		this.hasBaseDropzoneOver = event;
 	}
 
-	upload() {
+	uploadInit() {
 		this.uploader = new FileUploader({
 			url: environment.apiUrl,
 			authToken: this.accountService.currentUser()?.token,
