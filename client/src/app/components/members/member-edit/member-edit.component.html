@@ -60,7 +60,10 @@
 						</form>
 					</tab>
 					<tab heading="Pictures"
-						><app-photo-edit [member]="member"></app-photo-edit
+						><app-photo-edit
+							[member]="member"
+							(memberUpdated)="onMemberUpdated($event)"
+						></app-photo-edit
 					></tab>
 				</tabset>
 			</div>

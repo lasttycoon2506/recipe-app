@@ -14,7 +14,7 @@ import { AccountService } from '../../../services/account.service';
 })
 export class PhotoEditComponent implements OnInit {
 	member = input.required<Member>();
-	memberUpdate = output<Member>();
+	memberUpdated = output<Member>();
 	uploader?: FileUploader;
 	hasBaseDropzoneOver = false;
 	private accountService = inject(AccountService);
@@ -45,7 +45,7 @@ export class PhotoEditComponent implements OnInit {
 			const pic = JSON.parse(response);
 			const updatedMember = this.member();
 			updatedMember.photos.push(pic);
-			this.memberUpdate.emit(updatedMember);
+			this.memberUpdated.emit(updatedMember);
 		};
 	}
 }

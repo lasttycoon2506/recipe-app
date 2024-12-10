@@ -54,4 +54,8 @@ export class MemberEditComponent implements OnInit {
 			error: (err) => console.log(err),
 		});
 	}
+
+	onMemberUpdated(event: Member) {
+		this.member = event;
+	}
 }
