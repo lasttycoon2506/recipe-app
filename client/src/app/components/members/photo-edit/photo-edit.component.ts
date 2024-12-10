@@ -1,7 +1,7 @@
-import { Component, inject, input, OnInit } from '@angular/core';
+import { Component, inject, input, OnInit, output } from '@angular/core';
 import { Member } from '../../../models/member';
 import { NgClass, NgFor, NgIf, NgStyle } from '@angular/common';
-import { FileUploader, FileUploadModule } from 'ng2-file-upload';
+import { FileItem, FileUploader, FileUploadModule } from 'ng2-file-upload';
 import { environment } from '../../../../environments/environment';
 import { AccountService } from '../../../services/account.service';
 
@@ -14,6 +14,7 @@ import { AccountService } from '../../../services/account.service';
 })
 export class PhotoEditComponent implements OnInit {
 	member = input.required<Member>();
+	memberUpdate = output<Member>();
 	uploader?: FileUploader;
 	hasBaseDropzoneOver = false;
 	private accountService = inject(AccountService);
@@ -36,5 +37,15 @@ export class PhotoEditComponent implements OnInit {
 			removeAfterUpload: true,
 			maxFileSize: 1024 * 1024 * 10,
 		});
+
+		this.uploader.onAfterAddingFile = (file) =>
+			(file.withCredentials = false);
+
+		this.uploader.onSuccessItem = (item, response, status, headers) => {
+			const pic = JSON.parse(response);
+			const updatedMember = this.member();
+			updatedMember.photos.push(pic);
+			this.memberUpdate.emit(updatedMember);
+		};
 	}
 }
