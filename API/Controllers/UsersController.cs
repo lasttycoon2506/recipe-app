@@ -73,5 +73,27 @@ namespace API.Controllers
 
             return BadRequest("unable to save pic to db");
         }
+
+        [HttpPut("set-main-pic/{photoId:int}")]
+        public async Task<ActionResult> SetMainPic(int photoId)
+        {
+            var user = await userRepository.GetUserAsync(User.GetUsername());
+            if (user == null)
+                return BadRequest("user dne in db");
+
+            var newMainPic = user.Photos.FirstOrDefault(pic => pic.Id == photoId);
+
+            if (newMainPic == null || newMainPic.IsMain)
+                return BadRequest("pic already set as main or is null");
+
+            var currentMainPic = user.Photos.FirstOrDefault(pic => pic.IsMain);
+            if (currentMainPic != null)
+                currentMainPic.IsMain = false;
+            newMainPic.IsMain = true;
+
+            if (await userRepository.SaveAsync())
+                return NoContent();
+            return BadRequest("unable to set new pic as main");
+        }
     }
 }
