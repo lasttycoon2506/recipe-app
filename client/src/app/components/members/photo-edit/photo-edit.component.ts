@@ -1,14 +1,14 @@
 import { Component, inject, input, OnInit, output } from '@angular/core';
 import { Member } from '../../../models/member';
-import { NgClass, NgFor, NgIf, NgStyle } from '@angular/common';
-import { FileItem, FileUploader, FileUploadModule } from 'ng2-file-upload';
+import { DecimalPipe, NgClass, NgFor, NgIf, NgStyle } from '@angular/common';
+import { FileUploader, FileUploadModule } from 'ng2-file-upload';
 import { environment } from '../../../../environments/environment';
 import { AccountService } from '../../../services/account.service';
 
 @Component({
 	selector: 'app-photo-edit',
 	standalone: true,
-	imports: [NgIf, NgFor, NgStyle, NgClass, FileUploadModule],
+	imports: [NgIf, NgFor, NgStyle, NgClass, FileUploadModule, DecimalPipe],
 	templateUrl: './photo-edit.component.html',
 	styleUrl: './photo-edit.component.css',
 })
@@ -16,7 +16,7 @@ export class PhotoEditComponent implements OnInit {
 	member = input.required<Member>();
 	memberUpdated = output<Member>();
 	uploader?: FileUploader;
-	hasBaseDropzoneOver = false;
+	hasBaseDropZoneOver = false;
 	private accountService = inject(AccountService);
 
 	ngOnInit(): void {
@@ -24,7 +24,7 @@ export class PhotoEditComponent implements OnInit {
 	}
 
 	fileOverBase(event: any) {
-		this.hasBaseDropzoneOver = event;
+		this.hasBaseDropZoneOver = event;
 	}
 
 	uploadInit() {
