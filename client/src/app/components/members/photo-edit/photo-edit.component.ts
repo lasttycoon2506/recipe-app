@@ -72,5 +72,15 @@ export class PhotoEditComponent implements OnInit {
 		});
 	}
 
-	deletePic(photo: Photo): void {}
+	deletePic(photo: Photo): void {
+		this.memberService.deletePic(photo).subscribe({
+			next: () => {
+				const updatedMember = { ...this.member() };
+				updatedMember.photos = updatedMember.photos.filter(
+					(pic) => pic.id !== photo.id,
+				);
+				this.memberUpdated.emit(updatedMember);
+			},
+		});
+	}
 }
