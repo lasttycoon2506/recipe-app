@@ -1,14 +1,16 @@
 import { Component, inject, input, OnInit, output } from '@angular/core';
 import { Member } from '../../../models/member';
-import { DecimalPipe, NgFor, NgIf, NgStyle } from '@angular/common';
+import { DecimalPipe, NgClass, NgFor, NgIf, NgStyle } from '@angular/common';
 import { FileUploader, FileUploadModule } from 'ng2-file-upload';
 import { environment } from '../../../../environments/environment';
 import { AccountService } from '../../../services/account.service';
+import { MemberService } from '../../../services/member.service';
+import { Photo } from '../../../models/photo';
 
 @Component({
 	selector: 'app-photo-edit',
 	standalone: true,
-	imports: [NgIf, NgFor, NgStyle, FileUploadModule, DecimalPipe],
+	imports: [NgIf, NgFor, NgStyle, FileUploadModule, DecimalPipe, NgClass],
 	templateUrl: './photo-edit.component.html',
 	styleUrl: './photo-edit.component.css',
 })
@@ -18,6 +20,7 @@ export class PhotoEditComponent implements OnInit {
 	uploader?: FileUploader;
 	hasBaseDropZoneOver = false;
 	private accountService = inject(AccountService);
+	private memberService = inject(MemberService);
 	baseUrl = environment.apiUrl;
 
 	ngOnInit(): void {
@@ -48,5 +51,9 @@ export class PhotoEditComponent implements OnInit {
 			updatedMember.photos.push(pic);
 			this.memberUpdated.emit(updatedMember);
 		};
+	}
+
+	setMainPic(photo: Photo) {
+		this.memberService.setMainPic();
 	}
 }
