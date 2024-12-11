@@ -33,9 +33,9 @@ public class PhotoService : IPhotoService
         return uploadResult;
     }
 
-    public Task<DeletionResult> DeleteImgAsync(string imgId)
+    public Task<DeletionResult> DeleteImgAsync(string publicId)
     {
-        var deleteParams = new DeletionParams(imgId);
+        var deleteParams = new DeletionParams(publicId);
         return _cloudinary.DestroyAsync(deleteParams);
     }
 }

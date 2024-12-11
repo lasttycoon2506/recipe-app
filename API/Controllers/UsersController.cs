@@ -95,5 +95,29 @@ namespace API.Controllers
                 return NoContent();
             return BadRequest("unable to set new pic as main");
         }
+
+        [HttpDelete("delete-pic/{photoId:int}")]
+        public async Task<ActionResult> DeletePic(int photoId)
+        {
+            var user = await userRepository.GetUserAsync(User.GetUsername());
+            if (user == null)
+                return BadRequest("user not found in db");
+
+            var picToDelete = user.Photos.FirstOrDefault(pic => pic.Id == photoId);
+            if (picToDelete == null || picToDelete.IsMain)
+                return BadRequest("pic dne in users photos or pic is set as main");
+
+            if (picToDelete.PublicId != null)
+            {
+                var result = await photoService.DeleteImgAsync(picToDelete.PublicId);
+                if (result.Error != null)
+                    return BadRequest(result.Error.Message);
+            }
+
+            user.Photos.Remove(picToDelete);
+            if (await userRepository.SaveAsync())
+                return Ok();
+            return BadRequest("error deleting from db");
+        }
     }
 }
