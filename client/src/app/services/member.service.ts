@@ -46,4 +46,23 @@ export class MemberService {
 				),
 			);
 	}
+
+	deletePic(photo: Photo): Observable<Response> {
+		return this.http
+			.delete<Response>(this.baseUrl + 'users/delete-pic/' + photo.id)
+			.pipe(
+				tap(() =>
+					this.members.update((members) =>
+						members.map((member) => {
+							if (member.photos.includes(photo)) {
+								member.photos.filter(
+									(pic) => pic.id !== photo.id,
+								);
+							}
+							return member;
+						}),
+					),
+				),
+			);
+	}
 }
