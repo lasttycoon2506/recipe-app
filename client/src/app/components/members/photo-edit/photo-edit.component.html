@@ -19,7 +19,11 @@
 			>
 				Main
 			</button>
-			<button class="btn btn-danger btn-sm p-0">
+			<button
+				class="btn btn-danger btn-sm p-0"
+				[disabled]="pic.isMain"
+				(click)="deletePic(pic)"
+			>
 				<i class="material-icons">delete</i>
 			</button>
 		</div>
