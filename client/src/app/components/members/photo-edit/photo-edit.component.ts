@@ -27,11 +27,11 @@ export class PhotoEditComponent implements OnInit {
 		this.uploadInit();
 	}
 
-	fileOverBase(event: any) {
+	fileOverBase(event: any): void {
 		this.hasBaseDropZoneOver = event;
 	}
 
-	uploadInit() {
+	uploadInit(): void {
 		this.uploader = new FileUploader({
 			url: this.baseUrl + 'users/add-pic',
 			authToken: 'Bearer ' + this.accountService.currentUser()?.token,
@@ -53,7 +53,7 @@ export class PhotoEditComponent implements OnInit {
 		};
 	}
 
-	setMainPic(photo: Photo) {
+	setMainPic(photo: Photo): void {
 		this.memberService.setMainPic(photo).subscribe({
 			next: () => {
 				const user = this.accountService.currentUser();
@@ -71,4 +71,6 @@ export class PhotoEditComponent implements OnInit {
 			},
 		});
 	}
+
+	deletePic(photo: Photo): void {}
 }
