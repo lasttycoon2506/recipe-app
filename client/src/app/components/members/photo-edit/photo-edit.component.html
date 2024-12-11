@@ -46,7 +46,7 @@
 		</table>
 		<div>
 			<div>
-				Queue progress:
+				Progress:
 				<div class="progress">
 					<div
 						class="progress-bar"
@@ -57,7 +57,7 @@
 			</div>
 			<button
 				type="button"
-				class="btn btn-success btn-lg"
+				class="btn btn-success btn-lg mt-2 me-2"
 				(click)="uploader?.uploadAll()"
 				[disabled]="!uploader?.getNotUploadedItems()?.length"
 			>
@@ -65,7 +65,7 @@
 			</button>
 			<button
 				type="button"
-				class="btn btn-danger btn-lg"
+				class="btn btn-danger btn-lg mt-2"
 				(click)="uploader?.clearQueue()"
 				[disabled]="!uploader?.queue?.length"
 			>

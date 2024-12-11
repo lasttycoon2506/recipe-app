@@ -3,6 +3,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable, of } from 'rxjs';
 import { Member } from '../models/member';
+import { Photo } from '../models/photo';
 
 @Injectable({
 	providedIn: 'root',
@@ -27,5 +28,12 @@ export class MemberService {
 
 	updateMember(member: Member): Observable<Response> {
 		return this.http.put<Response>(this.baseUrl + 'users', member);
+	}
+
+	setMainPic(photo: Photo): Observable<Response> {
+		return this.http.put<Response>(
+			this.baseUrl + 'set-main-pic/' + photo.id,
+			{},
+		);
 	}
 }
