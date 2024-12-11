@@ -9,7 +9,8 @@
 	@for (pic of member().photos; track pic.id) {
 		<div class="col-2 text-center">
 			<img src="{{ pic.url }}" class="img-thumbnail mb-1" />
-			<button class="btn btn-danger btn-sm">
+			<button class="btn btn-success btn-sm me-2">Main</button>
+			<button class="btn btn-danger btn-sm p-0">
 				<i class="material-icons">delete</i>
 			</button>
 		</div>
