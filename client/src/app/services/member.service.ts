@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Observable, of } from 'rxjs';
+import { map, Observable, of, tap } from 'rxjs';
 import { Member } from '../models/member';
 import { Photo } from '../models/photo';
 
@@ -31,9 +31,19 @@ export class MemberService {
 	}
 
 	setMainPic(photo: Photo): Observable<Response> {
-		return this.http.put<Response>(
-			this.baseUrl + 'users/set-main-pic/' + photo.id,
-			{},
-		);
+		return this.http
+			.put<Response>(this.baseUrl + 'users/set-main-pic/' + photo.id, {})
+			.pipe(
+				tap(() =>
+					this.members.update((members) =>
+						members.map((member) => {
+							if (member.photos.includes(photo)) {
+								member.photoUrl = photo.url;
+							}
+							return member;
+						}),
+					),
+				),
+			);
 	}
 }
