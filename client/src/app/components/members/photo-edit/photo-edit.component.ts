@@ -54,6 +54,14 @@ export class PhotoEditComponent implements OnInit {
 	}
 
 	setMainPic(photo: Photo) {
-		this.memberService.setMainPic();
+		this.memberService.setMainPic(photo).subscribe({
+			next: () => {
+				const user = this.accountService.currentUser();
+				if (user) {
+					user.photoUrl = photo.url;
+					this.accountService.setMain;
+				}
+			},
+		});
 	}
 }

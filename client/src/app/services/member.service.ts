@@ -32,7 +32,7 @@ export class MemberService {
 
 	setMainPic(photo: Photo): Observable<Response> {
 		return this.http.put<Response>(
-			this.baseUrl + 'set-main-pic/' + photo.id,
+			this.baseUrl + 'users/set-main-pic/' + photo.id,
 			{},
 		);
 	}
