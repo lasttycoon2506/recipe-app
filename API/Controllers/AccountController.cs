@@ -4,37 +4,35 @@ using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
-public class AccountController(DataContext context, ITokenService tokenService) : BaseApiController
+public class AccountController(DataContext context, ITokenService tokenService, IMapper mapper)
+    : BaseApiController
 {
     [HttpPost("register")]
     public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
     {
-        return Ok();
+        if (await UsernameExists(registerDto.Username))
+            return BadRequest("username already exists");
+        using var hmac = new HMACSHA512();
 
-        //     if (await UsernameExists(registerDto.Username))
-        //         return BadRequest("username exists");
-        //     using var hmac = new HMACSHA512();
+        var newUser = mapper.Map<User>(registerDto);
+        newUser.UserName = registerDto.Username.ToLower();
+        newUser.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password));
+        newUser.PasswordSalt = hmac.Key;
 
-        //     var newUser = new User
-        //     {
-        //         UserName = registerDto.Username.ToLower(),
-        //         PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
-        //         PasswordSalt = hmac.Key,
-        //     };
+        context.Users.Add(newUser);
+        await context.SaveChangesAsync();
 
-        //     context.Users.Add(newUser);
-        //     await context.SaveChangesAsync();
-
-        //     return new UserDto
-        //     {
-        //         Username = newUser.UserName,
-        //         token = tokenService.CreateToken(newUser),
-        //     };
+        return new UserDto
+        {
+            Username = newUser.UserName,
+            Token = tokenService.CreateToken(newUser),
+        };
     }
 
     [HttpPost("login")]
