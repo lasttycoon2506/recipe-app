@@ -7,11 +7,12 @@ import {
 } from '@angular/forms';
 import { AccountService } from '../../services/account.service';
 import { NgIf } from '@angular/common';
+import { TextInputComponent } from '../forms/text-input/text-input.component';
 
 @Component({
 	selector: 'app-register',
 	standalone: true,
-	imports: [ReactiveFormsModule, NgIf],
+	imports: [ReactiveFormsModule, NgIf, TextInputComponent],
 	templateUrl: './register.component.html',
 	styleUrl: './register.component.css',
 })
