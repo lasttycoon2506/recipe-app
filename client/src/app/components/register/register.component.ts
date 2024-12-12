@@ -28,18 +28,19 @@ export class RegisterComponent implements OnInit {
 	}
 
 	register(): void {
-		this.accountService.register(this.model).subscribe({
-			next: () => this.cancel(),
-			error: (error) => {
-				console.log(error);
-				this.inputValidationErrors.push(
-					error.error.errors['Username'].flat(),
-				);
-				this.inputValidationErrors.push(
-					error.error.errors['Password'].flat(),
-				);
-			},
-		});
+		console.log(this.registerForm);
+		// this.accountService.register(this.model).subscribe({
+		// 	next: () => this.cancel(),
+		// 	error: (error) => {
+		// 		console.log(error);
+		// 		this.inputValidationErrors.push(
+		// 			error.error.errors['Username'].flat(),
+		// 		);
+		// 		this.inputValidationErrors.push(
+		// 			error.error.errors['Password'].flat(),
+		// 		);
+		// 	},
+		// });
 	}
 
 	cancel() {
