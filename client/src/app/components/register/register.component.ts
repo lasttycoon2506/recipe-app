@@ -1,21 +1,33 @@
-import { Component, inject, output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, inject, OnInit, output } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AccountService } from '../../services/account.service';
 
 @Component({
 	selector: 'app-register',
 	standalone: true,
-	imports: [FormsModule],
+	imports: [ReactiveFormsModule],
 	templateUrl: './register.component.html',
 	styleUrl: './register.component.css',
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
 	private accountService = inject(AccountService);
 	cancelRegister = output<boolean>();
 	model: any = {};
 	inputValidationErrors: string[] = [];
+	registerForm: FormGroup = new FormGroup({});
 
-	register() {
+	ngOnInit(): void {
+		this.initForm();
+	}
+
+	initForm(): void {
+		this.registerForm = new FormGroup({
+			username: new FormControl(),
+			password: new FormControl(),
+		});
+	}
+
+	register(): void {
 		this.accountService.register(this.model).subscribe({
 			next: () => this.cancel(),
 			error: (error) => {
