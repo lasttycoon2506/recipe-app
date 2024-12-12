@@ -1,16 +1,32 @@
 <form [formGroup]="registerForm" (ngSubmit)="register()" autocomplete="off">
 	<h2 class="text-center text-primary">Register</h2>
 	<div class="mb-3 form-floating">
-		<input class="form-control me-2" formControlName="username" />
+		<input
+			[class.is-invalid]="
+				registerForm.get('username')?.errors &&
+				registerForm.get('username')?.touched
+			"
+			class="form-control me-2"
+			formControlName="username"
+			placeholder="Username"
+		/>
 		<label>Username</label>
+		<div class="invalid-feedback">username required</div>
 	</div>
+
 	<div class="mb-3 form-floating">
 		<input
+			[class.-is-invalid]="
+				registerForm.get('password')?.errors &&
+				registerForm.get('password')?.touched
+			"
 			class="form-control me-2"
 			formControlName="password"
 			type="Password"
+			placeholder="Password"
 		/>
 		<label>Password</label>
+		<div class="invalid-feedback">password required</div>
 	</div>
 
 	<div class="form-group text-center">
