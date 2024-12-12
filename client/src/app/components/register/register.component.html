@@ -4,20 +4,20 @@
 	<div class="mb-3 form-floating">
 		<app-text-input
 			[formControl]="$any(registerForm.get('username'))"
-			[label]="'username'"
+			[label]="'Username'"
 		>
 		</app-text-input>
 	</div>
 	<div class="mb-3 form-floating">
 		<app-text-input
 			[formControl]="$any(registerForm.get('password'))"
-			[label]="'password'"
+			[label]="'Password'"
 			[type]="'password'"
 		>
 		</app-text-input>
 	</div>
 
-	<select class="form-select form-select-lg mb-3">
+	<select class="form-select form-select-md mb-3">
 		<option selected>Food Specialty</option>
 		<option value="American">American</option>
 		<option value="African">African</option>
@@ -27,7 +27,7 @@
 		<option value="European">European</option>
 	</select>
 
-	<select class="form-select form-select-lg mb-3">
+	<select class="form-select form-select-md mb-3">
 		<option selected>Experience</option>
 		<option value="Novice">Novice</option>
 		<option value="Improving!">Improving!</option>
