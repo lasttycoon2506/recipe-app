@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { AccountService } from '../../services/account.service';
 import { TextInputComponent } from '../forms/text-input/text-input.component';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-register',
@@ -18,9 +19,9 @@ import { TextInputComponent } from '../forms/text-input/text-input.component';
 export class RegisterComponent implements OnInit {
 	private accountService = inject(AccountService);
 	private formBuilder = inject(FormBuilder);
-	cancelRegister = output<boolean>();
-	model: any = {};
+	private router = inject(Router);
 	registerForm: FormGroup = new FormGroup({});
+	validationErrors: string[] | undefined;
 
 	ngOnInit(): void {
 		this.initForm();
@@ -48,23 +49,9 @@ export class RegisterComponent implements OnInit {
 	}
 
 	register(): void {
-		console.log(this.registerForm.value);
-		console.log(this.registerForm.status);
-		// this.accountService.register(this.model).subscribe({
-		// 	next: () => this.cancel(),
-		// 	error: (error) => {
-		// 		console.log(error);
-		// 		this.inputValidationErrors.push(
-		// 			error.error.errors['Username'].flat(),
-		// 		);
-		// 		this.inputValidationErrors.push(
-		// 			error.error.errors['Password'].flat(),
-		// 		);
-		// 	},
-		// });
-	}
-
-	cancel() {
-		this.cancelRegister.emit(false);
+		this.accountService.register(this.registerForm.value).subscribe({
+			next: () => this.router.navigateByUrl('/members'),
+			error: (error) => (this.validationErrors = error),
+		});
 	}
 }
