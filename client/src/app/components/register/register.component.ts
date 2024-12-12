@@ -1,5 +1,10 @@
 import { Component, inject, OnInit, output } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+	FormControl,
+	FormGroup,
+	ReactiveFormsModule,
+	Validators,
+} from '@angular/forms';
 import { AccountService } from '../../services/account.service';
 
 @Component({
@@ -22,13 +27,21 @@ export class RegisterComponent implements OnInit {
 
 	initForm(): void {
 		this.registerForm = new FormGroup({
-			username: new FormControl(),
-			password: new FormControl(),
+			username: new FormControl('', [
+				Validators.required,
+				Validators.minLength(5),
+			]),
+			password: new FormControl('', [
+				Validators.required,
+				Validators.minLength(8),
+				Validators.maxLength(16),
+			]),
 		});
 	}
 
 	register(): void {
-		console.log(this.registerForm);
+		console.log(this.registerForm.value);
+		console.log(this.registerForm.status);
 		// this.accountService.register(this.model).subscribe({
 		// 	next: () => this.cancel(),
 		// 	error: (error) => {
