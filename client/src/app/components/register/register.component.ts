@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, output } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
 	FormBuilder,
 	FormGroup,
@@ -45,6 +45,8 @@ export class RegisterComponent implements OnInit {
 					Validators.maxLength(16),
 				],
 			],
+			specialty: ['American'],
+			experience: ['Pro'],
 		});
 	}
 
