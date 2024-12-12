@@ -19,7 +19,6 @@ export class RegisterComponent implements OnInit {
 	private accountService = inject(AccountService);
 	cancelRegister = output<boolean>();
 	model: any = {};
-	inputValidationErrors: string[] = [];
 	registerForm: FormGroup = new FormGroup({});
 
 	ngOnInit(): void {

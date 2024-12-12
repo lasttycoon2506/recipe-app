@@ -66,12 +66,4 @@
 	<div class="form-group text-center">
 		<button class="btn btn-success" type="submit">Register</button>
 	</div>
-
-	<div class="mt-4">
-		<ul class="text-danger">
-			@for (error of inputValidationErrors; track $index) {
-				<li>{{ error }}</li>
-			}
-		</ul>
-	</div>
 </form>
