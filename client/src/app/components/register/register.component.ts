@@ -1,23 +1,23 @@
 import { Component, inject, OnInit, output } from '@angular/core';
 import {
-	FormControl,
+	FormBuilder,
 	FormGroup,
 	ReactiveFormsModule,
 	Validators,
 } from '@angular/forms';
 import { AccountService } from '../../services/account.service';
-import { NgIf } from '@angular/common';
 import { TextInputComponent } from '../forms/text-input/text-input.component';
 
 @Component({
 	selector: 'app-register',
 	standalone: true,
-	imports: [ReactiveFormsModule, NgIf, TextInputComponent],
+	imports: [ReactiveFormsModule, TextInputComponent],
 	templateUrl: './register.component.html',
 	styleUrl: './register.component.css',
 })
 export class RegisterComponent implements OnInit {
 	private accountService = inject(AccountService);
+	private formBuilder = inject(FormBuilder);
 	cancelRegister = output<boolean>();
 	model: any = {};
 	registerForm: FormGroup = new FormGroup({});
@@ -27,17 +27,23 @@ export class RegisterComponent implements OnInit {
 	}
 
 	initForm(): void {
-		this.registerForm = new FormGroup({
-			username: new FormControl('', [
-				Validators.required,
-				Validators.minLength(5),
-				Validators.maxLength(16),
-			]),
-			password: new FormControl('', [
-				Validators.required,
-				Validators.minLength(8),
-				Validators.maxLength(16),
-			]),
+		this.registerForm = this.formBuilder.group({
+			username: [
+				'',
+				[
+					Validators.required,
+					Validators.minLength(5),
+					Validators.maxLength(16),
+				],
+			],
+			password: [
+				'',
+				[
+					Validators.required,
+					Validators.minLength(8),
+					Validators.maxLength(16),
+				],
+			],
 		});
 	}
 
