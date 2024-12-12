@@ -6,11 +6,12 @@ import {
 	Validators,
 } from '@angular/forms';
 import { AccountService } from '../../services/account.service';
+import { NgIf } from '@angular/common';
 
 @Component({
 	selector: 'app-register',
 	standalone: true,
-	imports: [ReactiveFormsModule],
+	imports: [ReactiveFormsModule, NgIf],
 	templateUrl: './register.component.html',
 	styleUrl: './register.component.css',
 })

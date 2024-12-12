@@ -11,12 +11,29 @@
 			placeholder="Username"
 		/>
 		<label>Username</label>
-		<div class="invalid-feedback">username required</div>
+		<div
+			*ngIf="registerForm.get('username')?.hasError('required')"
+			class="invalid-feedback"
+		>
+			username required!
+		</div>
+		<div
+			*ngIf="registerForm.get('username')?.hasError('minlength')"
+			class="invalid-feedback"
+		>
+			username must be at least 5 chars!
+		</div>
+		<div
+			*ngIf="registerForm.get('username')?.hasError('maxlength')"
+			class="invalid-feedback"
+		>
+			username cant exceed 16 chars!
+		</div>
 	</div>
 
 	<div class="mb-3 form-floating">
 		<input
-			[class.-is-invalid]="
+			[class.is-invalid]="
 				registerForm.get('password')?.errors &&
 				registerForm.get('password')?.touched
 			"
@@ -26,7 +43,24 @@
 			placeholder="Password"
 		/>
 		<label>Password</label>
-		<div class="invalid-feedback">password required</div>
+		<div
+			*ngIf="registerForm.get('password')?.hasError('required')"
+			class="invalid-feedback"
+		>
+			password required!
+		</div>
+		<div
+			*ngIf="registerForm.get('password')?.hasError('minlength')"
+			class="invalid-feedback"
+		>
+			password must be at least 8 chars!
+		</div>
+		<div
+			*ngIf="registerForm.get('password')?.hasError('maxlength')"
+			class="invalid-feedback"
+		>
+			password cant exceed 16 chars!
+		</div>
 	</div>
 
 	<div class="form-group text-center">
