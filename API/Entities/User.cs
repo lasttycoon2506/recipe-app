@@ -7,7 +7,7 @@ public class User
     public byte[] PasswordHash { get; set; } = [];
     public byte[] PasswordSalt { get; set; } = [];
     public List<Photo> Photos { get; set; } = [];
-    public DateOnly Created { get; set; }
+    public DateOnly Created { get; set; } = DateOnly.FromDateTime(DateTime.Now);
     public DateTime LastActive { get; set; } = DateTime.UtcNow;
     public string? Experience { get; set; }
     public string? Specialty { get; set; }
