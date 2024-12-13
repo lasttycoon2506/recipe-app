@@ -4,6 +4,7 @@
 		class="form-control me-2"
 		placeholder="Username"
 		[formControl]="control"
+		[type]="type()"
 	/>
 	<label>{{ label() }}</label>
 	<div *ngIf="control?.hasError('required')" class="invalid-feedback">
