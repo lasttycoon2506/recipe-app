@@ -21,7 +21,6 @@ export class RegisterComponent implements OnInit {
 	private formBuilder = inject(FormBuilder);
 	private router = inject(Router);
 	registerForm: FormGroup = new FormGroup({});
-	validationErrors: string[] | undefined;
 
 	ngOnInit(): void {
 		this.initForm();
@@ -45,15 +44,15 @@ export class RegisterComponent implements OnInit {
 					Validators.maxLength(16),
 				],
 			],
-			specialty: ['American'],
-			experience: ['Pro'],
+			specialty: ['American', Validators.required],
+			experience: ['Pro', Validators.required],
 		});
 	}
 
 	register(): void {
 		this.accountService.register(this.registerForm.value).subscribe({
 			next: () => this.router.navigateByUrl('/members'),
-			error: (error) => (this.validationErrors = error),
+			error: (error) => console.log(error.error.errors),
 		});
 	}
 }
