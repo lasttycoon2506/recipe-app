@@ -8,6 +8,7 @@ import {
 import { AccountService } from '../../services/account.service';
 import { TextInputComponent } from '../forms/text-input/text-input.component';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
 	selector: 'app-register',
@@ -20,6 +21,7 @@ export class RegisterComponent implements OnInit {
 	private accountService = inject(AccountService);
 	private formBuilder = inject(FormBuilder);
 	private router = inject(Router);
+	private toastr = inject(ToastrService);
 	registerForm: FormGroup = new FormGroup({});
 
 	ngOnInit(): void {
@@ -52,7 +54,7 @@ export class RegisterComponent implements OnInit {
 	register(): void {
 		this.accountService.register(this.registerForm.value).subscribe({
 			next: () => this.router.navigateByUrl('/members'),
-			error: (error) => console.log(error.error.errors),
+			error: (error) => this.toastr.error(error.error),
 		});
 	}
 }
