@@ -6,7 +6,6 @@ import { authGuard } from './guards/auth.guard';
 import { MemberListComponent } from './components/members/member-list/member-list.component';
 import { MemberEditComponent } from './components/members/member-edit/member-edit.component';
 import { unsavedChangesGuard } from './guards/unsaved-changes.guard';
-import { PhotoEditComponent } from './components/members/photo-edit/photo-edit.component';
 
 export const routes: Routes = [
 	{ path: '', component: HomeComponent },

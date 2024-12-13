@@ -12,7 +12,7 @@
 		</div>
 		<div class="col-4">
 			<div class="card border-dark">
-				<img src="{{ member.photoUrl }}" />
+				<img src="{{ member.photoUrl || './assets/user.png' }}" />
 				<div class="card-body">
 					<strong>User: </strong>
 					<p class="member-details">{{ member.username }}</p>
