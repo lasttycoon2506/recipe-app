@@ -44,8 +44,8 @@ export class RegisterComponent implements OnInit {
 					Validators.maxLength(16),
 				],
 			],
-			specialty: ['American', Validators.required],
-			experience: ['Pro', Validators.required],
+			specialty: ['', Validators.required],
+			experience: ['', Validators.required],
 		});
 	}
 

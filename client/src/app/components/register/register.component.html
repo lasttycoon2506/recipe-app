@@ -1,40 +1,60 @@
 <form [formGroup]="registerForm" (ngSubmit)="register()" autocomplete="off">
 	<h2 class="text-center text-primary">Register</h2>
 	<hr />
-	<div class="mb-3 form-floating">
-		<app-text-input
-			[formControl]="$any(registerForm.get('username'))"
-			[label]="'Username'"
+	<app-text-input
+		[formControl]="$any(registerForm.get('username'))"
+		[label]="'Username'"
+	>
+	</app-text-input>
+	<app-text-input
+		[formControl]="$any(registerForm.get('password'))"
+		[label]="'Password'"
+		[type]="'password'"
+	>
+	</app-text-input>
+
+	<div class="mb-3">
+		<select
+			[class.is-invalid]="
+				registerForm.get('specialty')?.hasError('required') &&
+				registerForm.get('specialty')?.touched
+			"
+			class="form-select form-select-md"
+			formControlName="specialty"
 		>
-		</app-text-input>
-	</div>
-	<div class="mb-3 form-floating">
-		<app-text-input
-			[formControl]="$any(registerForm.get('password'))"
-			[label]="'Password'"
-			[type]="'password'"
-		>
-		</app-text-input>
+			<option value="">-----Specialty-----</option>
+			<option value="American">American</option>
+			<option value="African">African</option>
+			<option value="Central-American">Central-American</option>
+			<option value="Middle-Eastern">Middle-Eastern</option>
+			<option value="Asian">Asian</option>
+			<option value="European">European</option>
+		</select>
+		@if (registerForm.get("specialty")?.hasError("required")) {
+			<div class="invalid-feedback">Specialty required!</div>
+		}
 	</div>
 
-	<select class="form-select form-select-md mb-3">
-		<option selected>Food Specialty</option>
-		<option value="American">American</option>
-		<option value="African">African</option>
-		<option value="Central-American">Central-American</option>
-		<option value="Middle-Eastern">Middle-Eastern</option>
-		<option value="Asian">Asian</option>
-		<option value="European">European</option>
-	</select>
-
-	<select class="form-select form-select-md mb-3">
-		<option selected>Experience</option>
-		<option value="Novice">Novice</option>
-		<option value="Improving!">Improving!</option>
-		<option value="Home-all-star">Home-all-star</option>
-		<option value="Semi-pro">Semi-pro</option>
-		<option value="Pro">Pro</option>
-	</select>
+	<div class="mb-3">
+		<select
+			[class.is-invalid]="
+				registerForm.get('experience')?.hasError('required') &&
+				registerForm.get('experience')?.touched
+			"
+			class="form-select form-select-md"
+			formControlName="experience"
+		>
+			<option value>-----Experience-----</option>
+			<option value="Novice">Novice</option>
+			<option value="Improving!">Improving!</option>
+			<option value="Home-all-star">Home-all-star</option>
+			<option value="Semi-pro">Semi-pro</option>
+			<option value="Pro">Pro</option>
+		</select>
+		@if (registerForm.get("experience")?.hasError("required")) {
+			<div class="invalid-feedback">Experience required!</div>
+		}
+	</div>
 
 	<div class="form-group text-center">
 		<button
