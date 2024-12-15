@@ -7,7 +7,7 @@ public class UserParams
 
     private int _pgSize = 20;
 
-    public int PageSize
+    public int PgSize
     {
         get => _pgSize;
         set => _pgSize = value > MaxPgSize ? MaxPgSize : value;
