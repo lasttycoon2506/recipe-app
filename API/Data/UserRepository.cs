@@ -23,9 +23,13 @@ public class UserRepository(DataContext context, IMapper mapper) : IUserReposito
         var query = context.Users.AsQueryable();
         query = query.Where(member => member.UserName != userParams.CurrentUsername);
 
-        if (userParams.Specialty != null && userParams.Experience != null)
+        if (userParams.Specialty != null)
         {
             query = query.Where(member => member.Specialty == userParams.Specialty);
+        }
+
+        if (userParams.Experience != null)
+        {
             query = query.Where(member => member.Experience == userParams.Experience);
         }
 

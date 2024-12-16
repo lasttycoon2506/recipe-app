@@ -9,8 +9,8 @@
         "IsMain": true
       }
     ],
-    "Experience": "novice",
-    "Specialty": "african"
+    "Experience": "Pro",
+    "Specialty": "African"
   },
   {
     "UserName": "johhnny52",
@@ -22,8 +22,8 @@
         "IsMain": true
       }
     ],
-    "Experience": "expert",
-    "Specialty": "french"
+    "Experience": "Semi-pro",
+    "Specialty": "American"
   },
   {
     "UserName": "aggy19",
@@ -35,8 +35,8 @@
         "IsMain": true
       }
     ],
-    "Experience": "pro",
-    "Specialty": "brazilian"
+    "Experience": "Home all-star",
+    "Specialty": "Asian"
   },
   {
     "UserName": "yibbs437",
@@ -48,8 +48,8 @@
         "IsMain": true
       }
     ],
-    "Experience": "home-cook",
-    "Specialty": "italian"
+    "Experience": "Improving!",
+    "Specialty": "Australian"
   },
   {
     "UserName": "donny90",
@@ -61,8 +61,8 @@
         "IsMain": true
       }
     ],
-    "Experience": "semi-pro",
-    "Specialty": "russian"
+    "Experience": "Novice",
+    "Specialty": "Central-American"
   },
   {
     "UserName": "tacoes",
@@ -74,8 +74,8 @@
         "IsMain": true
       }
     ],
-    "Experience": "pro",
-    "Specialty": "japanese"
+    "Experience": "Pro",
+    "Specialty": "European"
   },
   {
     "UserName": "aaa",
@@ -87,8 +87,8 @@
         "IsMain": true
       }
     ],
-    "Experience": "novice",
-    "Specialty": "chinese"
+    "Experience": "Semi-pro",
+    "Specialty": "Middle-Eastern"
   },
   {
     "UserName": "yummy",
@@ -100,7 +100,7 @@
         "IsMain": true
       }
     ],
-    "Experience": "home-cook",
-    "Specialty": "mexican"
+    "Experience": "Improving!",
+    "Specialty": "South-American"
   }
 ]
