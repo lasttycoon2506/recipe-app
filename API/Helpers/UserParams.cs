@@ -12,4 +12,8 @@ public class UserParams
         get => _pgSize;
         set => _pgSize = value > MaxPgSize ? MaxPgSize : value;
     }
+
+    public string? Specialty { get; set; }
+    public string? Experience { get; set; }
+    public string? CurrentUsername { get; set; }
 }

@@ -13,7 +13,7 @@ import { PageChangedEvent, PaginationModule } from 'ngx-bootstrap/pagination';
 export class MemberListComponent implements OnInit {
 	memberService = inject(MemberService);
 	pgNumber = 1;
-	pgSize = 8;
+	pgSize = 5;
 
 	ngOnInit(): void {
 		if (!this.memberService.paginatedMembers()) this.loadMembers();
