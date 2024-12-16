@@ -20,8 +20,20 @@ public class UserRepository(DataContext context, IMapper mapper) : IUserReposito
 
     public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
     {
-        var query = context.Users.ProjectTo<MemberDto>(mapper.ConfigurationProvider);
-        return await PagedList<MemberDto>.GetResults(query, userParams.PgSize, userParams.PgNumber);
+        var query = context.Users.AsQueryable();
+        query = query.Where(member => member.UserName != userParams.CurrentUsername);
+
+        if (userParams.Specialty != null && userParams.Experience != null)
+        {
+            query = query.Where(member => member.Specialty == userParams.Specialty);
+            query = query.Where(member => member.Experience == userParams.Experience);
+        }
+
+        return await PagedList<MemberDto>.GetResults(
+            query.ProjectTo<MemberDto>(mapper.ConfigurationProvider),
+            userParams.PgSize,
+            userParams.PgNumber
+        );
     }
 
     public async Task<User?> GetUserAsync(string username)
