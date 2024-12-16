@@ -5,3 +5,16 @@
 		</div>
 	}
 </div>
+
+@if (memberService.paginatedMembers()?.pagination) {
+	<pagination
+		[totalItems]="
+			(memberService.paginatedMembers()?.pagination)!.totalItems
+		"
+		[itemsPerPage]="
+			(memberService.paginatedMembers()?.pagination)!.itemsPerPg
+		"
+		[maxSize]="5"
+		(pageChanged)="onPageChanged($event)"
+	></pagination>
+}
