@@ -4,7 +4,8 @@ import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { Member } from '../models/member';
 import { Photo } from '../models/photo';
-import { Pagination, PaginationResult } from '../models/pagination';
+import { PaginationResult } from '../models/pagination';
+import { UserParams } from '../models/userParams';
 
 @Injectable({
 	providedIn: 'root',
@@ -21,13 +22,9 @@ export class MemberService {
 		// return this.http.get<Member>(this.baseUrl + 'users/' + username);
 	}
 
-	getMembers(pgNumber?: number, pgSize?: number): void {
-		let params = new HttpParams();
+	getMembers(userParams: UserParams): void {
+		var params = this.setUserParams(userParams);
 
-		if (pgNumber && pgSize) {
-			params = params.append('pgNumber', pgNumber);
-			params = params.append('pgSize', pgSize);
-		}
 		this.http
 			.get<
 				Member[]
@@ -46,6 +43,21 @@ export class MemberService {
 
 	updateMember(member: Member): Observable<Response> {
 		return this.http.put<Response>(this.baseUrl + 'users', member);
+	}
+
+	private setUserParams(userParams: UserParams): HttpParams {
+		let params = new HttpParams();
+
+		params = params.append('pgNumber', userParams.pgNumber);
+		params = params.append('pgSize', userParams.pgSize);
+		if (userParams.specialty) {
+			params = params.append('specialty', userParams.specialty);
+		}
+		if (userParams.experience) {
+			params = params.append('experience', userParams.experience);
+		}
+
+		return params;
 	}
 
 	setMainPic(photo: Photo) {
