@@ -3,11 +3,12 @@ import { MemberService } from '../../../services/member.service';
 import { MemberCardComponent } from '../member-card/member-card.component';
 import { PageChangedEvent, PaginationModule } from 'ngx-bootstrap/pagination';
 import { UserParams } from '../../../models/userParams';
+import { FormsModule } from '@angular/forms';
 
 @Component({
 	selector: 'app-member-list',
 	standalone: true,
-	imports: [MemberCardComponent, PaginationModule],
+	imports: [MemberCardComponent, PaginationModule, FormsModule],
 	templateUrl: './member-list.component.html',
 	styleUrl: './member-list.component.css',
 })
