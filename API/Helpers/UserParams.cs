@@ -17,8 +17,5 @@ public class UserParams
     public string? Experience { get; set; }
     public string? CurrentUsername { get; set; }
 
-    internal object OrderBy()
-    {
-        throw new NotImplementedException();
-    }
+    public string? OrderBy { get; set; } = "lastActive";
 }

@@ -33,7 +33,7 @@ public class UserRepository(DataContext context, IMapper mapper) : IUserReposito
             query = query.Where(member => member.Experience == userParams.Experience);
         }
 
-        query = userParams.OrderBy() switch
+        query = userParams.OrderBy switch
         {
             "created" => query.OrderByDescending(member => member.Created),
             _ => query.OrderByDescending(member => member.LastActive),
