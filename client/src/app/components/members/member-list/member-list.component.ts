@@ -11,12 +11,14 @@ import { MemberCardComponent } from '../member-card/member-card.component';
 })
 export class MemberListComponent implements OnInit {
 	memberService = inject(MemberService);
+	pgNumber = 1;
+	pgSize = 8;
 
 	ngOnInit(): void {
-		if (this.memberService.members().length === 0) this.loadMembers();
+		if (!this.memberService.paginatedMembers()) this.loadMembers();
 	}
 
 	loadMembers(): void {
-		this.memberService.getMembers();
+		this.memberService.getMembers(this.pgNumber, this.pgSize);
 	}
 }

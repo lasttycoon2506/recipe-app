@@ -5,7 +5,7 @@ export type Pagination = {
 	totalPgs: number;
 };
 
-export type PaginationResult<T> = {
-	items: T;
-	pagination: Pagination;
-};
+export class PaginationResult<T> {
+	items?: T;
+	pagination?: Pagination;
+}

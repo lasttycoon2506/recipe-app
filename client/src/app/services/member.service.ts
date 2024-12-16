@@ -21,12 +21,12 @@ export class MemberService {
 		// return this.http.get<Member>(this.baseUrl + 'users/' + username);
 	}
 
-	getMembers(pgNumber: number, pgSize: number): void {
+	getMembers(pgNumber?: number, pgSize?: number): void {
 		let params = new HttpParams();
 
-		if (pgNumber & pgSize) {
-			params.set('pgNumber', pgNumber);
-			params.set('pgSize', pgSize);
+		if (pgNumber && pgSize) {
+			params = params.append('pgNumber', pgNumber);
+			params = params.append('pgSize', pgSize);
 		}
 		this.http
 			.get<
