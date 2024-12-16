@@ -1,20 +1,39 @@
 <div class="row">
-	<h2>Matches</h2>
+	<h1>Matches</h1>
+	<hr />
 	<form #form="ngForm" class="d-flex mb-3" (ngSubmit)="loadMembers()">
-		<label>Experience: </label>
+		<label class="me-2">Filter by <strong>Specialty:</strong> </label>
 		<select
-			class="form-select form-select-md"
+			class="form-select filter-btn"
 			[ngModel]="userParams.experience"
 			name="experience"
-			class="filter-btn"
+			display="experience"
 		>
-			<option selected>-----Experience-----</option>
+			<option value="African">African</option>
+			<option value="American">American</option>
+			<option value="Asian">Asian</option>
+			<option value="Australian">Australian</option>
+			<option value="Central-American">Central-American</option>
+			<option value="European">European</option>
+			<option value="Middle-Eastern">Middle-Eastern</option>
+			<option value="South-American">South-American</option>
+		</select>
+
+		<label class="me-2">Filter by <strong>Experience:</strong> </label>
+		<select
+			class="form-select filter-btn"
+			[ngModel]="userParams.experience"
+			name="experience"
+			display="experience"
+		>
 			<option value="Novice">Novice</option>
 			<option value="Improving!">Improving!</option>
 			<option value="Home all-star">Home all-star</option>
 			<option value="Semi-pro">Semi-pro</option>
 			<option value="Pro">Pro</option>
 		</select>
+		<button type="submit" class="btn btn-primary mx-1">Filter</button>
+		<button type="submit" class="btn btn-warning mx-1">Reset</button>
 	</form>
 
 	@for (member of memberService.paginatedMembers()?.items; track member.id) {
