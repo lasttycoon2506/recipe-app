@@ -33,6 +33,12 @@ public class UserRepository(DataContext context, IMapper mapper) : IUserReposito
             query = query.Where(member => member.Experience == userParams.Experience);
         }
 
+        query = userParams.OrderBy() switch
+        {
+            "created" => query.OrderByDescending(member => member.Created),
+            _ => query.OrderByDescending(member => member.LastActive),
+        };
+
         return await PagedList<MemberDto>.GetResults(
             query.ProjectTo<MemberDto>(mapper.ConfigurationProvider),
             userParams.PgSize,

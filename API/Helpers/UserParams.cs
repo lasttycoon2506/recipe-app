@@ -16,4 +16,9 @@ public class UserParams
     public string? Specialty { get; set; }
     public string? Experience { get; set; }
     public string? CurrentUsername { get; set; }
+
+    internal object OrderBy()
+    {
+        throw new NotImplementedException();
+    }
 }
