@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
@@ -21,9 +21,17 @@ export class MemberService {
 		// return this.http.get<Member>(this.baseUrl + 'users/' + username);
 	}
 
-	getMembers(): void {
-		let userParams = this.http
-			.get<Member[]>(this.baseUrl + 'users', { observe: 'response' })
+	getMembers(pgNumber: number, pgSize: number): void {
+		let params = new HttpParams();
+
+		if (pgNumber & pgSize) {
+			params.set('pgNumber', pgNumber);
+			params.set('pgSize', pgSize);
+		}
+		this.http
+			.get<
+				Member[]
+			>(this.baseUrl + 'users', { observe: 'response', params })
 			.subscribe({
 				next: (response) => {
 					this.paginatedMembers.set({
