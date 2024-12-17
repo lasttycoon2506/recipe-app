@@ -19,10 +19,11 @@
 					<strong>Experience: </strong>
 					<p class="member-details">{{ member.experience }}</p>
 					<p class="member-details">
-						<strong>Created: </strong>{{ member.created }}
+						<strong>Created: </strong>{{ member.created | date }}
 					</p>
 					<p class="member-details">
-						<strong>Last Active: </strong>{{ member.lastActive }}
+						<strong>Last Active: </strong
+						>{{ member.lastActive | date: "short" }}
 					</p>
 				</div>
 				<div class="card-footer">
