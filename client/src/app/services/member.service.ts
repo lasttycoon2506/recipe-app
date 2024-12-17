@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable, of } from 'rxjs';
@@ -14,6 +14,7 @@ export class MemberService {
 	private http = inject(HttpClient);
 	private baseUrl = environment.apiUrl;
 	paginatedMembers = signal<PaginationResult<Member[]> | null>(null);
+	clientCache = new Map();
 
 	getMember(username: string) {
 		const member = this.paginatedMembers
@@ -27,6 +28,12 @@ export class MemberService {
 	}
 
 	getMembers(userParams: UserParams): void {
+		const response = this.clientCache.get(
+			Object.values(userParams).join('-'),
+		);
+
+		if (response) this.setPaginatedResponse(response);
+
 		var params = this.setUserParams(userParams);
 
 		this.http
@@ -35,14 +42,20 @@ export class MemberService {
 			>(this.baseUrl + 'users', { observe: 'response', params })
 			.subscribe({
 				next: (response) => {
-					this.paginatedMembers.set({
-						items: response.body as Member[],
-						pagination: JSON.parse(
-							response.headers.get('Pagination')!,
-						),
-					});
+					this.clientCache.set(
+						Object.values(userParams).join('-'),
+						response,
+					),
+						this.setPaginatedResponse(response);
 				},
 			});
+	}
+
+	private setPaginatedResponse(response: HttpResponse<Member[]>) {
+		this.paginatedMembers.set({
+			items: response.body as Member[],
+			pagination: JSON.parse(response.headers.get('Pagination')!),
+		});
 	}
 
 	updateMember(member: Member): Observable<Response> {
