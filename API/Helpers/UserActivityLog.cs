@@ -15,8 +15,8 @@ public class UserActivityLog : IAsyncActionFilter
         if (context.HttpContext.User.Identity!.IsAuthenticated != true)
             return;
 
-        var repo = result.HttpContext.RequestServices.GetRequiredService<IUserRepository>();
         var username = result.HttpContext.User.GetUsername();
+        var repo = result.HttpContext.RequestServices.GetRequiredService<IUserRepository>();
         var user = await repo.GetUserAsync(username);
         if (user == null)
             return;
