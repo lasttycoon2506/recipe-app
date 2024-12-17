@@ -54,33 +54,33 @@ export class PhotoEditComponent implements OnInit {
 	}
 
 	setMainPic(photo: Photo): void {
-		// this.memberService.setMainPic(photo).subscribe({
-		// 	next: () => {
-		// 		const user = this.accountService.currentUser();
-		// 		if (user) {
-		// 			user.photoUrl = photo.url;
-		// 			this.accountService.setCurrentUser(user);
-		// 		}
-		// 		const updatedMember = { ...this.member() };
-		// 		updatedMember.photoUrl = photo.url;
-		// 		updatedMember.photos.forEach((p) => {
-		// 			if (p.isMain) p.isMain = false;
-		// 			if (p.id === photo.id) p.isMain = true;
-		// 		});
-		// 		this.memberUpdated.emit(updatedMember);
-		// 	},
-		// });
+		this.memberService.setMainPic(photo).subscribe({
+			next: () => {
+				const user = this.accountService.currentUser();
+				if (user) {
+					user.photoUrl = photo.url;
+					this.accountService.setCurrentUser(user);
+				}
+				const updatedMember = { ...this.member() };
+				updatedMember.photoUrl = photo.url;
+				updatedMember.photos.forEach((p) => {
+					if (p.isMain) p.isMain = false;
+					if (p.id === photo.id) p.isMain = true;
+				});
+				this.memberUpdated.emit(updatedMember);
+			},
+		});
 	}
 
 	deletePic(photo: Photo): void {
-		// this.memberService.deletePic(photo).subscribe({
-		// 	next: () => {
-		// 		const updatedMember = { ...this.member() };
-		// 		updatedMember.photos = updatedMember.photos.filter(
-		// 			(pic) => pic.id !== photo.id,
-		// 		);
-		// 		this.memberUpdated.emit(updatedMember);
-		// 	},
-		// });
+		this.memberService.deletePic(photo).subscribe({
+			next: () => {
+				const updatedMember = { ...this.member() };
+				updatedMember.photos = updatedMember.photos.filter(
+					(pic) => pic.id !== photo.id,
+				);
+				this.memberUpdated.emit(updatedMember);
+			},
+		});
 	}
 }
