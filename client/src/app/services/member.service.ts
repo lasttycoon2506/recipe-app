@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Member } from '../models/member';
 import { Photo } from '../models/photo';
 import { PaginationResult } from '../models/pagination';
@@ -13,13 +13,17 @@ import { UserParams } from '../models/userParams';
 export class MemberService {
 	private http = inject(HttpClient);
 	private baseUrl = environment.apiUrl;
-	// members = signal<Member[]>([]);
 	paginatedMembers = signal<PaginationResult<Member[]> | null>(null);
 
 	getMember(username: string) {
-		// const member = this.members().find((m) => m.username === username);
-		// if (member) return of(member);
-		// return this.http.get<Member>(this.baseUrl + 'users/' + username);
+		const member = this.paginatedMembers
+			? this.paginatedMembers()?.items.find(
+					(m) => m.username === username,
+				)
+			: null;
+
+		if (member) return of(member);
+		return this.http.get<Member>(this.baseUrl + 'users/' + username);
 	}
 
 	getMembers(userParams: UserParams): void {

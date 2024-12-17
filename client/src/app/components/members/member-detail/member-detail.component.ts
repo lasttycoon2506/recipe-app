@@ -21,11 +21,11 @@ export class MemberDetailComponent implements OnInit {
 	}
 
 	loadMember(): void {
-		// const username = this.route.snapshot.paramMap.get('username');
-		// if (!username) return;
-		// this.memberService.getMember(username).subscribe({
-		// 	next: (member) => (this.member = member),
-		// 	error: (err) => console.log(err),
-		// });
+		const username = this.route.snapshot.paramMap.get('username');
+		if (!username) return;
+		this.memberService.getMember(username).subscribe({
+			next: (member) => (this.member = member),
+			error: (err) => console.log(err),
+		});
 	}
 }
