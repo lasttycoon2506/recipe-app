@@ -13,11 +13,12 @@ public static class ClaimsPrincipleExtensions
         return username;
     }
 
-    public static string GetUserId(this ClaimsPrincipal user)
+    public static int GetUserId(this ClaimsPrincipal user)
     {
-        var userId =
+        var userId = int.Parse(
             user.FindFirstValue(ClaimTypes.NameIdentifier)
-            ?? throw new Exception("user-id not found in token");
+                ?? throw new Exception("user-id not found in token")
+        );
 
         return userId;
     }
