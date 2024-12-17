@@ -90,4 +90,8 @@ export class MemberService {
 			this.baseUrl + 'users/delete-pic/' + photo.id,
 		);
 	}
+
+	resetUserParams() {
+		this.userParams.set(new UserParams());
+	}
 }

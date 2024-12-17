@@ -14,7 +14,6 @@ import { FormsModule } from '@angular/forms';
 })
 export class MemberListComponent implements OnInit {
 	memberService = inject(MemberService);
-	userParams = new UserParams();
 
 	ngOnInit(): void {
 		if (!this.memberService.paginatedMembers()) this.loadMembers();
@@ -25,12 +24,12 @@ export class MemberListComponent implements OnInit {
 	}
 
 	onPageChanged(event: PageChangedEvent): void {
-		this.userParams.pgNumber = event.page;
+		this.memberService.userParams().pgNumber = event.page;
 		this.loadMembers();
 	}
 
 	resetFilter() {
-		this.userParams = new UserParams();
+		this.memberService.resetUserParams();
 		this.loadMembers();
 	}
 }

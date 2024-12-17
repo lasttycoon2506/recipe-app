@@ -7,8 +7,8 @@
 		</label>
 		<select
 			class="form-select filter-btn"
-			[(ngModel)]="userParams.specialty"
-			name="experience"
+			[(ngModel)]="memberService.userParams().specialty"
+			name="specialty"
 		>
 			<option value="African">African</option>
 			<option value="American">American</option>
@@ -23,7 +23,7 @@
 		<label class="select-label"> <strong>Experience:</strong> </label>
 		<select
 			class="form-select filter-btn"
-			[(ngModel)]="userParams.experience"
+			[(ngModel)]="memberService.userParams().experience"
 			name="experience"
 		>
 			<option value="Novice">Novice</option>
