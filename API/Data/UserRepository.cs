@@ -49,6 +49,11 @@ public class UserRepository(DataContext context, IMapper mapper) : IUserReposito
             .SingleOrDefaultAsync(x => x.UserName == username);
     }
 
+    public async Task<User?> GetUserByIdAsync(int id)
+    {
+        return await context.Users.FindAsync(id);
+    }
+
     public async Task<IEnumerable<User>> GetUsersAsync()
     {
         return await context.Users.Include(x => x.Photos).ToListAsync();

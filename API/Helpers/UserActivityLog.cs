@@ -17,11 +17,10 @@ public class UserActivityLog : IAsyncActionFilter
 
         var repo = result.HttpContext.RequestServices.GetRequiredService<IUserRepository>();
         var username = result.HttpContext.User.GetUsername();
-        var member = await repo.GetMemberAsync(username);
-        if (member != null)
-        {
-            member.LastActive = DateTime.UtcNow;
-        }
+        var user = await repo.GetUserAsync(username);
+        if (user == null)
+            return;
+        user.LastActive = DateTime.UtcNow;
         await repo.SaveAsync();
     }
 }
