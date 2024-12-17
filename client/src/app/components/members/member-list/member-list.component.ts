@@ -21,7 +21,7 @@ export class MemberListComponent implements OnInit {
 	}
 
 	loadMembers(): void {
-		this.memberService.getMembers(this.userParams);
+		this.memberService.getMembers();
 	}
 
 	onPageChanged(event: PageChangedEvent): void {

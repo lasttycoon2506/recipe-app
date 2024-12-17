@@ -15,6 +15,7 @@ export class MemberService {
 	private baseUrl = environment.apiUrl;
 	paginatedMembers = signal<PaginationResult<Member[]> | null>(null);
 	clientCache = new Map();
+	userParams = signal<UserParams>(new UserParams());
 
 	getMember(username: string) {
 		const member = this.paginatedMembers
@@ -27,14 +28,14 @@ export class MemberService {
 		return this.http.get<Member>(this.baseUrl + 'users/' + username);
 	}
 
-	getMembers(userParams: UserParams): void {
+	getMembers(): void {
 		const response = this.clientCache.get(
-			Object.values(userParams).join('-'),
+			Object.values(this.userParams()).join('-'),
 		);
 
 		if (response) this.setPaginatedResponse(response);
 
-		var params = this.setUserParams(userParams);
+		var params = this.setUserParams(this.userParams());
 
 		this.http
 			.get<
@@ -43,7 +44,7 @@ export class MemberService {
 			.subscribe({
 				next: (response) => {
 					this.clientCache.set(
-						Object.values(userParams).join('-'),
+						Object.values(this.userParams()).join('-'),
 						response,
 					),
 						this.setPaginatedResponse(response);
@@ -78,38 +79,15 @@ export class MemberService {
 	}
 
 	setMainPic(photo: Photo) {
-		// return this.http
-		// 	.put<Response>(this.baseUrl + 'users/set-main-pic/' + photo.id, {})
-		// 	.pipe(
-		// 		tap(() =>
-		// 			this.members.update((members) =>
-		// 				members.map((member) => {
-		// 					if (member.photos.includes(photo)) {
-		// 						member.photoUrl = photo.url;
-		// 					}
-		// 					return member;
-		// 				}),
-		// 			),
-		// 		),
-		// 	);
+		return this.http.put<Response>(
+			this.baseUrl + 'users/set-main-pic/' + photo.id,
+			{},
+		);
 	}
 
 	deletePic(photo: Photo) {
-		// return this.http
-		// 	.delete<Response>(this.baseUrl + 'users/delete-pic/' + photo.id)
-		// 	.pipe(
-		// 		tap(() =>
-		// 			this.members.update((members) =>
-		// 				members.map((member) => {
-		// 					if (member.photos.includes(photo)) {
-		// 						member.photos = member.photos.filter(
-		// 							(pic) => pic.id !== photo.id,
-		// 						);
-		// 					}
-		// 					return member;
-		// 				}),
-		// 			),
-		// 		),
-		// 	);
+		return this.http.delete<Response>(
+			this.baseUrl + 'users/delete-pic/' + photo.id,
+		);
 	}
 }
