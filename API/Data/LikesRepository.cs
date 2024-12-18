@@ -63,8 +63,8 @@ public class LikesRepository(DataContext context, IMapper mapper) : ILikesReposi
             .ToListAsync();
     }
 
-    public Task<bool> Save()
+    public async Task<bool> Save()
     {
-        throw new NotImplementedException();
+        return await context.SaveChangesAsync() > 0;
     }
 }
