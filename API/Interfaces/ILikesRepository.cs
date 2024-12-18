@@ -3,7 +3,7 @@ using API.Entities;
 
 namespace API.Interfaces;
 
-public interface ILikesRepo
+public interface ILikesRepository
 {
     Task<UserLikes> GetLike(int sourceId, int targetId);
     Task<IEnumerable<MemberDto>> GetLikes(string predicate, int userId);
