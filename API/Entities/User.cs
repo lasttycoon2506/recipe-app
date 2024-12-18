@@ -11,4 +11,6 @@ public class User
     public DateTime LastActive { get; set; } = DateTime.UtcNow;
     public string? Experience { get; set; }
     public string? Specialty { get; set; }
+    public List<UserLikes> WhoLikesUser { get; set; } = [];
+    public List<UserLikes> WhoUserLikes { get; set; } = [];
 }
