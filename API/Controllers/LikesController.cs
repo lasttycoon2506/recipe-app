@@ -1,12 +1,12 @@
-using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Extensions;
+using API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
-public class LikesController(LikesRepository likesRepository) : BaseApiController
+public class LikesController(ILikesRepository likesRepository) : BaseApiController
 {
     [HttpGet("list-likeIds")]
     public async Task<IEnumerable<int>> GetIdsWhoUserLikes()
