@@ -1,4 +1,4 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { Member } from '../../../models/member';
 import { RouterLink } from '@angular/router';
 import { LikesService } from '../../../services/likes.service';
@@ -13,9 +13,11 @@ import { LikesService } from '../../../services/likes.service';
 export class MemberCardComponent {
 	private likesService = inject(LikesService);
 	member = input.required<Member>();
-	
 
 	like() {
-		this.likesService.
+		this.likesService.whoUserLikesIds.update((ids) => [
+			...ids,
+			this.member().id,
+		]);
 	}
 }

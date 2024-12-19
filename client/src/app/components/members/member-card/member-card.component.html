@@ -21,11 +21,6 @@
 			{{ member().experience }}
 		</p>
 		<ul class="list-inline text-center mb-0">
-			<!-- @if (isLikedByUser()) {
-				<li class="list-inline-item">
-					<i class="material-icons heart">favorite</i>
-				</li>
-			} -->
 			<button
 				class="btn btn-dark btn-sm me-2"
 				routerLink="/members/{{ member().username }}"
@@ -34,11 +29,11 @@
 					<i class="material-icons">info</i>
 				</li>
 			</button>
-			<!-- <button (click)="toggleLike()" class="btn btn-danger btn-sm me-2">
+			<button (click)="like()" class="btn btn-danger btn-sm me-2">
 				<li>
 					<i class="material-icons">favorite</i>
 				</li>
-			</button> -->
+			</button>
 			<button class="btn btn-primary btn-sm">
 				<li class="list-inline-item">
 					<i class="material-icons">mail</i>
