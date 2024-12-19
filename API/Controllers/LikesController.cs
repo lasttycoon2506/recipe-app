@@ -8,13 +8,13 @@ namespace API.Controllers;
 
 public class LikesController(ILikesRepository likesRepository) : BaseApiController
 {
-    [HttpGet("list-ids")]
+    [HttpGet("list-like-ids")]
     public async Task<IEnumerable<int>> GetIdsWhoUserLikes()
     {
         return await likesRepository.GetIdsWhoCurrentUserLikes(User.GetUserId());
     }
 
-    [HttpGet("list")]
+    [HttpGet("list-matches")]
     public async Task<IEnumerable<MemberDto>> GetMatches()
     {
         return await likesRepository.GetMatches(User.GetUserId());
@@ -37,10 +37,13 @@ public class LikesController(ILikesRepository likesRepository) : BaseApiControll
             };
             likesRepository.AddLike(newLike);
         }
+        else
+        {
+            return BadRequest("user already liked");
+        }
 
         if (await likesRepository.Save())
-            return Ok();
-
-        return BadRequest("unable to like");
+            return StatusCode(201);
+        return BadRequest("unable to save like in db");
     }
 }
