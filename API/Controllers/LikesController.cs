@@ -8,13 +8,13 @@ namespace API.Controllers;
 
 public class LikesController(ILikesRepository likesRepository) : BaseApiController
 {
-    [HttpGet("list-likeIds")]
+    [HttpGet("list-ids")]
     public async Task<IEnumerable<int>> GetIdsWhoUserLikes()
     {
         return await likesRepository.GetIdsWhoCurrentUserLikes(User.GetUserId());
     }
 
-    [HttpGet("list-likes")]
+    [HttpGet("list")]
     public async Task<IEnumerable<MemberDto>> GetLikes(string predicate)
     {
         return await likesRepository.GetLikes(predicate, User.GetUserId());
