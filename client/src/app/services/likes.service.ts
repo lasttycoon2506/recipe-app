@@ -12,22 +12,20 @@ export class LikesService {
 	http = inject(HttpClient);
 	baseUrl = environment.apiUrl;
 
-	toggleLike(targetUserId: number): Observable<Response> {
+	like(targetUserId: number): Observable<Response> {
 		return this.http.post<Response>(
 			this.baseUrl + 'likes/' + targetUserId,
 			{},
 		);
 	}
 
-	getLikes(predicate: string): Observable<Member[]> {
-		return this.http.get<Member[]>(
-			this.baseUrl + 'likes/list?predicate=' + predicate,
-		);
+	getMatches(): Observable<Member[]> {
+		return this.http.get<Member[]>(this.baseUrl + 'list-matches');
 	}
 
 	getWhoUserLikesIds(): Subscription {
 		return this.http
-			.get<number[]>(this.baseUrl + 'likes/list-ids')
+			.get<number[]>(this.baseUrl + 'likes/list-like-ids')
 			.subscribe({
 				next: (ids) => this.whoUserLikesIds.set(ids),
 			});

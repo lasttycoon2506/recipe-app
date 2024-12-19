@@ -2,7 +2,6 @@ import { Component, inject, OnInit } from '@angular/core';
 import { MemberService } from '../../../services/member.service';
 import { MemberCardComponent } from '../member-card/member-card.component';
 import { PageChangedEvent, PaginationModule } from 'ngx-bootstrap/pagination';
-import { UserParams } from '../../../models/userParams';
 import { FormsModule } from '@angular/forms';
 
 @Component({
