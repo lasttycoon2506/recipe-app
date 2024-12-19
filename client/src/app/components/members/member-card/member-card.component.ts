@@ -1,6 +1,7 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { Member } from '../../../models/member';
 import { RouterLink } from '@angular/router';
+import { LikesService } from '../../../services/likes.service';
 
 @Component({
 	selector: 'app-member-card',
@@ -10,5 +11,9 @@ import { RouterLink } from '@angular/router';
 	styleUrl: './member-card.component.css',
 })
 export class MemberCardComponent {
+	private likesService = inject(LikesService);
 	member = input.required<Member>();
+	mutualLike = computed(() =>
+		this.likesService.whoUserLikesIds().includes(this.member().id),
+	);
 }
