@@ -15,6 +15,9 @@ export class MemberCardComponent {
 	member = input.required<Member>();
 
 	like() {
+		if (!this.likesService.whoUserLikesIds().includes(this.member().id)) {
+		}
+
 		this.likesService.whoUserLikesIds.update((ids) => [
 			...ids,
 			this.member().id,
