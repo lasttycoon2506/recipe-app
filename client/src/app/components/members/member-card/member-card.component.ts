@@ -13,7 +13,20 @@ import { LikesService } from '../../../services/likes.service';
 export class MemberCardComponent {
 	private likesService = inject(LikesService);
 	member = input.required<Member>();
-	mutualLike = computed(() =>
+	isLikedByUser = computed(() =>
 		this.likesService.whoUserLikesIds().includes(this.member().id),
 	);
+
+	toggleLike() {
+		if (this.isLikedByUser()) {
+			this.likesService.whoUserLikesIds.update((ids) =>
+				ids.filter((id) => id !== this.member().id),
+			);
+		} else {
+			this.likesService.whoUserLikesIds.update((ids) => [
+				...ids,
+				this.member().id,
+			]);
+		}
+	}
 }
