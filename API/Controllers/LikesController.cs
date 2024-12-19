@@ -15,13 +15,13 @@ public class LikesController(ILikesRepository likesRepository) : BaseApiControll
     }
 
     [HttpGet("list")]
-    public async Task<IEnumerable<MemberDto>> GetLikes(string predicate)
+    public async Task<IEnumerable<MemberDto>> GetMatches()
     {
-        return await likesRepository.GetLikes(predicate, User.GetUserId());
+        return await likesRepository.GetMatches(User.GetUserId());
     }
 
     [HttpPost("{targetUserId:int}")]
-    public async Task<ActionResult> ToggleLike(int targetUserId)
+    public async Task<ActionResult> Like(int targetUserId)
     {
         if (User.GetUserId() == targetUserId)
             return BadRequest("cant like yourself!");
@@ -37,14 +37,10 @@ public class LikesController(ILikesRepository likesRepository) : BaseApiControll
             };
             likesRepository.AddLike(newLike);
         }
-        else
-        {
-            likesRepository.DeleteLike(existingLike);
-        }
 
         if (await likesRepository.Save())
             return Ok();
 
-        return BadRequest("unable to update like");
+        return BadRequest("unable to like");
     }
 }

@@ -24,35 +24,16 @@ public class LikesRepository(DataContext context, IMapper mapper) : ILikesReposi
         return await context.Likes.FindAsync(sourceUserId, targetUserId);
     }
 
-    public async Task<IEnumerable<MemberDto>> GetLikes(string predicate, int userId)
+    public async Task<IEnumerable<MemberDto>> GetMatches(int userId)
     {
         var query = context.Likes.AsQueryable();
 
-        switch (predicate)
-        {
-            case "whoLikesUser":
-                return await query
-                    .Where(x => x.TargetUserId == userId)
-                    .Select(x => x.SourceUser)
-                    .ProjectTo<MemberDto>(mapper.ConfigurationProvider)
-                    .ToListAsync();
-            case "whoUserLikes":
-                return await query
-                    .Where(x => x.SourceUserId == userId)
-                    .Select(x => x.TargetUser)
-                    .ProjectTo<MemberDto>(mapper.ConfigurationProvider)
-                    .ToListAsync();
-            //mutual like
-            default:
-                var idsWhoUserLikes = await GetIdsWhoCurrentUserLikes(userId);
-                return await query
-                    .Where(x =>
-                        x.TargetUserId == userId && idsWhoUserLikes.Contains(x.SourceUserId)
-                    )
-                    .Select(x => x.SourceUser)
-                    .ProjectTo<MemberDto>(mapper.ConfigurationProvider)
-                    .ToListAsync();
-        }
+        var idsWhoUserLikes = await GetIdsWhoCurrentUserLikes(userId);
+        return await query
+            .Where(x => x.TargetUserId == userId && idsWhoUserLikes.Contains(x.SourceUserId))
+            .Select(x => x.SourceUser)
+            .ProjectTo<MemberDto>(mapper.ConfigurationProvider)
+            .ToListAsync();
     }
 
     public async Task<IEnumerable<int>> GetIdsWhoCurrentUserLikes(int currentUserId)
