@@ -6,6 +6,7 @@ import { authGuard } from './guards/auth.guard';
 import { MemberListComponent } from './components/members/member-list/member-list.component';
 import { MemberEditComponent } from './components/members/member-edit/member-edit.component';
 import { unsavedChangesGuard } from './guards/unsaved-changes.guard';
+import { MatchesComponent } from './components/matches/matches.component';
 
 export const routes: Routes = [
 	{ path: '', component: HomeComponent },
@@ -29,5 +30,10 @@ export const routes: Routes = [
 		component: MemberEditComponent,
 		canActivate: [authGuard],
 		canDeactivate: [unsavedChangesGuard],
+	},
+	{
+		path: 'matches',
+		component: MatchesComponent,
+		canActivate: [authGuard],
 	},
 ];
