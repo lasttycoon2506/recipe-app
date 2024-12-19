@@ -1,8 +1,8 @@
-<div class="col-2">
+<div class="row">
 	<h2>Matches</h2>
-	<ul>
-		@for (member of signalhere; track $index) {
-			<li>{{ member }}</li>
-		}
-	</ul>
+	@for (member of likesService.matches(); track $index) {
+		<div class="col-2">
+			<app-member-card [member]="member"></app-member-card>
+		</div>
+	}
 </div>

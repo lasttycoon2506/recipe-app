@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Member } from '../models/member';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root',
@@ -20,7 +20,7 @@ export class LikesService {
 	}
 
 	getMatches(): void {
-		this.http.get<Member[]>(this.baseUrl + 'list-matches').subscribe({
+		this.http.get<Member[]>(this.baseUrl + 'likes/list-matches').subscribe({
 			next: (matches) => this.matches.set(matches),
 		});
 	}

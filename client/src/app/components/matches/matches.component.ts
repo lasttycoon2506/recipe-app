@@ -1,19 +1,20 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { LikesService } from '../../services/likes.service';
-import { Member } from '../../models/member';
+import { MemberCardComponent } from '../members/member-card/member-card.component';
 
 @Component({
 	selector: 'app-matches',
 	standalone: true,
-	imports: [],
+	imports: [MemberCardComponent],
 	templateUrl: './matches.component.html',
 	styleUrl: './matches.component.css',
 })
 export class MatchesComponent implements OnInit {
-	private likesService = inject(LikesService);
-	matches: Member[] = [];
+	likesService = inject(LikesService);
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		this.loadMatches();
+	}
 
 	loadMatches() {
 		this.likesService.getMatches();
