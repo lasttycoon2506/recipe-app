@@ -17,7 +17,7 @@ export class MemberService {
 	clientCache = new Map();
 	userParams = signal<UserParams>(new UserParams());
 
-	getMember(username: string) {
+	getMember(username: string): Observable<Member> {
 		const member = this.paginatedMembers
 			? this.paginatedMembers()?.items.find(
 					(m) => m.username === username,
@@ -52,7 +52,7 @@ export class MemberService {
 			});
 	}
 
-	private setPaginatedResponse(response: HttpResponse<Member[]>) {
+	private setPaginatedResponse(response: HttpResponse<Member[]>): void {
 		this.paginatedMembers.set({
 			items: response.body as Member[],
 			pagination: JSON.parse(response.headers.get('Pagination')!),
@@ -78,20 +78,20 @@ export class MemberService {
 		return params;
 	}
 
-	setMainPic(photo: Photo) {
+	setMainPic(photo: Photo): Observable<Response> {
 		return this.http.put<Response>(
 			this.baseUrl + 'users/set-main-pic/' + photo.id,
 			{},
 		);
 	}
 
-	deletePic(photo: Photo) {
+	deletePic(photo: Photo): Observable<Response> {
 		return this.http.delete<Response>(
 			this.baseUrl + 'users/delete-pic/' + photo.id,
 		);
 	}
 
-	resetUserParams() {
+	resetUserParams(): void {
 		this.userParams.set(new UserParams());
 	}
 }
