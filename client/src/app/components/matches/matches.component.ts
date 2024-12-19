@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { LikesService } from '../../services/likes.service';
+import { Member } from '../../models/member';
 
 @Component({
 	selector: 'app-matches',
@@ -10,8 +11,11 @@ import { LikesService } from '../../services/likes.service';
 })
 export class MatchesComponent implements OnInit {
 	private likesService = inject(LikesService);
+	matches: Member[] = [];
 
 	ngOnInit(): void {}
 
-	loadMatches() {}
+	loadMatches() {
+		this.likesService.getMatches();
+	}
 }

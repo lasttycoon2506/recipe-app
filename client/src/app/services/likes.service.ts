@@ -8,7 +8,7 @@ import { Observable, Subscription } from 'rxjs';
 	providedIn: 'root',
 })
 export class LikesService {
-	whoUserLikesIds = signal<number[]>([]);
+	matches = signal<Member[]>([]);
 	http = inject(HttpClient);
 	baseUrl = environment.apiUrl;
 
@@ -19,15 +19,13 @@ export class LikesService {
 		);
 	}
 
-	getMatches(): Observable<Member[]> {
-		return this.http.get<Member[]>(this.baseUrl + 'list-matches');
+	getMatches(): void {
+		this.http.get<Member[]>(this.baseUrl + 'list-matches').subscribe({
+			next: (matches) => this.matches.set(matches),
+		});
 	}
 
-	getWhoUserLikesIds(): Subscription {
-		return this.http
-			.get<number[]>(this.baseUrl + 'likes/list-like-ids')
-			.subscribe({
-				next: (ids) => this.whoUserLikesIds.set(ids),
-			});
+	getWhoUserLikesIds() {
+		return this.http.get<number[]>(this.baseUrl + 'likes/list-like-ids');
 	}
 }
