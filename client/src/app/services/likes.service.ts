@@ -11,6 +11,7 @@ export class LikesService {
 	matches = signal<Member[]>([]);
 	http = inject(HttpClient);
 	baseUrl = environment.apiUrl;
+	whoUserLikesIds = signal<number[]>([]);
 
 	like(targetUserId: number): Observable<Response> {
 		return this.http.post<Response>(
@@ -26,6 +27,10 @@ export class LikesService {
 	}
 
 	getWhoUserLikesIds() {
-		return this.http.get<number[]>(this.baseUrl + 'likes/list-like-ids');
+		this.http
+			.get<number[]>(this.baseUrl + 'likes/list-like-ids')
+			.subscribe({
+				next: (ids) => this.whoUserLikesIds.set(ids),
+			});
 	}
 }
