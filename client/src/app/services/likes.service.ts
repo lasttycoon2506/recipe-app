@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Member } from '../models/member';
+import { Observable, Subscription } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root',
@@ -11,19 +12,24 @@ export class LikesService {
 	http = inject(HttpClient);
 	baseUrl = environment.apiUrl;
 
-	toggleLike(targetUserId: number): void {
-		this.http.post(this.baseUrl + 'likes/' + targetUserId, {});
+	toggleLike(targetUserId: number): Observable<Response> {
+		return this.http.post<Response>(
+			this.baseUrl + 'likes/' + targetUserId,
+			{},
+		);
 	}
 
-	getLikes(predicate: string) {
-		this.http.get<Member[]>(
+	getLikes(predicate: string): Observable<Member[]> {
+		return this.http.get<Member[]>(
 			this.baseUrl + 'likes/list?predicate=' + predicate,
 		);
 	}
 
-	getWhoUserLikesIds() {
-		this.http.get<number[]>(this.baseUrl + 'likes/list-ids').subscribe({
-			next: (ids) => this.whoUserLikesIds.set(ids),
-		});
+	getWhoUserLikesIds(): Subscription {
+		return this.http
+			.get<number[]>(this.baseUrl + 'likes/list-ids')
+			.subscribe({
+				next: (ids) => this.whoUserLikesIds.set(ids),
+			});
 	}
 }
