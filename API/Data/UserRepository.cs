@@ -8,7 +8,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Data;
 
-public class UserRepository(DataContext context, IMapper mapper, ILikesRepository likesRepository) : IUserRepository
+public class UserRepository(DataContext context, IMapper mapper, ILikesRepository likesRepository)
+    : IUserRepository
 {
     public async Task<MemberDto?> GetMemberAsync(string username)
     {
@@ -34,7 +35,15 @@ public class UserRepository(DataContext context, IMapper mapper, ILikesRepositor
         }
 
         query = query.OrderByDescending(member => member.LastActive);
-        likesRepository.GetIdsWhoCurrentUserLikes()
+
+        //returns only users curr.user hasnt liked
+        if (userParams.CurrentUserId.HasValue)
+        {
+            var whoUserLikesIds = await likesRepository.GetIdsWhoCurrentUserLikes(
+                userParams.CurrentUserId.Value
+            );
+            query = query.Where(member => !whoUserLikesIds.Contains(member.Id));
+        }
 
         return await PagedList<MemberDto>.GetResults(
             query.ProjectTo<MemberDto>(mapper.ConfigurationProvider),
