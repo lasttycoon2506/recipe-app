@@ -33,6 +33,7 @@ namespace API.Controllers
         )
         {
             userParams.CurrentUsername = User.GetUsername();
+            userParams.CurrentUserId = User.GetUserId();
             var members = await userRepository.GetMembersAsync(userParams);
             Response.AddPaginationHeader(members);
 

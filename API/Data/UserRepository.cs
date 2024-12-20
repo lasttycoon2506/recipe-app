@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Data;
 
-public class UserRepository(DataContext context, IMapper mapper) : IUserRepository
+public class UserRepository(DataContext context, IMapper mapper, ILikesRepository likesRepository) : IUserRepository
 {
     public async Task<MemberDto?> GetMemberAsync(string username)
     {
@@ -34,6 +34,7 @@ public class UserRepository(DataContext context, IMapper mapper) : IUserReposito
         }
 
         query = query.OrderByDescending(member => member.LastActive);
+        likesRepository.GetIdsWhoCurrentUserLikes()
 
         return await PagedList<MemberDto>.GetResults(
             query.ProjectTo<MemberDto>(mapper.ConfigurationProvider),
