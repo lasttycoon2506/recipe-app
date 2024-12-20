@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Member } from '../models/member';
-import { Observable } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root',
@@ -13,11 +12,16 @@ export class LikesService {
 	baseUrl = environment.apiUrl;
 	whoUserLikesIds = signal<number[]>([]);
 
-	like(targetUserId: number): Observable<Response> {
-		return this.http.post<Response>(
-			this.baseUrl + 'likes/' + targetUserId,
-			{},
-		);
+	like(targetUserId: number): void {
+		this.http
+			.post<Response>(this.baseUrl + 'likes/' + targetUserId, {})
+			.subscribe({
+				next: () =>
+					this.whoUserLikesIds.update(() => [
+						...this.whoUserLikesIds(),
+						targetUserId,
+					]),
+			});
 	}
 
 	getMatches(): void {

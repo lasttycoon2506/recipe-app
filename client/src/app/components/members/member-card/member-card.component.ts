@@ -13,16 +13,8 @@ import { LikesService } from '../../../services/likes.service';
 export class MemberCardComponent {
 	private likesService = inject(LikesService);
 	member = input.required<Member>();
-	likedByUser = computed(() =>
-		this.likesService.whoUserLikesIds().includes(this.member().id),
-	);
 
 	like() {
-		if (!this.likedByUser) {
-			this.likesService.whoUserLikesIds.update((ids) => [
-				...ids,
-				this.member().id,
-			]);
-		}
+		this.likesService.like(this.member().id);
 	}
 }
