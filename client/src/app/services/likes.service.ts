@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Member } from '../models/member';
-import { MemberService } from './member.service';
 import { PaginationResult } from '../models/pagination';
 
 @Injectable({
@@ -32,11 +31,13 @@ export class LikesService {
 				PaginationResult<Member[]>
 			>(this.baseUrl + 'likes/list-matches')
 			.subscribe({
-				next: (matches) => this.paginatedMatchedMembers.set(matches),
+				next: (matches) => {
+					this.paginatedMatchedMembers.set(matches);
+				},
 			});
 	}
 
-	getWhoUserLikesIds() {
+	getWhoUserLikesIds(): void {
 		this.http
 			.get<number[]>(this.baseUrl + 'likes/list-like-ids')
 			.subscribe({

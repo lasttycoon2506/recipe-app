@@ -1,8 +1,24 @@
 <div class="row">
 	<h2>Matches</h2>
-	@for (member of likesService.matches(); track $index) {
+	@for (
+		member of likesService.paginatedMatchedMembers()?.items;
+		track $index
+	) {
 		<div class="col-2">
 			<app-member-card [member]="member"></app-member-card>
 		</div>
+	}
+
+	@if (likesService.paginatedMatchedMembers()?.pagination) {
+		<pagination
+			[totalItems]="
+				(likesService.paginatedMatchedMembers()?.pagination)!.totalItems
+			"
+			[itemsPerPage]="
+				(likesService.paginatedMatchedMembers()?.pagination)!.itemsPerPg
+			"
+			[maxSize]="5"
+			(pageChanged)="onPageChanged($event)"
+		></pagination>
 	}
 </div>
