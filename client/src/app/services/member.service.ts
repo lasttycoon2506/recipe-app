@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable, of } from 'rxjs';
@@ -6,6 +6,7 @@ import { Member } from '../models/member';
 import { Photo } from '../models/photo';
 import { PaginationResult } from '../models/pagination';
 import { UserParams } from '../models/userParams';
+import { setPaginatedResponse, setPaginationHeader } from './paginationHelper';
 
 @Injectable({
 	providedIn: 'root',
@@ -33,9 +34,10 @@ export class MemberService {
 			Object.values(this.userParams()).join('-'),
 		);
 
-		if (response) this.setPaginatedResponse(response);
+		if (response)
+			return setPaginatedResponse(response, this.paginatedMembers);
 
-		var params = this.setUserParams(this.userParams());
+		var params = setPaginationHeader(this.userParams());
 
 		this.http
 			.get<
@@ -47,7 +49,7 @@ export class MemberService {
 						Object.values(this.userParams()).join('-'),
 						response,
 					),
-						this.setPaginatedResponse(response);
+						setPaginatedResponse(response, this.paginatedMembers);
 				},
 			});
 	}
