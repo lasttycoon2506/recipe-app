@@ -2,15 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Member } from '../models/member';
+import { MemberService } from './member.service';
+import { PaginationResult } from '../models/pagination';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class LikesService {
-	matches = signal<Member[]>([]);
 	http = inject(HttpClient);
 	baseUrl = environment.apiUrl;
 	whoUserLikesIds = signal<number[]>([]);
+	paginatedMatchedMembers = signal<PaginationResult<Member[]> | null>(null);
 
 	like(targetUserId: number): void {
 		this.http
@@ -25,9 +27,13 @@ export class LikesService {
 	}
 
 	getMatches(): void {
-		this.http.get<Member[]>(this.baseUrl + 'likes/list-matches').subscribe({
-			next: (matches) => this.matches.set(matches),
-		});
+		this.http
+			.get<
+				PaginationResult<Member[]>
+			>(this.baseUrl + 'likes/list-matches')
+			.subscribe({
+				next: (matches) => this.paginatedMatchedMembers.set(matches),
+			});
 	}
 
 	getWhoUserLikesIds() {
