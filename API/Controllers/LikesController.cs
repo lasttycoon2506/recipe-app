@@ -16,11 +16,12 @@ public class LikesController(ILikesRepository likesRepository) : BaseApiControll
     }
 
     [HttpGet("list-matches")]
-    public async Task<IEnumerable<MemberDto>> GetMatches([FromQuery] UserParams userParams)
+    public async Task<PagedList<MemberDto>> GetMatches([FromQuery] UserParams userParams)
     {
         userParams.CurrentUserId = User.GetUserId();
         var matchedMembers = await likesRepository.GetMatches(userParams);
         Response.AddPaginationHeader(matchedMembers);
+        return matchedMembers;
     }
 
     [HttpPost("{targetUserId:int}")]
