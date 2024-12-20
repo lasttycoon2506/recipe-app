@@ -1,6 +1,7 @@
 using API.DTOs;
 using API.Entities;
 using API.Extensions;
+using API.Helpers;
 using API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,9 +16,11 @@ public class LikesController(ILikesRepository likesRepository) : BaseApiControll
     }
 
     [HttpGet("list-matches")]
-    public async Task<IEnumerable<MemberDto>> GetMatches()
+    public async Task<IEnumerable<MemberDto>> GetMatches([FromQuery] UserParams userParams)
     {
-        return await likesRepository.GetMatches(User.GetUserId());
+        userParams.CurrentUserId = User.GetUserId();
+        var matchedMembers = await likesRepository.GetMatches(userParams);
+        Response.AddPaginationHeader(matchedMembers);
     }
 
     [HttpPost("{targetUserId:int}")]

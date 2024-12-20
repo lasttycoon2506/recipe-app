@@ -6,14 +6,12 @@ import { Member } from '../models/member';
 import { Photo } from '../models/photo';
 import { PaginationResult } from '../models/pagination';
 import { UserParams } from '../models/userParams';
-import { LikesService } from './likes.service';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class MemberService {
 	private http = inject(HttpClient);
-	private likesService = inject(LikesService);
 	private baseUrl = environment.apiUrl;
 	paginatedMembers = signal<PaginationResult<Member[]> | null>(null);
 	clientCache = new Map();

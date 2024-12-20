@@ -1,5 +1,6 @@
 using API.DTOs;
 using API.Entities;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -24,16 +25,23 @@ public class LikesRepository(DataContext context, IMapper mapper) : ILikesReposi
         return await context.Likes.FindAsync(sourceUserId, targetUserId);
     }
 
-    public async Task<IEnumerable<MemberDto>> GetMatches(int userId)
+    public async Task<PagedList<MemberDto>> GetMatches(UserParams userParams)
     {
         var query = context.Likes.AsQueryable();
 
-        var idsWhoUserLikes = await GetIdsWhoCurrentUserLikes(userId);
-        return await query
-            .Where(x => x.TargetUserId == userId && idsWhoUserLikes.Contains(x.SourceUserId))
-            .Select(x => x.SourceUser)
-            .ProjectTo<MemberDto>(mapper.ConfigurationProvider)
-            .ToListAsync();
+        var idsWhoUserLikes = await GetIdsWhoCurrentUserLikes(userParams.CurrentUserId);
+
+        return await PagedList<MemberDto>.GetResults(
+            query
+                .Where(x =>
+                    x.TargetUserId == userParams.CurrentUserId
+                    && idsWhoUserLikes.Contains(x.SourceUserId)
+                )
+                .Select(x => x.SourceUser)
+                .ProjectTo<MemberDto>(mapper.ConfigurationProvider),
+            userParams.PgSize,
+            userParams.PgNumber
+        );
     }
 
     public async Task<IEnumerable<int>> GetIdsWhoCurrentUserLikes(int currentUserId)

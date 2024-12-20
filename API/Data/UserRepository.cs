@@ -37,13 +37,10 @@ public class UserRepository(DataContext context, IMapper mapper, ILikesRepositor
         query = query.OrderByDescending(member => member.LastActive);
 
         //returns only users curr.user hasnt liked
-        if (userParams.CurrentUserId.HasValue)
-        {
-            var whoUserLikesIds = await likesRepository.GetIdsWhoCurrentUserLikes(
-                userParams.CurrentUserId.Value
-            );
-            query = query.Where(member => !whoUserLikesIds.Contains(member.Id));
-        }
+        var whoUserLikesIds = await likesRepository.GetIdsWhoCurrentUserLikes(
+            userParams.CurrentUserId
+        );
+        query = query.Where(member => !whoUserLikesIds.Contains(member.Id));
 
         return await PagedList<MemberDto>.GetResults(
             query.ProjectTo<MemberDto>(mapper.ConfigurationProvider),
