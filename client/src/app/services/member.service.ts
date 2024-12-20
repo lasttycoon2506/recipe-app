@@ -52,30 +52,8 @@ export class MemberService {
 			});
 	}
 
-	private setPaginatedResponse(response: HttpResponse<Member[]>): void {
-		this.paginatedMembers.set({
-			items: response.body as Member[],
-			pagination: JSON.parse(response.headers.get('Pagination')!),
-		});
-	}
-
 	updateMember(member: Member): Observable<Response> {
 		return this.http.put<Response>(this.baseUrl + 'users', member);
-	}
-
-	private setUserParams(userParams: UserParams): HttpParams {
-		let params = new HttpParams();
-
-		params = params.append('pgNumber', userParams.pgNumber);
-		params = params.append('pgSize', userParams.pgSize);
-		if (userParams.specialty) {
-			params = params.append('specialty', userParams.specialty);
-		}
-		if (userParams.experience) {
-			params = params.append('experience', userParams.experience);
-		}
-
-		return params;
 	}
 
 	setMainPic(photo: Photo): Observable<Response> {
