@@ -45,12 +45,11 @@ export class MemberService {
 			>(this.baseUrl + 'users', { observe: 'response', params })
 			.subscribe({
 				next: (response) => {
-					var filteredMembers = this.filterNotLikedMembers(response);
 					this.clientCache.set(
 						Object.values(this.userParams()).join('-'),
-						filteredMembers,
+						response,
 					),
-						this.setPaginatedResponse(filteredMembers);
+						this.setPaginatedResponse(response);
 				},
 			});
 	}
@@ -60,16 +59,6 @@ export class MemberService {
 			items: response.body as Member[],
 			pagination: JSON.parse(response.headers.get('Pagination')!),
 		});
-	}
-
-	private filterNotLikedMembers(
-		response: HttpResponse<Member[]>,
-	): HttpResponse<Member[]> {
-		var filteredMembers = response.body?.filter(
-			(member) =>
-				!this.likesService.whoUserLikesIds().includes(member.id),
-		);
-		return filteredMembers;
 	}
 
 	updateMember(member: Member): Observable<Response> {
