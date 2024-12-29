@@ -1,8 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Member } from '../models/member';
 import { PaginationResult } from '../models/pagination';
+import { setPaginatedResponse, setPaginationHeader } from './paginationHelper';
+import { UserParams } from '../models/userParams';
 
 @Injectable({
 	providedIn: 'root',
@@ -25,15 +27,16 @@ export class LikesService {
 			});
 	}
 
-	getMatches(): void {
+	getMatches(userParams: UserParams): void {
+		setPaginationHeader(userParams);
 		this.http
-			.get<
-				PaginationResult<Member[]>
-			>(this.baseUrl + 'likes/list-matches')
+			.get<HttpResponse<Member[]>>(this.baseUrl + 'likes/list-matches')
 			.subscribe({
-				next: (matches) => {
-					this.paginatedMatchedMembers.set(matches);
-				},
+				next: (response) =>
+					setPaginatedResponse(
+						response,
+						this.paginatedMatchedMembers,
+					),
 			});
 	}
 
