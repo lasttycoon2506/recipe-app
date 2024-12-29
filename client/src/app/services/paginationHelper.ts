@@ -2,18 +2,22 @@ import { HttpParams, HttpResponse } from '@angular/common/http';
 import { WritableSignal } from '@angular/core';
 import { Member } from '../models/member';
 import { PaginationResult } from '../models/pagination';
-import { UserParams } from '../models/userParams';
 
-export function setPaginationHeader(userParams: UserParams): HttpParams {
+export function setPaginationHeader(
+	pgNumber: number,
+	pgSize: number,
+	specialty?: string,
+	experience?: string,
+): HttpParams {
 	let params = new HttpParams();
 
-	params = params.append('pgNumber', userParams.pgNumber);
-	params = params.append('pgSize', userParams.pgSize);
-	if (userParams.specialty) {
-		params = params.append('specialty', userParams.specialty);
+	params = params.append('pgNumber', pgNumber);
+	params = params.append('pgSize', pgSize);
+	if (specialty) {
+		params = params.append('specialty', specialty);
 	}
-	if (userParams.experience) {
-		params = params.append('experience', userParams.experience);
+	if (experience) {
+		params = params.append('experience', experience);
 	}
 
 	return params;
