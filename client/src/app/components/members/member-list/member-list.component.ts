@@ -15,7 +15,7 @@ export class MemberListComponent implements OnInit {
 	memberService = inject(MemberService);
 
 	ngOnInit(): void {
-		if (!this.memberService.paginatedMembers()) this.loadMembers();
+		this.loadMembers();
 	}
 
 	loadMembers(): void {

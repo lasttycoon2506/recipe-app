@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, model, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable, of } from 'rxjs';
 import { Member } from '../models/member';
@@ -7,7 +7,6 @@ import { Photo } from '../models/photo';
 import { PaginationResult } from '../models/pagination';
 import { UserParams } from '../models/userParams';
 import { setPaginatedResponse, setPaginationHeader } from './paginationHelper';
-import { AccountService } from './account.service';
 
 @Injectable({
 	providedIn: 'root',
