@@ -1,5 +1,5 @@
 import { HttpParams, HttpResponse } from '@angular/common/http';
-import { WritableSignal } from '@angular/core';
+import { signal } from '@angular/core';
 import { Member } from '../models/member';
 import { PaginationResult } from '../models/pagination';
 
@@ -23,12 +23,14 @@ export function setPaginationHeader(
 	return params;
 }
 
-export function setPaginatedResponse(
-	response: HttpResponse<Member[]>,
-	paginatedMembersSignal: WritableSignal<PaginationResult<Member[]> | null>,
+export function setPaginatedResponse<T>(
+	response: HttpResponse<T>,
+	paginatedMembersSignal: ReturnType<
+		typeof signal<PaginationResult<T> | null>
+	>,
 ): void {
 	paginatedMembersSignal.set({
-		items: response.body as Member[],
+		items: response.body as T,
 		pagination: JSON.parse(response.headers.get('Pagination')!),
 	});
 }
