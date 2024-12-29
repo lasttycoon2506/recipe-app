@@ -27,13 +27,13 @@ export class LikesService {
 			});
 	}
 
-	getMatches(userParams: UserParams): void {
-		if (userParams) {
-			setPaginationHeader(userParams);
-		}
+	getMatches(pgNumber: number, pgSize: number): void {
+		let params = setPaginationHeader(pgNumber, pgSize);
 
 		this.http
-			.get<HttpResponse<Member[]>>(this.baseUrl + 'likes/list-matches')
+			.get<
+				Member[]
+			>(this.baseUrl + 'likes/list-matches', { observe: 'response', params })
 			.subscribe({
 				next: (response) =>
 					setPaginatedResponse(
