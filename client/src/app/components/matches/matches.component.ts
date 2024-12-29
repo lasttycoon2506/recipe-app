@@ -12,18 +12,19 @@ import { PageChangedEvent, PaginationModule } from 'ngx-bootstrap/pagination';
 })
 export class MatchesComponent implements OnInit {
 	likesService = inject(LikesService);
-	currentPg = 1;
+	pgNumber = 1;
+	pgSize = 10;
 
 	ngOnInit(): void {
 		this.loadMatches();
 	}
 
 	loadMatches() {
-		this.likesService.getMatches();
+		this.likesService.getMatches(this.pgNumber, this.pgSize);
 	}
 
 	onPageChanged(event: PageChangedEvent) {
-		if (this.currentPg !== event.page) this.loadMatches();
-		this.currentPg = event.page;
+		if (this.pgNumber !== event.page) this.loadMatches();
+		this.pgNumber = event.page;
 	}
 }

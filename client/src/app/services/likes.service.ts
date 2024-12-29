@@ -28,7 +28,10 @@ export class LikesService {
 	}
 
 	getMatches(userParams: UserParams): void {
-		setPaginationHeader(userParams);
+		if (userParams) {
+			setPaginationHeader(userParams);
+		}
+
 		this.http
 			.get<HttpResponse<Member[]>>(this.baseUrl + 'likes/list-matches')
 			.subscribe({
