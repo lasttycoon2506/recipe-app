@@ -37,7 +37,12 @@ export class MemberService {
 		if (response)
 			return setPaginatedResponse(response, this.paginatedMembers);
 
-		var params = setPaginationHeader(this.userParams());
+		var params = setPaginationHeader(
+			this.userParams().pgNumber,
+			this.userParams().pgSize,
+			this.userParams().experience,
+			this.userParams().specialty,
+		);
 
 		this.http
 			.get<
