@@ -13,10 +13,8 @@ import { LikesService } from '../../../services/likes.service';
 export class MemberCardComponent {
 	private likesService = inject(LikesService);
 	member = input.required<Member>();
-	reloadMembers = output<boolean>();
 
 	like() {
 		this.likesService.like(this.member().id);
-		this.reloadMembers.emit(true);
 	}
 }
