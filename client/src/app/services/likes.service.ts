@@ -1,10 +1,9 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Member } from '../models/member';
 import { PaginationResult } from '../models/pagination';
 import { setPaginatedResponse, setPaginationHeader } from './paginationHelper';
-import { UserParams } from '../models/userParams';
 
 @Injectable({
 	providedIn: 'root',
