@@ -20,6 +20,7 @@ export class MemberListComponent implements OnInit {
 
 	loadMembers(): void {
 		this.memberService.getMembers();
+		console.log(this.memberService.paginatedMembers());
 	}
 
 	onPageChanged(event: PageChangedEvent): void {

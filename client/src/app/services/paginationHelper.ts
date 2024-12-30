@@ -1,6 +1,5 @@
 import { HttpParams, HttpResponse } from '@angular/common/http';
 import { signal } from '@angular/core';
-import { Member } from '../models/member';
 import { PaginationResult } from '../models/pagination';
 
 export function setPaginationHeader(

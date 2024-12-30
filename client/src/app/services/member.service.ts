@@ -32,8 +32,8 @@ export class MemberService {
 		let params = setPaginationHeader(
 			this.userParams().pgNumber,
 			this.userParams().pgSize,
-			this.userParams().experience,
 			this.userParams().specialty,
+			this.userParams().experience,
 		);
 
 		this.http
