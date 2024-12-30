@@ -1,3 +1,4 @@
+using API.DTOs;
 using API.Entities;
 using API.Helpers;
 
@@ -10,7 +11,7 @@ public interface IMessageRepository
     Task<Message> GetMessageAsync(int id);
     Task<PagedList<MessageDto>> GetUserMessagesAsync();
     Task<IEnumerable<MessageDto>> GetMessageThreadAsync(
-        string senderUsername,
+        string currentUsername,
         string receiverUsername
     );
     Task<bool> SaveAsync();
