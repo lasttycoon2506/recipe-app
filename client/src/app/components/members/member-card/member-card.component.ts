@@ -1,4 +1,11 @@
-import { Component, EventEmitter, inject, input, Output } from '@angular/core';
+import {
+	Component,
+	EventEmitter,
+	inject,
+	input,
+	output,
+	Output,
+} from '@angular/core';
 import { Member } from '../../../models/member';
 import { RouterLink } from '@angular/router';
 import { LikesService } from '../../../services/likes.service';
@@ -14,11 +21,11 @@ import { sleep } from '../../../helpers/sleepHelper';
 export class MemberCardComponent {
 	private likesService = inject(LikesService);
 	member = input.required<Member>();
-	@Output() reload = new EventEmitter<void>();
+	reload = output<boolean>();
 
 	async like() {
 		this.likesService.like(this.member().id);
 		await sleep(); //1 sec - allows db to update and send refreshed members-list
-		this.reload.emit();
+		this.reload.emit(true);
 	}
 }
