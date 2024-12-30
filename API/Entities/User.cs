@@ -13,4 +13,6 @@ public class User
     public string? Specialty { get; set; }
     public List<UserLikes> WhoLikesUser { get; set; } = [];
     public List<UserLikes> WhoUserLikes { get; set; } = [];
+    public List<Message> MessagesSent { get; set; } = [];
+    public List<Message> MessagesReceived { get; set; } = [];
 }
