@@ -2,6 +2,7 @@ namespace API.Entities;
 
 public class Message
 {
+    public int Id { get; set; }
     public required string SenderUsername { get; set; }
     public required string ReceiverUsername { get; set; }
     public required string Content { get; set; }
