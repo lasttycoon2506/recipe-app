@@ -1,3 +1,4 @@
+using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Helpers;
@@ -6,7 +7,7 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Data;
+namespace API.Repositories;
 
 public class UserRepository(DataContext context, IMapper mapper, ILikesRepository likesRepository)
     : IUserRepository
@@ -37,7 +38,7 @@ public class UserRepository(DataContext context, IMapper mapper, ILikesRepositor
         query = query.OrderByDescending(member => member.LastActive);
 
         //returns only users curr.user hasnt liked
-        var whoUserLikesIds = await likesRepository.GetIdsWhoCurrentUserLikes(
+        var whoUserLikesIds = await likesRepository.GetIdsWhoCurrentUserLikesAsync(
             userParams.CurrentUserId
         );
         query = query.Where(member => !whoUserLikesIds.Contains(member.Id));

@@ -12,14 +12,14 @@ public class LikesController(ILikesRepository likesRepository) : BaseApiControll
     [HttpGet("list-like-ids")]
     public async Task<IEnumerable<int>> GetIdsWhoUserLikes()
     {
-        return await likesRepository.GetIdsWhoCurrentUserLikes(User.GetUserId());
+        return await likesRepository.GetIdsWhoCurrentUserLikesAsync(User.GetUserId());
     }
 
     [HttpGet("list-matches")]
     public async Task<PagedList<MemberDto>> GetMatches([FromQuery] UserParams userParams)
     {
         userParams.CurrentUserId = User.GetUserId();
-        var matchedMembers = await likesRepository.GetMatches(userParams);
+        var matchedMembers = await likesRepository.GetMatchesAsync(userParams);
         Response.AddPaginationHeader(matchedMembers);
         return matchedMembers;
     }
@@ -30,7 +30,7 @@ public class LikesController(ILikesRepository likesRepository) : BaseApiControll
         if (User.GetUserId() == targetUserId)
             return BadRequest("cant like yourself!");
 
-        var existingLike = await likesRepository.GetLike(User.GetUserId(), targetUserId);
+        var existingLike = await likesRepository.GetLikeAsync(User.GetUserId(), targetUserId);
 
         if (existingLike == null)
         {
@@ -46,7 +46,7 @@ public class LikesController(ILikesRepository likesRepository) : BaseApiControll
             return BadRequest("user already liked");
         }
 
-        if (await likesRepository.Save())
+        if (await likesRepository.SaveAsync())
             return StatusCode(201);
         return BadRequest("unable to save like in db");
     }

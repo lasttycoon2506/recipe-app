@@ -3,7 +3,7 @@ using API.Entities;
 using API.Helpers;
 using API.Interfaces;
 
-namespace API.Data;
+namespace API.Repositories;
 
 public class MessageRepository : IMessageRepository
 {
