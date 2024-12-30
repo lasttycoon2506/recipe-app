@@ -1,3 +1,4 @@
+using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Helpers;
@@ -5,21 +6,21 @@ using API.Interfaces;
 
 namespace API.Repositories;
 
-public class MessageRepository : IMessageRepository
+public class MessageRepository(DataContext context) : IMessageRepository
 {
     public void AddMessage(Message message)
     {
-        throw new NotImplementedException();
+        context.Messages.Add(message);
     }
 
     public void DeleteMessage(Message message)
     {
-        throw new NotImplementedException();
+        context.Messages.Remove(message);
     }
 
-    public Task<Message> GetMessageAsync(int id)
+    public async Task<Message?> GetMessageAsync(int id)
     {
-        throw new NotImplementedException();
+        return await context.Messages.FindAsync(id);
     }
 
     public Task<IEnumerable<MessageDto>> GetMessageThreadAsync(
@@ -35,8 +36,8 @@ public class MessageRepository : IMessageRepository
         throw new NotImplementedException();
     }
 
-    public Task<bool> SaveAsync()
+    public async Task<bool> SaveAsync()
     {
-        throw new NotImplementedException();
+        return await context.SaveChangesAsync() > 0;
     }
 }
