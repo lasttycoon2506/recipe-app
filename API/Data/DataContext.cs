@@ -20,12 +20,20 @@ public class DataContext(DbContextOptions options) : DbContext(options)
             .WithMany(target => target.WhoUserLikes)
             .HasForeignKey(source => source.SourceUserId)
             .OnDelete(DeleteBehavior.Cascade);
-
         builder
             .Entity<UserLikes>()
             .HasOne(source => source.TargetUser)
             .WithMany(target => target.WhoLikesUser)
             .HasForeignKey(source => source.TargetUserId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder
+            .Entity<Message>()
+            .HasOne(sender => sender.Sender)
+            .WithMany(sender => sender.MessagesSent);
+        builder
+            .Entity<Message>()
+            .HasOne(receiver => receiver.Receiver)
+            .WithMany(receiver => receiver.MessagesReceived);
     }
 }
