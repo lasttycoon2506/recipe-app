@@ -1,4 +1,11 @@
-import { Component, inject, input, output } from '@angular/core';
+import {
+	Component,
+	EventEmitter,
+	inject,
+	input,
+	Output,
+	output,
+} from '@angular/core';
 import { Member } from '../../../models/member';
 import { RouterLink } from '@angular/router';
 import { LikesService } from '../../../services/likes.service';
@@ -13,10 +20,10 @@ import { LikesService } from '../../../services/likes.service';
 export class MemberCardComponent {
 	private likesService = inject(LikesService);
 	member = input.required<Member>();
-	reload = output<boolean>();
+	@Output() reloadMembers = new EventEmitter<void>();
 
 	like() {
 		this.likesService.like(this.member().id);
-		this.reload.emit(true);
+		this.reloadMembers.emit();
 	}
 }

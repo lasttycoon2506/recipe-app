@@ -36,7 +36,10 @@ export class MemberListComponent implements OnInit {
 
 	reloadMembers(event: boolean): void {
 		this.triggerReload = event;
-		this.loadMembers();
+		if (this.triggerReload) {
+			this.loadMembers();
+			console.log('triggered');
+		}
 		this.triggerReload = false;
 	}
 }
