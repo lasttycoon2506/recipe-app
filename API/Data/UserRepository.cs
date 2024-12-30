@@ -61,11 +61,6 @@ public class UserRepository(DataContext context, IMapper mapper, ILikesRepositor
         return await context.Users.FindAsync(id);
     }
 
-    public async Task<IEnumerable<User>> GetUsersAsync()
-    {
-        return await context.Users.Include(x => x.Photos).ToListAsync();
-    }
-
     public async Task<bool> SaveAsync()
     {
         return await context.SaveChangesAsync() > 0;
