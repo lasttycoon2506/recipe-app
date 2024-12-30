@@ -6,10 +6,10 @@ namespace API.Interfaces;
 
 public interface ILikesRepository
 {
-    Task<UserLikes?> GetLike(int sourceUserId, int targetUserId);
-    Task<PagedList<MemberDto>> GetMatches(UserParams userParams);
-    Task<IEnumerable<int>> GetIdsWhoCurrentUserLikes(int currentUserId);
+    Task<UserLikes?> GetLikeAsync(int sourceUserId, int targetUserId);
+    Task<PagedList<MemberDto>> GetMatchesAsync(UserParams userParams);
+    Task<IEnumerable<int>> GetIdsWhoCurrentUserLikesAsync(int currentUserId);
     void DeleteLike(UserLikes like);
     void AddLike(UserLikes like);
-    Task<bool> Save();
+    Task<bool> SaveAsync();
 }
