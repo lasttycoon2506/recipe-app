@@ -3,6 +3,7 @@ import { MemberService } from '../../../services/member.service';
 import { MemberCardComponent } from '../member-card/member-card.component';
 import { PageChangedEvent, PaginationModule } from 'ngx-bootstrap/pagination';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @Component({
 	selector: 'app-member-list',
@@ -19,6 +20,7 @@ export class MemberListComponent implements OnInit {
 	}
 
 	loadMembers(): void {
+		console.log(this.memberService.paginatedMembers());
 		this.memberService.getMembers();
 		console.log(this.memberService.paginatedMembers());
 	}

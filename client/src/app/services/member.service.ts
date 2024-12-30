@@ -41,8 +41,10 @@ export class MemberService {
 				Member[]
 			>(this.baseUrl + 'users', { observe: 'response', params })
 			.subscribe({
-				next: (response) =>
-					setPaginatedResponse(response, this.paginatedMembers),
+				next: (response) => {
+					console.log(response.body);
+					setPaginatedResponse(response, this.paginatedMembers);
+				},
 			});
 	}
 
