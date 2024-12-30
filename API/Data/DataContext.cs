@@ -7,6 +7,7 @@ public class DataContext(DbContextOptions options) : DbContext(options)
 {
     public required DbSet<User> Users { get; set; }
     public required DbSet<UserLikes> Likes { get; set; }
+    public required DbSet<Message> Messages { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
