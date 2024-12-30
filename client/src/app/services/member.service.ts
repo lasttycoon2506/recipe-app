@@ -6,7 +6,10 @@ import { Member } from '../models/member';
 import { Photo } from '../models/photo';
 import { PaginationResult } from '../models/pagination';
 import { UserParams } from '../models/userParams';
-import { setPaginatedResponse, setPaginationHeader } from './paginationHelper';
+import {
+	setPaginatedResponse,
+	setPaginationHeader,
+} from '../helpers/paginationHelper';
 
 @Injectable({
 	providedIn: 'root',

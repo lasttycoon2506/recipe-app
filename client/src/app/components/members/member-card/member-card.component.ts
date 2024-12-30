@@ -15,9 +15,16 @@ export class MemberCardComponent {
 	member = input.required<Member>();
 	@Output() reload = new EventEmitter<void>();
 
-	async like() {
+	like() {
 		this.likesService.like(this.member().id);
-
 		this.reload.emit();
 	}
+
+	async function example() {
+		console.log("Before delay");
+		await delay(1000); // Wait for 1 second
+		console.log("After delay");
+	  }
+	  
+	  example();
 }
