@@ -18,7 +18,7 @@ export class MemberCardComponent {
 
 	async like() {
 		this.likesService.like(this.member().id);
-		await sleep(); //allows db to update and send refreshed members-list
+		await sleep(); //1 sec - allows db to update and send refreshed members-list
 		this.reload.emit();
 	}
 }
