@@ -45,7 +45,10 @@
 
 	@for (member of memberService.paginatedMembers()?.items; track member.id) {
 		<div class="col-2">
-			<app-member-card [member]="member"></app-member-card>
+			<app-member-card
+				[member]="member"
+				(reload)="reloadMembers($event)"
+			></app-member-card>
 		</div>
 	}
 </div>
