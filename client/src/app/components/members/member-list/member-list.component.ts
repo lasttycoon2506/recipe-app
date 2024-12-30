@@ -13,10 +13,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class MemberListComponent implements OnInit {
 	memberService = inject(MemberService);
-	triggerReload = false;
 
 	ngOnInit(): void {
-		console.log(this.memberService.paginatedMembers());
 		this.loadMembers();
 	}
 
@@ -32,14 +30,5 @@ export class MemberListComponent implements OnInit {
 	resetFilter(): void {
 		this.memberService.resetUserParams();
 		this.loadMembers();
-	}
-
-	reloadMembers(event: boolean): void {
-		this.triggerReload = event;
-		if (this.triggerReload) {
-			this.loadMembers();
-			console.log('triggered');
-		}
-		this.triggerReload = false;
 	}
 }
