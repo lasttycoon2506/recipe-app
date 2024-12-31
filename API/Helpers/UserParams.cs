@@ -1,6 +1,6 @@
 namespace API.Helpers;
 
-public class UserParams
+public class UserParams : PaginationParams
 {
     public string? Specialty { get; set; }
     public string? Experience { get; set; }
