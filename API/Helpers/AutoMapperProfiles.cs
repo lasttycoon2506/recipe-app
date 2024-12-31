@@ -10,12 +10,24 @@ public class AutoMapperProfiles : Profile
     {
         CreateMap<User, MemberDto>()
             .ForMember(
-                d => d.PhotoUrl,
-                o => o.MapFrom(s => s.Photos.FirstOrDefault(x => x.IsMain)!.Url)
+                to => to.PhotoUrl,
+                from => from.MapFrom(from => from.Photos.FirstOrDefault(pic => pic.IsMain)!.Url)
             );
         CreateMap<Photo, PhotoDto>();
         CreateMap<MemberUpdateDto, User>();
         CreateMap<RegisterDto, User>();
-        CreateMap<Message, MessageDto>();
+        CreateMap<Message, MessageDto>()
+            .ForMember(
+                to => to.SenderPicUrl,
+                from =>
+                    from.MapFrom(from => from.Sender.Photos.FirstOrDefault(pic => pic.IsMain)!.Url)
+            )
+            .ForMember(
+                to => to.ReceiverPicUrl,
+                from =>
+                    from.MapFrom(from =>
+                        from.Receiver.Photos.FirstOrDefault(pic => pic.IsMain)!.Url
+                    )
+            );
     }
 }
