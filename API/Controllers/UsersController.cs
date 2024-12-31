@@ -45,7 +45,7 @@ namespace API.Controllers
         {
             var user = await userRepository.GetUserAsync(User.GetUsername());
             if (user == null)
-                return BadRequest("user dne in db");
+                return NotFound("user dne in db");
 
             mapper.Map(memberUpdateDto, user);
             if (await userRepository.SaveAsync())
@@ -59,7 +59,7 @@ namespace API.Controllers
         {
             var user = await userRepository.GetUserAsync(User.GetUsername());
             if (user == null)
-                return BadRequest("user dne in db");
+                return NotFound("user dne in db");
 
             var result = await photoService.UploadImgAsync(file);
 
@@ -85,7 +85,7 @@ namespace API.Controllers
         {
             var user = await userRepository.GetUserAsync(User.GetUsername());
             if (user == null)
-                return BadRequest("user dne in db");
+                return NotFound("user dne in db");
 
             var newMainPic = user.Photos.FirstOrDefault(pic => pic.Id == photoId);
 
@@ -107,7 +107,7 @@ namespace API.Controllers
         {
             var user = await userRepository.GetUserAsync(User.GetUsername());
             if (user == null)
-                return BadRequest("user not found in db");
+                return NotFound("user not found in db");
 
             var picToDelete = user.Photos.FirstOrDefault(pic => pic.Id == photoId);
             if (picToDelete == null || picToDelete.IsMain)
