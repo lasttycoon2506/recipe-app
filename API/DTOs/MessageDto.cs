@@ -11,4 +11,5 @@ public class MessageDto
     public required string ReceiverPicUrl { get; set; }
     public required string Content { get; set; }
     public DateTime TimeSent { get; set; }
+    public bool Read { get; set; }
 }
