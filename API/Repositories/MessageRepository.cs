@@ -3,10 +3,12 @@ using API.DTOs;
 using API.Entities;
 using API.Helpers;
 using API.Interfaces;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 
 namespace API.Repositories;
 
-public class MessageRepository(DataContext context) : IMessageRepository
+public class MessageRepository(DataContext context, IMapper mapper) : IMessageRepository
 {
     public void AddMessage(Message message)
     {
@@ -31,7 +33,7 @@ public class MessageRepository(DataContext context) : IMessageRepository
         throw new NotImplementedException();
     }
 
-    public Task<PagedList<MessageDto>> GetUserMessagesAsync(MessageParams messageParams)
+    public async Task<PagedList<MessageDto>> GetUserMessagesAsync(MessageParams messageParams)
     {
         var query = context.Messages.OrderByDescending(message => message.TimeSent).AsQueryable();
 
@@ -43,6 +45,13 @@ public class MessageRepository(DataContext context) : IMessageRepository
                 message.ReceiverUsername == messageParams.Username && !message.Read
             ),
         };
+
+        var messagesQuery = query.ProjectTo<MessageDto>(mapper.ConfigurationProvider);
+        return await PagedList<MessageDto>.GetResults(
+            messagesQuery,
+            messageParams.PgSize,
+            messageParams.PgNumber
+        );
     }
 
     public async Task<bool> SaveAsync()
