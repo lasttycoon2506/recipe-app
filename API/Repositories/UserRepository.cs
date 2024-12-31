@@ -23,7 +23,9 @@ public class UserRepository(DataContext context, IMapper mapper, ILikesRepositor
     public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
     {
         var query = context.Users.AsQueryable();
-        query = query.Where(member => member.UserName != userParams.CurrentUsername);
+        query = query
+            .Where(member => member.UserName != userParams.CurrentUsername)
+            .OrderByDescending(member => member.LastActive);
 
         if (userParams.Specialty != null)
         {
@@ -34,8 +36,6 @@ public class UserRepository(DataContext context, IMapper mapper, ILikesRepositor
         {
             query = query.Where(member => member.Experience == userParams.Experience);
         }
-
-        query = query.OrderByDescending(member => member.LastActive);
 
         //returns only users curr.user hasnt liked
         var whoUserLikesIds = await likesRepository.GetIdsWhoCurrentUserLikesAsync(
