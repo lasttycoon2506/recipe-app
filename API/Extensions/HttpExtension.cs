@@ -1,6 +1,5 @@
 using System.Text.Json;
 using API.Helpers;
-using Newtonsoft.Json.Serialization;
 
 namespace API.Extensions;
 

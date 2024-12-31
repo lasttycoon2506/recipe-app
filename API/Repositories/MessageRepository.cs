@@ -31,9 +31,9 @@ public class MessageRepository(DataContext context) : IMessageRepository
         throw new NotImplementedException();
     }
 
-    public Task<PagedList<MessageDto>> GetUserMessagesAsync()
+    public Task<PagedList<MessageDto>> GetUserMessagesAsync(MessageParams messageParams)
     {
-        throw new NotImplementedException();
+        context.Messages.
     }
 
     public async Task<bool> SaveAsync()
