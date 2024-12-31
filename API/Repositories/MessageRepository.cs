@@ -34,6 +34,15 @@ public class MessageRepository(DataContext context) : IMessageRepository
     public Task<PagedList<MessageDto>> GetUserMessagesAsync(MessageParams messageParams)
     {
         var query = context.Messages.OrderByDescending(message => message.TimeSent).AsQueryable();
+
+        query = messageParams.Container switch
+        {
+            "inbox" => query.Where(message => message.ReceiverUsername == messageParams.Username),
+            "outbox" => query.Where(message => message.SenderUsername == messageParams.Username),
+            _ => query.Where(message =>
+                message.ReceiverUsername == messageParams.Username && !message.Read
+            ),
+        };
     }
 
     public async Task<bool> SaveAsync()
