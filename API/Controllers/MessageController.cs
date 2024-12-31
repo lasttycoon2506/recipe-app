@@ -13,7 +13,7 @@ namespace API.Controllers
         IMapper mapper
     ) : BaseApiController
     {
-        [HttpPost("send-message")]
+        [HttpPost]
         public async Task<ActionResult<MessageDto>> CreateMessage(CreateMessageDto createMessageDto)
         {
             var username = User.GetUsername();
@@ -29,13 +29,16 @@ namespace API.Controllers
             {
                 Content = createMessageDto.Content,
                 SenderUsername = username,
-                SenderId = sender.Id,
+                Sender = sender,
                 ReceiverUsername = createMessageDto.ReceiverUsername,
-                ReceiverId = receiver.Id,
+                Receiver = receiver,
             };
 
             messageRepository.AddMessage(newMessage);
-            return mapper.Map<MessageDto>(newMessage);
+
+            if (await messageRepository.SaveAsync())
+                return Ok(mapper.Map<MessageDto>(newMessage));
+            return BadRequest("unable to save message to db");
         }
     }
 }
