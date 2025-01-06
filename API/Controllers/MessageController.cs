@@ -50,6 +50,7 @@ namespace API.Controllers
             messageParams.Username = User.GetUsername();
 
             var messages = await messageRepository.GetUserMessagesAsync(messageParams);
+
             Response.AddPaginationHeader(messages);
             return messages;
         }

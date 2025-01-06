@@ -5,6 +5,7 @@ using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Repositories;
 
@@ -30,7 +31,17 @@ public class MessageRepository(DataContext context, IMapper mapper) : IMessageRe
         string receiverUsername
     )
     {
-        throw new NotImplementedException();
+        var messages = context
+            .Messages.Include(x => x.Sender)
+            .ThenInclude(x => x.Photos)
+            .Include(x => x.Receiver)
+            .ThenInclude(x => x.Photos)
+            .Where(x =>
+                (x.SenderUsername == currentUsername && x.ReceiverUsername == receiverUsername)
+                || (x.SenderUsername == receiverUsername && x.ReceiverUsername == currentUsername)
+            )
+            .OrderBy(x => x.TimeSent)
+            .ToListAsync();
     }
 
     public async Task<PagedList<MessageDto>> GetUserMessagesAsync(MessageParams messageParams)
