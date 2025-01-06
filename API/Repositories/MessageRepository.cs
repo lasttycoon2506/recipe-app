@@ -53,7 +53,7 @@ public class MessageRepository(DataContext context, IMapper mapper) : IMessageRe
             await context.SaveChangesAsync();
         }
 
-        return mapper.Map<IEnumerable<MessageDto>>(unreadMsgs);
+        return mapper.Map<IEnumerable<MessageDto>>(messages);
     }
 
     public async Task<PagedList<MessageDto>> GetUserMessagesAsync(MessageParams messageParams)
