@@ -74,3 +74,14 @@
 		</tbody>
 	</table>
 }
+
+@if (msgService.paginatedMessages()?.pagination) {
+	<pagination
+		[totalItems]="(msgService.paginatedMessages()?.pagination)!.totalItems"
+		[itemsPerPage]="
+			(msgService.paginatedMessages()?.pagination)!.itemsPerPg
+		"
+		[maxSize]="5"
+		(pageChanged)="onPageChanged($event)"
+	></pagination>
+}

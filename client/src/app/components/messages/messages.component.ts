@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { MessagesService } from '../../services/messages.service';
-import { PageChangedEvent } from 'ngx-bootstrap/pagination';
+import { PageChangedEvent, PaginationModule } from 'ngx-bootstrap/pagination';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { FormsModule } from '@angular/forms';
 import { Message } from '../../models/message';
@@ -10,7 +10,13 @@ import { DatePipe } from '@angular/common';
 @Component({
 	selector: 'app-messages',
 	standalone: true,
-	imports: [ButtonsModule, FormsModule, RouterLink, DatePipe],
+	imports: [
+		ButtonsModule,
+		FormsModule,
+		RouterLink,
+		DatePipe,
+		PaginationModule,
+	],
 	templateUrl: './messages.component.html',
 	styleUrl: './messages.component.css',
 })
