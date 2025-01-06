@@ -3,11 +3,13 @@ import { MessagesService } from '../../services/messages.service';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { FormsModule } from '@angular/forms';
+import { Message } from '../../models/message';
+import { RouterLink } from '@angular/router';
 
 @Component({
 	selector: 'app-messages',
 	standalone: true,
-	imports: [ButtonsModule, FormsModule],
+	imports: [ButtonsModule, FormsModule, RouterLink],
 	templateUrl: './messages.component.html',
 	styleUrl: './messages.component.css',
 })
@@ -30,5 +32,11 @@ export class MessagesComponent implements OnInit {
 			this.pgNumber = event.page;
 			this.loadMessages();
 		}
+	}
+
+	getRoute(message: Message): string {
+		if (this.container === 'inbox')
+			return `members/${message.senderUsername}`;
+		else return `members/${message.receiverUsername}`;
 	}
 }
