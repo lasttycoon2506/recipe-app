@@ -52,6 +52,8 @@ public class MessageRepository(DataContext context, IMapper mapper) : IMessageRe
             unreadMsgs.ForEach(message => message.Read = true);
             await context.SaveChangesAsync();
         }
+
+        return mapper.Map<IEnumerable<MessageDto>>(unreadMsgs);
     }
 
     public async Task<PagedList<MessageDto>> GetUserMessagesAsync(MessageParams messageParams)
