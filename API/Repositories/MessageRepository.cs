@@ -26,12 +26,12 @@ public class MessageRepository(DataContext context, IMapper mapper) : IMessageRe
         return await context.Messages.FindAsync(id);
     }
 
-    public Task<IEnumerable<MessageDto>> GetMessageThreadAsync(
+    public async Task<IEnumerable<MessageDto>> GetMessageThreadAsync(
         string currentUsername,
         string receiverUsername
     )
     {
-        var messages = context
+        var messages = await context
             .Messages.Include(x => x.Sender)
             .ThenInclude(x => x.Photos)
             .Include(x => x.Receiver)
@@ -42,6 +42,16 @@ public class MessageRepository(DataContext context, IMapper mapper) : IMessageRe
             )
             .OrderBy(x => x.TimeSent)
             .ToListAsync();
+
+        var unreadMsgs = messages
+            .Where(message => !message.Read && message.ReceiverUsername == currentUsername)
+            .ToList();
+
+        if (unreadMsgs.Count != 0)
+        {
+            unreadMsgs.ForEach(message => message.Read = true);
+            await context.SaveChangesAsync();
+        }
     }
 
     public async Task<PagedList<MessageDto>> GetUserMessagesAsync(MessageParams messageParams)
