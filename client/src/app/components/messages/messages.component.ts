@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { MessagesService } from '../../services/messages.service';
+import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 
 @Component({
 	selector: 'app-messages',
@@ -20,5 +21,12 @@ export class MessagesComponent implements OnInit {
 
 	getMessages(): void {
 		this.msgService.getMessages(this.pgNumber, this.pgSize, this.container);
+	}
+
+	onPageChanged(event: PageChangedEvent): void {
+		if (this.pgNumber !== event.page) {
+			this.pgNumber = event.page;
+			this.getMessages();
+		}
 	}
 }
