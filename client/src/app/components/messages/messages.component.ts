@@ -12,7 +12,7 @@ export class MessagesComponent implements OnInit {
 	msgService = inject(MessagesService);
 	pgNumber = 1;
 	pgSize = 5;
-	container = 'inbox';
+	container = 'outbox';
 
 	ngOnInit(): void {
 		this.getMessages();

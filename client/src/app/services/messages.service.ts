@@ -18,7 +18,7 @@ export class MessagesService {
 
 	getMessages(pgNumber: number, pgSize: number, container: string): void {
 		let params = setPaginationHeader(pgNumber, pgSize);
-		params.append('container', container);
+		params = params.append('container', container);
 
 		this.httpClient
 			.get<Message[]>(this.baseUrl + 'message', {
