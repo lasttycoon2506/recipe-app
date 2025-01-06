@@ -27,7 +27,7 @@
 @if (!msgService.paginatedMessages()?.items) {
 	<div>No messages!</div>
 } @else {
-	<table class="table">
+	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th scope="col">Message</th>
@@ -68,7 +68,7 @@
 							/>
 						}
 					</td>
-					<td>{{ message.timeSent }}</td>
+					<td>{{ message.timeSent | date: "short" }}</td>
 				</tr>
 			}
 		</tbody>
