@@ -31,7 +31,13 @@
 		<thead>
 			<tr>
 				<th scope="col">Message</th>
-				<th scope="col">From</th>
+				<th scope="col">
+					@if (container === "inbox") {
+						From
+					} @else {
+						To
+					}
+				</th>
 				<th scope="col">Sent</th>
 			</tr>
 		</thead>
@@ -42,7 +48,13 @@
 			) {
 				<tr>
 					<td>{{ message.content }}</td>
-					<td>{{ message.senderUsername }}</td>
+					<td>
+						@if (container === "inbox") {
+							{{ message.senderUsername }}
+						} @else {
+							{{ message.receiverUsername }}
+						}
+					</td>
 					<td>{{ message.timeSent }}</td>
 				</tr>
 			}
