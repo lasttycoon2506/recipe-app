@@ -1,3 +1,29 @@
+<div class="form-inline d-flex align-items-center">
+	<div class="btn-group" btnRadioGroup [(ngModel)]="container">
+		<button
+			class="btn btn-success mb-0"
+			btnRadio="unread"
+			(click)="loadMessages()"
+		>
+			Unread
+		</button>
+		<button
+			class="btn btn-success mb-0"
+			btnRadio="inbox"
+			(click)="loadMessages()"
+		>
+			Inbox
+		</button>
+		<button
+			class="btn btn-success mb-0"
+			btnRadio="outbox"
+			(click)="loadMessages()"
+		>
+			Outbox
+		</button>
+	</div>
+</div>
+
 @if (!msgService.paginatedMessages()?.items) {
 	<div>No messages!</div>
 } @else {
