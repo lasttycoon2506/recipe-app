@@ -70,6 +70,7 @@ public class MessageRepository(DataContext context, IMapper mapper) : IMessageRe
         };
 
         var messagesQuery = query.ProjectTo<MessageDto>(mapper.ConfigurationProvider);
+
         return await PagedList<MessageDto>.GetResults(
             messagesQuery,
             messageParams.PgSize,
