@@ -51,8 +51,21 @@
 					<td>
 						@if (container === "inbox") {
 							{{ message.senderUsername }}
+							<img
+								class="rounded-circle"
+								src="{{
+									message.senderPicUrl || './assets/user.png'
+								}}"
+							/>
 						} @else {
 							{{ message.receiverUsername }}
+							<img
+								class="rounded-circle"
+								src="{{
+									message.receiverPicUrl ||
+										'./assets/user.png'
+								}}"
+							/>
 						}
 					</td>
 					<td>{{ message.timeSent }}</td>
