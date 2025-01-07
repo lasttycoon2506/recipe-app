@@ -30,8 +30,10 @@
 					<tab heading="Pictures" (selectTab)="onActivateTab($event)"
 						>pics here</tab
 					>
-					<tab heading="Recipe">recipe here</tab>
-					<tab heading="Messages"
+					<tab heading="Recipe" (selectTab)="onActivateTab($event)"
+						>recipe here</tab
+					>
+					<tab heading="Messages" (selectTab)="onActivateTab($event)"
 						><app-member-message
 							[username]="member.username"
 						></app-member-message>

@@ -28,7 +28,7 @@ export class MemberDetailComponent implements OnInit {
 		this.loadMember();
 	}
 
-	onActivateTab(data: Event): void {
+	onActivateTab(data: TabDirective): void {
 		this.activeTab = data;
 		if (
 			this.activeTab?.heading === 'Messages' &&
