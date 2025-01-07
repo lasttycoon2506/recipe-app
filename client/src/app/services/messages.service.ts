@@ -34,7 +34,7 @@ export class MessagesService {
 
 	getMessageThread(targetUserName: string): Observable<Message[]> {
 		return this.httpClient.get<Message[]>(
-			`${this.baseUrl}message/${targetUserName}`,
+			`${this.baseUrl}message/thread/${targetUserName}`,
 		);
 	}
 }
