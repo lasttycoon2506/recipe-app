@@ -1,1 +1,3 @@
-<p>member-message works!</p>
+@for (message of msgThread; track message.id) {
+	{{ message.content }}
+}

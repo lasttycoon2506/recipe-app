@@ -1,5 +1,6 @@
 import { Component, inject, input, OnInit } from '@angular/core';
 import { MessagesService } from '../../../services/messages.service';
+import { Message } from '../../../models/message';
 
 @Component({
 	selector: 'app-member-message',
@@ -11,12 +12,15 @@ import { MessagesService } from '../../../services/messages.service';
 export class MemberMessageComponent implements OnInit {
 	private msgService = inject(MessagesService);
 	username = input<string>('');
+	msgThread: Message[] = [];
 
 	ngOnInit(): void {
 		throw new Error('Method not implemented.');
 	}
 
 	loadMsgThread(): void {
-		this.msgService.getMessageThread(this.username()).subscribe({});
+		this.msgService
+			.getMessageThread(this.username())
+			.subscribe({ next: (msgThread) => (this.msgThread = msgThread) });
 	}
 }
