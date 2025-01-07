@@ -2,13 +2,27 @@
 	<div class="card-body">
 		<ul>
 			@for (message of msgThread; track message.id) {
-				<li>
-					{{ message.content }}
-					<img
-						src="{{ message.senderPicUrl || './assets/user.png' }}"
-						class="rounded-circle"
-					/>
-				</li>
+				@if (message.receiverUsername !== username()) {
+					<li class="receiver">
+						{{ message.content }}
+						<img
+							src="{{
+								message.senderPicUrl || './assets/user.png'
+							}}"
+							class="rounded-circle"
+						/>
+					</li>
+				} @else {
+					<li>
+						{{ message.content }}
+						<img
+							src="{{
+								message.senderPicUrl || './assets/user.png'
+							}}"
+							class="rounded-circle"
+						/>
+					</li>
+				}
 			}
 		</ul>
 	</div>

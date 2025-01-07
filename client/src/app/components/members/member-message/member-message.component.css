@@ -1,3 +1,11 @@
 .rounded-circle {
 	max-height: 50px;
 }
+
+.receiver {
+	float: right;
+}
+
+ul {
+	list-style-type: none;
+}
