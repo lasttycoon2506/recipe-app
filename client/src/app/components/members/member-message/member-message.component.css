@@ -5,6 +5,7 @@
 
 .receiver {
 	text-align: end;
+	border-color: red;
 }
 
 li {
@@ -19,4 +20,8 @@ ul {
 
 .form-control {
 	margin-right: 20px;
+}
+
+.btn {
+	width: 150px;
 }
