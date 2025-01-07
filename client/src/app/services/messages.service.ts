@@ -7,6 +7,7 @@ import {
 	setPaginatedResponse,
 	setPaginationHeader,
 } from '../helpers/paginationHelper';
+import { Observable } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root',
@@ -31,8 +32,8 @@ export class MessagesService {
 			});
 	}
 
-	getMessageThread(targetUserName: string): void {
-		this.httpClient.get<Message[]>(
+	getMessageThread(targetUserName: string): Observable<Message[]> {
+		return this.httpClient.get<Message[]>(
 			`${this.baseUrl}message/${targetUserName}`,
 		);
 	}
