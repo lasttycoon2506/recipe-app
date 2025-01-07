@@ -29,13 +29,10 @@
 				<tabset>
 					<tab heading="Pictures">pics here</tab>
 					<tab heading="Recipe">recipe here</tab>
-					<tab heading="Messages">
-						@for (
-							message of msgService.msgThread();
-							track message.id
-						) {
-							{{ message }}
-						}
+					<tab heading="Messages"
+						><app-member-message
+							[username]="member.username"
+						></app-member-message>
 					</tab>
 				</tabset>
 			</div>

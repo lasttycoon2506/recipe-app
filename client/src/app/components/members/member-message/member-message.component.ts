@@ -15,7 +15,7 @@ export class MemberMessageComponent implements OnInit {
 	msgThread: Message[] = [];
 
 	ngOnInit(): void {
-		throw new Error('Method not implemented.');
+		this.loadMsgThread();
 	}
 
 	loadMsgThread(): void {
