@@ -1,7 +1,7 @@
 <div class="card text-bg-secondary">
 	<div class="card-body">
 		<ul>
-			@for (message of msgThread; track message.id) {
+			@for (message of msgThread(); track message.id) {
 				@if (message.receiverUsername !== username()) {
 					<li class="receiver">
 						{{ message.content }}

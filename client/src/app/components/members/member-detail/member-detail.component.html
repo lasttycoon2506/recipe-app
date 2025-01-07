@@ -36,6 +36,7 @@
 					<tab heading="Messages" (selectTab)="onActivateTab($event)"
 						><app-member-message
 							[username]="member.username"
+							[msgThread]="msgThread"
 						></app-member-message>
 					</tab>
 				</tabset>

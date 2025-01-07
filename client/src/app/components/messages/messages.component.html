@@ -32,7 +32,7 @@
 			<tr>
 				<th scope="col">Message</th>
 				<th scope="col">
-					@if (container === "inbox") {
+					@if (container === "inbox" || container === "unread") {
 						From
 					} @else {
 						To
@@ -49,7 +49,7 @@
 				<tr class="align-middle" routerLink="{{ getRoute(message) }}">
 					<td>{{ message.content }}</td>
 					<td>
-						@if (container === "inbox") {
+						@if (container === "inbox" || container === "unread") {
 							{{ message.senderUsername }}
 							<img
 								class="rounded-circle"

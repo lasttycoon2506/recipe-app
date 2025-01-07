@@ -13,15 +13,7 @@ import { FormsModule } from '@angular/forms';
 export class MemberMessageComponent implements OnInit {
 	private msgService = inject(MessagesService);
 	username = input<string>('');
-	msgThread: Message[] = [];
+	msgThread = input<Message[] | null>(null);
 
-	ngOnInit(): void {
-		this.loadMsgThread();
-	}
-
-	loadMsgThread(): void {
-		this.msgService
-			.getMessageThread(this.username())
-			.subscribe({ next: (msgThread) => (this.msgThread = msgThread) });
-	}
+	ngOnInit(): void {}
 }
