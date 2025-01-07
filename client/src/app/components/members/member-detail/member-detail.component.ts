@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Member } from '../../../models/member';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { DatePipe } from '@angular/common';
+import { MessagesService } from '../../../services/messages.service';
 
 @Component({
 	selector: 'app-member-detail',
@@ -15,10 +16,12 @@ import { DatePipe } from '@angular/common';
 export class MemberDetailComponent implements OnInit {
 	private route = inject(ActivatedRoute);
 	private memberService = inject(MemberService);
+	msgService = inject(MessagesService);
 	member?: Member;
 
 	ngOnInit(): void {
 		this.loadMember();
+		this.loadMsgThread();
 	}
 
 	loadMember(): void {
@@ -28,5 +31,9 @@ export class MemberDetailComponent implements OnInit {
 			next: (member) => (this.member = member),
 			error: (err) => console.log(err),
 		});
+	}
+
+	loadMsgThread(): void {
+		this.msgService.getMessageThread(this.member!.username);
 	}
 }

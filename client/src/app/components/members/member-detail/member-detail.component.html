@@ -29,7 +29,14 @@
 				<tabset>
 					<tab heading="Pictures">pics here</tab>
 					<tab heading="Recipe">recipe here</tab>
-					<tab heading="Messages">recipe here</tab>
+					<tab heading="Messages">
+						@for (
+							message of msgService.msgThread();
+							track message.id
+						) {
+							{{ message }}
+						}
+					</tab>
 				</tabset>
 			</div>
 		</div>

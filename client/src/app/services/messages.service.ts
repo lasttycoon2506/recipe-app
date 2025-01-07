@@ -15,7 +15,6 @@ export class MessagesService {
 	private baseUrl = environment.apiUrl;
 	private httpClient = inject(HttpClient);
 	paginatedMessages = signal<PaginationResult<Message[]> | null>(null);
-	msgThread = signal<Message[] | null>(null);
 
 	getMessages(pgNumber: number, pgSize: number, container: string): void {
 		let params = setPaginationHeader(pgNumber, pgSize);
@@ -33,10 +32,8 @@ export class MessagesService {
 	}
 
 	getMessageThread(targetUserName: string): void {
-		this.httpClient
-			.get<Message[]>(`${this.baseUrl}message/${targetUserName}`)
-			.subscribe({
-				next: (res) => this.msgThread.set(res),
-			});
+		this.httpClient.get<Message[]>(
+			`${this.baseUrl}message/${targetUserName}`,
+		);
 	}
 }
