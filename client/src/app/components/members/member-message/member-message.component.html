@@ -1,3 +1,15 @@
-@for (message of msgThread; track message.id) {
-	{{ message.content }}
-}
+<div class="card">
+	<div class="card-body">
+		<ul>
+			@for (message of msgThread; track message.id) {
+				<li>
+					{{ message.content }}
+					<img
+						src="{{ message.senderPicUrl || './assets/user.png' }}"
+						class="rounded-circle"
+					/>
+				</li>
+			}
+		</ul>
+	</div>
+</div>
