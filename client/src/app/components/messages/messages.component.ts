@@ -42,7 +42,7 @@ export class MessagesComponent implements OnInit {
 	}
 
 	getRoute(message: Message): string {
-		if (this.container === 'inbox')
+		if (this.container === 'inbox' || this.container === 'unread')
 			return `/members/${message.senderUsername}`;
 		else return `/members/${message.receiverUsername}`;
 	}
