@@ -1,11 +1,22 @@
 .rounded-circle {
-	max-height: 50px;
+	max-height: 30px;
+	margin-left: 5px;
 }
 
 .receiver {
-	float: right;
+	text-align: end;
+}
+
+li {
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px dotted black;
 }
 
 ul {
 	list-style-type: none;
+}
+
+.form-control {
+	margin-right: 20px;
 }
