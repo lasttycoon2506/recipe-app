@@ -26,8 +26,10 @@
 		</div>
 		<div class="col-8">
 			<div>
-				<tabset>
-					<tab heading="Pictures">pics here</tab>
+				<tabset #memberTabs>
+					<tab heading="Pictures" (selectTab)="onActivateTab($event)"
+						>pics here</tab
+					>
 					<tab heading="Recipe">recipe here</tab>
 					<tab heading="Messages"
 						><app-member-message
