@@ -54,4 +54,8 @@ export class MemberDetailComponent implements OnInit {
 			if (msgTab) msgTab.active = true;
 		}
 	}
+
+	updateMsgThread(event: Message): void {
+		this.msgThread.push(event);
+	}
 }

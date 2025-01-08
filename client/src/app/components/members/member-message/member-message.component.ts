@@ -1,7 +1,7 @@
-import { Component, inject, input, output } from '@angular/core';
+import { Component, inject, input, output, ViewChild } from '@angular/core';
 import { MessagesService } from '../../../services/messages.service';
 import { Message } from '../../../models/message';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
 	selector: 'app-member-message',
@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 	styleUrl: './member-message.component.css',
 })
 export class MemberMessageComponent {
+	@ViewChild('msgForm') msgForm?: NgForm;
 	private msgService = inject(MessagesService);
 	username = input<string>('');
 	msgThread = input<Message[] | null>(null);

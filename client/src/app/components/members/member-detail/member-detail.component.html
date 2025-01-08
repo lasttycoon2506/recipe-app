@@ -41,6 +41,7 @@
 					><app-member-message
 						[username]="member.username"
 						[msgThread]="msgThread"
+						(newMsg)="updateMsgThread($event)"
 					></app-member-message>
 				</tab>
 			</tabset>

@@ -31,13 +31,17 @@
 	</div>
 
 	<div class="card-footer text-bg-dark">
-		<form #form="ngForm" class="d-flex mt-2 mb-2">
+		<form #msgForm="ngForm" class="d-flex mt-2 mb-2">
 			<input
+				required
+				[(ngModel)]="msgContent"
 				type="text"
 				placeholder="send message"
 				class="form-control"
 			/>
-			<button class="btn btn-success btn-lg">Send</button>
+			<button [disabled]="!msgForm.valid" class="btn btn-success btn-lg">
+				Send
+			</button>
 		</form>
 	</div>
 </div>
