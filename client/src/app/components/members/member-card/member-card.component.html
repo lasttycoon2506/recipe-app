@@ -22,21 +22,21 @@
 		<p class="card-text text-muted text-center">
 			{{ member().experience }}
 		</p>
-		<ul class="list-inline text-center mb-0">
-			<button
-				class="btn btn-dark btn-sm me-2"
-				routerLink="/members/{{ member().username }}"
-			>
-				<li class="list-inline-item">
-					<i class="material-icons">info</i>
-				</li>
-			</button>
-			<button (click)="like()" class="btn btn-danger btn-sm me-2">
-				<li>
-					<i class="material-icons">favorite</i>
-				</li>
-			</button>
-			@if (likesService.whoUserLikesIds().includes(member().id)) {
+		@if (likesService.whoUserLikesIds().includes(member().id)) {
+			<ul class="list-inline text-center mb-0">
+				<button
+					class="btn btn-dark btn-sm me-2"
+					routerLink="/members/{{ member().username }}"
+				>
+					<li class="list-inline-item">
+						<i class="material-icons">info</i>
+					</li>
+				</button>
+				<button (click)="like()" class="btn btn-danger btn-sm me-2">
+					<li>
+						<i class="material-icons">favorite</i>
+					</li>
+				</button>
 				<button
 					routerLink="/members/{{ member().username }}"
 					[queryParams]="{ tab: 'Messages' }"
@@ -46,7 +46,23 @@
 						<i class="material-icons">mail</i>
 					</li>
 				</button>
-			}
-		</ul>
+			</ul>
+		} @else {
+			<ul class="list-inline text-center mb-0 me-0">
+				<button
+					class="btn btn-dark btn-sm me-2"
+					routerLink="/members/{{ member().username }}"
+				>
+					<li class="list-inline-item">
+						<i class="material-icons">info</i>
+					</li>
+				</button>
+				<button (click)="like()" class="btn btn-danger btn-sm">
+					<li>
+						<i class="material-icons">favorite</i>
+					</li>
+				</button>
+			</ul>
+		}
 	</div>
 </div>
