@@ -46,7 +46,11 @@
 				message of msgService.paginatedMessages()?.items;
 				track message.id
 			) {
-				<tr class="align-middle" routerLink="{{ getRoute(message) }}">
+				<tr
+					class="align-middle"
+					routerLink="{{ getRoute(message) }}"
+					[queryParams]="{ tab: 'Messages' }"
+				>
 					<td>{{ message.content }}</td>
 					<td>
 						@if (container === "inbox" || container === "unread") {

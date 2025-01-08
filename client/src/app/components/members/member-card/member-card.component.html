@@ -36,7 +36,11 @@
 					<i class="material-icons">favorite</i>
 				</li>
 			</button>
-			<button class="btn btn-primary btn-sm">
+			<button
+				routerLink="/members/{{ member().username }}"
+				[queryParams]="{ tab: 'Messages' }"
+				class="btn btn-primary btn-sm"
+			>
 				<li class="list-inline-item">
 					<i class="material-icons">mail</i>
 				</li>
