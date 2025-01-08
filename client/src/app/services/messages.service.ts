@@ -38,8 +38,8 @@ export class MessagesService {
 		);
 	}
 
-	sendMessage(targetUserName: string, content: string) {
-		this.httpClient.post<Message>(this.baseUrl + 'message', {
+	sendMessage(targetUserName: string, content: string): Observable<Message> {
+		return this.httpClient.post<Message>(this.baseUrl + 'message', {
 			receiverUsername: targetUserName,
 			content,
 		});

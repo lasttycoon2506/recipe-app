@@ -1,4 +1,4 @@
-import { Component, inject, input, OnInit } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { MessagesService } from '../../../services/messages.service';
 import { Message } from '../../../models/message';
 import { FormsModule } from '@angular/forms';
@@ -10,9 +10,18 @@ import { FormsModule } from '@angular/forms';
 	templateUrl: './member-message.component.html',
 	styleUrl: './member-message.component.css',
 })
-export class MemberMessageComponent implements OnInit {
+export class MemberMessageComponent {
+	private msgService = inject(MessagesService);
 	username = input<string>('');
 	msgThread = input<Message[] | null>(null);
+	msgContent = '';
+	newMsg = output<Message>();
 
-	ngOnInit(): void {}
+	sendMsg() {
+		this.msgService
+			.sendMessage(this.username(), this.msgContent)
+			.subscribe({
+				next: (postedMsg) => this.newMsg.emit(postedMsg),
+			});
+	}
 }
