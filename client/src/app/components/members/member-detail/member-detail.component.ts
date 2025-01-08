@@ -16,16 +16,17 @@ import { MessagesService } from '../../../services/messages.service';
 	styleUrl: './member-detail.component.css',
 })
 export class MemberDetailComponent implements OnInit {
-	@ViewChild('memberTabs') memberTabs?: TabsetComponent;
+	@ViewChild('memberTabs', { static: true }) memberTabs?: TabsetComponent;
 	private route = inject(ActivatedRoute);
-	private memberService = inject(MemberService);
 	private msgService = inject(MessagesService);
-	member?: Member;
+	member: Member = {} as Member;
 	activeTab?: TabDirective;
 	msgThread: Message[] = [];
 
 	ngOnInit(): void {
-		this.loadMember();
+		this.route.data.subscribe({
+			next: (data) => (this.member = data['member']),
+		});
 
 		this.route.queryParams.subscribe({
 			next: (params) => {
@@ -55,12 +56,12 @@ export class MemberDetailComponent implements OnInit {
 		}
 	}
 
-	loadMember(): void {
-		const username = this.route.snapshot.paramMap.get('username');
-		if (!username) return;
-		this.memberService.getMember(username).subscribe({
-			next: (member) => (this.member = member),
-			error: (err) => console.log(err),
-		});
-	}
+	// loadMember(): void {
+	// 	const username = this.route.snapshot.paramMap.get('username');
+	// 	if (!username) return;
+	// 	this.memberService.getMember(username).subscribe({
+	// 		next: (member) => (this.member = member),
+	// 		error: (err) => console.log(err),
+	// 	});
+	// }
 }

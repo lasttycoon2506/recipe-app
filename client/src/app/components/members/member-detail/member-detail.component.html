@@ -1,51 +1,49 @@
-@if (member) {
-	<div class="row">
-		<div class="col-4">
-			<div class="card border-dark">
-				<img src="{{ member.photoUrl || '../../assets/user.png' }}" />
-				<div class="card-body">
-					<strong>Specialty: </strong>
-					<p class="member-details">{{ member.specialty }}</p>
-					<strong>Experience: </strong>
-					<p class="member-details">{{ member.experience }}</p>
-					<p class="member-details">
-						<strong>Created: </strong>{{ member.created | date }}
-					</p>
-					<p class="member-details">
-						<strong>Last Active: </strong>
-						{{ member.lastActive | date: "short" }}
-					</p>
-				</div>
-				<div class="card-footer">
-					<div class="btn-group d-flex">
-						<button class="btn btn-danger">Like</button>
-						<button
-							(click)="selectTab('Messages')"
-							class="btn btn-success"
-						>
-							Message
-						</button>
-					</div>
-				</div>
+<div class="row">
+	<div class="col-4">
+		<div class="card border-dark">
+			<img src="{{ member.photoUrl || '../../assets/user.png' }}" />
+			<div class="card-body">
+				<strong>Specialty: </strong>
+				<p class="member-details">{{ member.specialty }}</p>
+				<strong>Experience: </strong>
+				<p class="member-details">{{ member.experience }}</p>
+				<p class="member-details">
+					<strong>Created: </strong>{{ member.created | date }}
+				</p>
+				<p class="member-details">
+					<strong>Last Active: </strong>
+					{{ member.lastActive | date: "short" }}
+				</p>
 			</div>
-		</div>
-		<div class="col-8">
-			<div>
-				<tabset #memberTabs>
-					<tab heading="Pictures" (selectTab)="onActivateTab($event)"
-						>pics here</tab
+			<div class="card-footer">
+				<div class="btn-group d-flex">
+					<button class="btn btn-danger">Like</button>
+					<button
+						(click)="selectTab('Messages')"
+						class="btn btn-success"
 					>
-					<tab heading="Recipe" (selectTab)="onActivateTab($event)"
-						>recipe here</tab
-					>
-					<tab heading="Messages" (selectTab)="onActivateTab($event)"
-						><app-member-message
-							[username]="member.username"
-							[msgThread]="msgThread"
-						></app-member-message>
-					</tab>
-				</tabset>
+						Message
+					</button>
+				</div>
 			</div>
 		</div>
 	</div>
-}
+	<div class="col-8">
+		<div>
+			<tabset #memberTabs>
+				<tab heading="Pictures" (selectTab)="onActivateTab($event)"
+					>pics here</tab
+				>
+				<tab heading="Recipe" (selectTab)="onActivateTab($event)"
+					>recipe here</tab
+				>
+				<tab heading="Messages" (selectTab)="onActivateTab($event)"
+					><app-member-message
+						[username]="member.username"
+						[msgThread]="msgThread"
+					></app-member-message>
+				</tab>
+			</tabset>
+		</div>
+	</div>
+</div>
