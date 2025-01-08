@@ -24,8 +24,11 @@
 	</div>
 </div>
 
-@if (!msgService.paginatedMessages()?.items) {
-	<div>No messages!</div>
+@if (
+	!msgService.paginatedMessages()?.items ||
+	msgService.paginatedMessages()?.items?.length === 0
+) {
+	<h4 class="mt-4">No new messages!</h4>
 } @else {
 	<table class="table table-hover">
 		<thead>
@@ -79,7 +82,10 @@
 	</table>
 }
 
-@if (msgService.paginatedMessages()?.pagination) {
+@if (
+	msgService.paginatedMessages()?.pagination &&
+	msgService.paginatedMessages()!.items.length > 0
+) {
 	<pagination
 		[totalItems]="(msgService.paginatedMessages()?.pagination)!.totalItems"
 		[itemsPerPage]="
