@@ -9,7 +9,7 @@
 							src="{{
 								message.senderPicUrl || './assets/user.png'
 							}}"
-							class="rounded-circle"
+							class="rounded-circle ms-1"
 						/>
 						@if (!message.read) {
 							<small class="text-warning">unread</small>
@@ -17,13 +17,13 @@
 					</li>
 				} @else {
 					<li>
-						{{ message.content }}
 						<img
 							src="{{
 								message.senderPicUrl || './assets/user.png'
 							}}"
-							class="rounded-circle"
+							class="rounded-circle me-1"
 						/>
+						{{ message.content }}
 					</li>
 				}
 			}
