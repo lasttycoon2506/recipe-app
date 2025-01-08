@@ -22,7 +22,9 @@ export class MemberMessageComponent {
 		this.msgService
 			.sendMessage(this.username(), this.msgContent)
 			.subscribe({
-				next: (postedMsg) => this.newMsg.emit(postedMsg),
+				next: (postedMsg) => {
+					this.newMsg.emit(postedMsg), this.msgForm?.reset();
+				},
 			});
 	}
 }

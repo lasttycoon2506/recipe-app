@@ -31,15 +31,16 @@
 	</div>
 
 	<div class="card-footer text-bg-dark">
-		<form #msgForm="ngForm" class="d-flex mt-2 mb-2">
+		<form #msgForm="ngForm" (ngSubmit)="sendMsg()" class="d-flex mt-2 mb-2">
 			<input
+				name="msgContent"
 				required
 				[(ngModel)]="msgContent"
 				type="text"
 				placeholder="send message"
 				class="form-control"
 			/>
-			<button [disabled]="!msgForm.valid" class="btn btn-success btn-lg">
+			<button [disabled]="msgForm.invalid" class="btn btn-success btn-lg">
 				Send
 			</button>
 		</form>
