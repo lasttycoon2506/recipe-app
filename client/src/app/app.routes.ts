@@ -7,6 +7,7 @@ import { MemberListComponent } from './components/members/member-list/member-lis
 import { MemberEditComponent } from './components/members/member-edit/member-edit.component';
 import { unsavedChangesGuard } from './guards/unsaved-changes.guard';
 import { MatchesComponent } from './components/matches/matches.component';
+import { memberDetailResolver } from './resolvers/member-detail.resolver';
 
 export const routes: Routes = [
 	{ path: '', component: HomeComponent },
@@ -22,6 +23,7 @@ export const routes: Routes = [
 	},
 	{
 		path: 'members/:username',
+		resolve: { member: memberDetailResolver },
 		component: MemberDetailComponent,
 		canActivate: [authGuard],
 	},
