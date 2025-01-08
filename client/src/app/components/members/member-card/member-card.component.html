@@ -36,15 +36,17 @@
 					<i class="material-icons">favorite</i>
 				</li>
 			</button>
-			<button
-				routerLink="/members/{{ member().username }}"
-				[queryParams]="{ tab: 'Messages' }"
-				class="btn btn-primary btn-sm"
-			>
-				<li class="list-inline-item">
-					<i class="material-icons">mail</i>
-				</li>
-			</button>
+			@if (likesService.whoUserLikesIds().includes(member().id)) {
+				<button
+					routerLink="/members/{{ member().username }}"
+					[queryParams]="{ tab: 'Messages' }"
+					class="btn btn-primary btn-sm"
+				>
+					<li class="list-inline-item">
+						<i class="material-icons">mail</i>
+					</li>
+				</button>
+			}
 		</ul>
 	</div>
 </div>

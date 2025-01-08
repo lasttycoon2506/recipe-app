@@ -45,11 +45,11 @@ export class LikesService {
 			});
 	}
 
-	// getWhoUserLikesIds(): void {
-	// 	this.http
-	// 		.get<number[]>(this.baseUrl + 'likes/list-like-ids')
-	// 		.subscribe({
-	// 			next: (ids) => this.whoUserLikesIds.set(ids),
-	// 		});
-	// }
+	getWhoUserLikesIds(): void {
+		this.http
+			.get<number[]>(this.baseUrl + 'likes/list-like-ids')
+			.subscribe({
+				next: (ids) => this.whoUserLikesIds.set(ids),
+			});
+	}
 }

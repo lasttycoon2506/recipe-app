@@ -13,7 +13,7 @@ import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 	styleUrl: './member-card.component.css',
 })
 export class MemberCardComponent {
-	private likesService = inject(LikesService);
+	likesService = inject(LikesService);
 	private spinnerService = inject(NgxSpinnerService);
 	member = input.required<Member>();
 	reload = output<boolean>();

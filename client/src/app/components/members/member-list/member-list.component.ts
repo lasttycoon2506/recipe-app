@@ -3,6 +3,7 @@ import { MemberService } from '../../../services/member.service';
 import { MemberCardComponent } from '../member-card/member-card.component';
 import { PageChangedEvent, PaginationModule } from 'ngx-bootstrap/pagination';
 import { FormsModule } from '@angular/forms';
+import { LikesService } from '../../../services/likes.service';
 
 @Component({
 	selector: 'app-member-list',
@@ -13,9 +14,11 @@ import { FormsModule } from '@angular/forms';
 })
 export class MemberListComponent implements OnInit {
 	memberService = inject(MemberService);
+	private likesService = inject(LikesService);
 
 	ngOnInit(): void {
 		this.loadMembers();
+		this.likesService.getWhoUserLikesIds();
 	}
 
 	loadMembers(): void {

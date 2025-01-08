@@ -44,12 +44,6 @@ namespace API.Controllers
             return BadRequest("unable to save message to db");
         }
 
-        [HttpDelete("{id}")]
-        public Task<ActionResult> DeleteMsg(int id)
-        {
-            var username = User.GetUsername();
-        }
-
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MessageDto>>> GetUserMessages(
             [FromQuery] MessageParams messageParams
