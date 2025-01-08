@@ -11,7 +11,6 @@ import { FormsModule } from '@angular/forms';
 	styleUrl: './member-message.component.css',
 })
 export class MemberMessageComponent implements OnInit {
-	private msgService = inject(MessagesService);
 	username = input<string>('');
 	msgThread = input<Message[] | null>(null);
 

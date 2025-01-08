@@ -11,6 +11,9 @@
 							}}"
 							class="rounded-circle"
 						/>
+						@if (!message.read) {
+							<small class="text-warning">unread</small>
+						}
 					</li>
 				} @else {
 					<li>
