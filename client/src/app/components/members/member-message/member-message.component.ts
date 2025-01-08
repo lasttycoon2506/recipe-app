@@ -18,7 +18,7 @@ export class MemberMessageComponent {
 	msgContent = '';
 	newMsg = output<Message>();
 
-	sendMsg() {
+	sendMsg(): void {
 		this.msgService
 			.sendMessage(this.username(), this.msgContent)
 			.subscribe({
@@ -27,4 +27,6 @@ export class MemberMessageComponent {
 				},
 			});
 	}
+
+	deleteMsg() {}
 }

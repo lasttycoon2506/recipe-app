@@ -4,10 +4,12 @@ using API.Extensions;
 using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [Authorize]
     public class MessageController(
         IMessageRepository messageRepository,
         IUserRepository userRepository,
@@ -40,6 +42,12 @@ namespace API.Controllers
             if (await messageRepository.SaveAsync())
                 return Ok(mapper.Map<MessageDto>(newMessage));
             return BadRequest("unable to save message to db");
+        }
+
+        [HttpDelete("{id}")]
+        public Task<ActionResult> DeleteMsg(int id)
+        {
+            var username = User.GetUsername();
         }
 
         [HttpGet]
