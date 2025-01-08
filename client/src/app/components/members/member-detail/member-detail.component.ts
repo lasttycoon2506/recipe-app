@@ -2,7 +2,7 @@ import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { MemberService } from '../../../services/member.service';
 import { ActivatedRoute } from '@angular/router';
 import { Member } from '../../../models/member';
-import { TabDirective, TabsModule } from 'ngx-bootstrap/tabs';
+import { TabDirective, TabsetComponent, TabsModule } from 'ngx-bootstrap/tabs';
 import { DatePipe } from '@angular/common';
 import { MemberMessageComponent } from '../member-message/member-message.component';
 import { Message } from '../../../models/message';
@@ -16,7 +16,7 @@ import { MessagesService } from '../../../services/messages.service';
 	styleUrl: './member-detail.component.css',
 })
 export class MemberDetailComponent implements OnInit {
-	@ViewChild('memberTabs') memberTabs?: TabsModule;
+	@ViewChild('memberTabs') memberTabs?: TabsetComponent;
 	private route = inject(ActivatedRoute);
 	private memberService = inject(MemberService);
 	private msgService = inject(MessagesService);
@@ -37,6 +37,15 @@ export class MemberDetailComponent implements OnInit {
 			this.msgService.getMessageThread(this.member!.username).subscribe({
 				next: (msgThread) => (this.msgThread = msgThread),
 			});
+		}
+	}
+
+	selectTab(header: string): void {
+		if (this.memberTabs) {
+			const msgTab = this.memberTabs.tabs.find(
+				(tab) => tab.heading === header,
+			);
+			if (msgTab) msgTab.active = true;
 		}
 	}
 
