@@ -18,12 +18,16 @@
 			<div class="card-footer">
 				<div class="btn-group d-flex">
 					<button class="btn btn-danger">Like</button>
-					<button
-						(click)="selectTab('Messages')"
-						class="btn btn-success"
-					>
-						Message
-					</button>
+					@if (!likesService.whoUserLikesIds().includes(member.id)) {
+					} @else {
+						<button
+							(click)="selectTab('Messages')"
+							class="btn btn-success"
+							[disabled]=""
+						>
+							Message
+						</button>
+					}
 				</div>
 			</div>
 		</div>

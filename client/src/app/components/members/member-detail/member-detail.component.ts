@@ -6,6 +6,7 @@ import { DatePipe } from '@angular/common';
 import { MemberMessageComponent } from '../member-message/member-message.component';
 import { Message } from '../../../models/message';
 import { MessagesService } from '../../../services/messages.service';
+import { LikesService } from '../../../services/likes.service';
 
 @Component({
 	selector: 'app-member-detail',
@@ -18,6 +19,7 @@ export class MemberDetailComponent implements OnInit {
 	@ViewChild('memberTabs', { static: true }) memberTabs?: TabsetComponent;
 	private route = inject(ActivatedRoute);
 	private msgService = inject(MessagesService);
+	likesService = inject(LikesService);
 	member: Member = {} as Member;
 	activeTab?: TabDirective;
 	msgThread: Message[] = [];
