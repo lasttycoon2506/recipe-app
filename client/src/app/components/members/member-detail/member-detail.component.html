@@ -46,16 +46,13 @@
 				<tab heading="Recipe" (selectTab)="onActivateTab($event)"
 					>recipe here</tab
 				>
-				@if (!likesService.whoUserLikesIds().includes(member.id)) {
-				} @else {
-					<tab heading="Messages" (selectTab)="onActivateTab($event)"
-						><app-member-message
-							[username]="member.username"
-							[msgThread]="msgThread"
-							(newMsg)="updateMsgThread($event)"
-						></app-member-message>
-					</tab>
-				}
+				<tab heading="Messages" (selectTab)="onActivateTab($event)"
+					><app-member-message
+						[username]="member.username"
+						[msgThread]="msgThread"
+						(newMsg)="updateMsgThread($event)"
+					></app-member-message>
+				</tab>
 			</tabset>
 		</div>
 	</div>
