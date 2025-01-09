@@ -17,20 +17,25 @@
 			</div>
 			<div class="card-footer">
 				<div class="btn-group d-flex">
-					@if (likesService.whoUserLikesIds().includes(member.id)) {
-					} @else {
-						<button (click)="like()" class="btn btn-danger">
-							Like
-						</button>
-					}
-					@if (!likesService.whoUserLikesIds().includes(member.id)) {
-					} @else {
+					@if (
+						likesService.whoUserLikesIds().includes(member.id) &&
+						!memberService
+							.paginatedMembers()
+							?.items?.includes(member)
+					) {
 						<button
 							(click)="selectTab('Messages')"
 							class="btn btn-success"
-							[disabled]=""
 						>
 							Message
+						</button>
+					} @else {
+						<button
+							(click)="like()"
+							[disabled]="disableLike"
+							class="btn btn-danger"
+						>
+							Like
 						</button>
 					}
 				</div>

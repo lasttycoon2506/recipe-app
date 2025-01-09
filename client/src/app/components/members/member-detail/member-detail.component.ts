@@ -7,6 +7,7 @@ import { MemberMessageComponent } from '../member-message/member-message.compone
 import { Message } from '../../../models/message';
 import { MessagesService } from '../../../services/messages.service';
 import { LikesService } from '../../../services/likes.service';
+import { MemberService } from '../../../services/member.service';
 
 @Component({
 	selector: 'app-member-detail',
@@ -20,9 +21,11 @@ export class MemberDetailComponent implements OnInit {
 	private route = inject(ActivatedRoute);
 	private msgService = inject(MessagesService);
 	likesService = inject(LikesService);
+	memberService = inject(MemberService);
 	member: Member = {} as Member;
 	activeTab?: TabDirective;
 	msgThread: Message[] = [];
+	disableLike: boolean = false;
 
 	ngOnInit(): void {
 		this.route.data.subscribe({
@@ -63,5 +66,6 @@ export class MemberDetailComponent implements OnInit {
 
 	like(): void {
 		this.likesService.like(this.member.id);
+		this.disableLike = true;
 	}
 }
