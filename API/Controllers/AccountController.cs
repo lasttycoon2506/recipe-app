@@ -40,7 +40,7 @@ public class AccountController(DataContext context, ITokenService tokenService, 
             .Users.Include(user => user.Photos)
             .FirstOrDefaultAsync(user => user.UserName == loginDto.Username.ToLower());
 
-        if (user == null)
+        if (user == null || user.UserName == null)
             return Unauthorized("invalid username");
 
         return new UserDto
@@ -53,6 +53,6 @@ public class AccountController(DataContext context, ITokenService tokenService, 
 
     public async Task<bool> UsernameExists(string username)
     {
-        return await context.Users.AnyAsync(user => user.UserName == username.ToLower());
+        return await context.Users.AnyAsync(user => user.NormalizedUserName == username.ToUpper());
     }
 }

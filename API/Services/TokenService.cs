@@ -15,6 +15,10 @@ public class TokenService(IConfiguration config) : ITokenService
         if (tokenKey.Length < 64)
             throw new Exception("token too small");
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey));
+
+        if (user.UserName == null)
+            throw new Exception("username dne for user");
+
         var claims = new List<Claim>
         {
             new(ClaimTypes.NameIdentifier, user.Id.ToString()),
