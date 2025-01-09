@@ -19,7 +19,9 @@
 				<div class="btn-group d-flex">
 					@if (likesService.whoUserLikesIds().includes(member.id)) {
 					} @else {
-						<button class="btn btn-danger">Like</button>
+						<button (click)="like()" class="btn btn-danger">
+							Like
+						</button>
 					}
 					@if (!likesService.whoUserLikesIds().includes(member.id)) {
 					} @else {

@@ -60,4 +60,8 @@ export class MemberDetailComponent implements OnInit {
 	updateMsgThread(event: Message): void {
 		this.msgThread.push(event);
 	}
+
+	like(): void {
+		this.likesService.like(this.member.id);
+	}
 }
