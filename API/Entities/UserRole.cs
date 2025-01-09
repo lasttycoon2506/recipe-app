@@ -2,7 +2,8 @@ using Microsoft.AspNetCore.Identity;
 
 namespace API.Entities;
 
-public class UserRole : IdentityRole<int>
+public class UserRole : IdentityUserRole<int>
 {
-    public ICollection<UserRoles> UserRoles { get; set; } = [];
+    public User User { get; set; } = null!;
+    public AppRole Role { get; set; } = null!;
 }
