@@ -32,14 +32,11 @@
 					<i class="material-icons">info</i>
 				</li>
 			</button>
-			@if (!likesService.whoUserLikesIds().includes(member().id)) {
-				<button (click)="like()" class="btn btn-danger btn-sm">
-					<li>
-						<i class="material-icons">favorite</i>
-					</li>
-				</button>
-			}
-			@if (likesService.whoUserLikesIds().includes(member().id)) {
+			@if (
+				likesService
+					.paginatedMatchedMembers()
+					?.items?.includes(member())
+			) {
 				<button
 					routerLink="/members/{{ member().username }}"
 					[queryParams]="{ tab: 'Messages' }"
@@ -47,6 +44,12 @@
 				>
 					<li class="list-inline-item">
 						<i class="material-icons">mail</i>
+					</li>
+				</button>
+			} @else {
+				<button (click)="like()" class="btn btn-danger btn-sm">
+					<li>
+						<i class="material-icons">favorite</i>
 					</li>
 				</button>
 			}
