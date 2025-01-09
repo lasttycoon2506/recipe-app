@@ -1,48 +1,57 @@
-<div class="card text-bg-secondary">
-	<div class="card-body">
-		<ul>
-			@for (message of msgThread(); track message.id) {
-				@if (message.receiverUsername !== username()) {
-					<li class="receiver">
-						{{ message.content }}
-						<img
-							src="{{
-								message.senderPicUrl || './assets/user.png'
-							}}"
-							class="rounded-circle ms-1"
-						/>
-						@if (!message.read) {
-							<small class="text-warning">unread</small>
-						}
-					</li>
-				} @else {
-					<li>
-						<img
-							src="{{
-								message.senderPicUrl || './assets/user.png'
-							}}"
-							class="rounded-circle me-1"
-						/>
-						{{ message.content }}
-					</li>
+@if (!memberService.paginatedMembers()?.items!.includes(this.member())) {
+	<div class="card text-bg-secondary">
+		<div class="card-body">
+			<ul>
+				@for (message of msgThread(); track message.id) {
+					@if (message.receiverUsername !== username()) {
+						<li class="receiver">
+							{{ message.content }}
+							<img
+								src="{{
+									message.senderPicUrl || './assets/user.png'
+								}}"
+								class="rounded-circle ms-1"
+							/>
+							@if (!message.read) {
+								<small class="text-warning">unread</small>
+							}
+						</li>
+					} @else {
+						<li>
+							<img
+								src="{{
+									message.senderPicUrl || './assets/user.png'
+								}}"
+								class="rounded-circle me-1"
+							/>
+							{{ message.content }}
+						</li>
+					}
 				}
-			}
-		</ul>
-	</div>
+			</ul>
+		</div>
 
-	<div class="card-footer text-bg-dark">
-		<form #msgForm="ngForm" (ngSubmit)="sendMsg()" class="d-flex mt-2 mb-2">
-			<input
-				name="msgContent"
-				required
-				[(ngModel)]="msgContent"
-				type="text"
-				placeholder="send message"
-				class="form-control"
-			/>
-			<button [disabled]="msgForm.invalid" class="btn btn-success btn-lg">
-				Send
-			</button>
-		</form>
+		<div class="card-footer text-bg-dark">
+			<form
+				#msgForm="ngForm"
+				(ngSubmit)="sendMsg()"
+				class="d-flex mt-2 mb-2"
+			>
+				<input
+					name="msgContent"
+					required
+					[(ngModel)]="msgContent"
+					type="text"
+					placeholder="send message"
+					class="form-control"
+				/>
+				<button
+					[disabled]="msgForm.invalid"
+					class="btn btn-success btn-lg"
+				>
+					Send
+				</button>
+			</form>
+		</div>
 	</div>
-</div>
+}
