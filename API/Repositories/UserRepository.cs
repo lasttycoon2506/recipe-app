@@ -15,7 +15,7 @@ public class UserRepository(DataContext context, IMapper mapper, ILikesRepositor
     public async Task<MemberDto?> GetMemberAsync(string username)
     {
         return await context
-            .Users.Where(x => x.UserName == username)
+            .Users.Where(x => x.UserName == username.ToLower())
             .ProjectTo<MemberDto>(mapper.ConfigurationProvider)
             .SingleOrDefaultAsync();
     }
