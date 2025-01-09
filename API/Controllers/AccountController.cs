@@ -1,29 +1,32 @@
-using System.Security.Cryptography;
-using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
-public class AccountController(DataContext context, ITokenService tokenService, IMapper mapper)
-    : BaseApiController
+public class AccountController(
+    UserManager<User> userManager,
+    ITokenService tokenService,
+    IMapper mapper
+) : BaseApiController
 {
     [HttpPost("register")]
     public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
     {
         if (await UsernameExists(registerDto.Username))
             return BadRequest("username already exists");
-        using var hmac = new HMACSHA512();
 
         var newUser = mapper.Map<User>(registerDto);
         newUser.UserName = registerDto.Username.ToLower();
 
-        context.Users.Add(newUser);
-        await context.SaveChangesAsync();
+        var result = await userManager.CreateAsync(newUser, registerDto.Password);
+
+        if (!result.Succeeded)
+            return BadRequest(result.Errors);
 
         return new UserDto
         {
@@ -35,12 +38,17 @@ public class AccountController(DataContext context, ITokenService tokenService, 
     [HttpPost("login")]
     public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
     {
-        var user = await context
+        var user = await userManager
             .Users.Include(user => user.Photos)
             .FirstOrDefaultAsync(user => user.UserName == loginDto.Username.ToLower());
 
         if (user == null || user.UserName == null)
             return Unauthorized("invalid username");
+
+        var pwCheckResult = await userManager.CheckPasswordAsync(user, loginDto.Password);
+
+        if (!pwCheckResult)
+            return Unauthorized("incorrect pw");
 
         return new UserDto
         {
@@ -52,6 +60,6 @@ public class AccountController(DataContext context, ITokenService tokenService, 
 
     public async Task<bool> UsernameExists(string username)
     {
-        return await context.Users.AnyAsync(user => user.NormalizedUserName == username.ToUpper());
+        return await userManager.Users.AnyAsync(user => user.UserName == username.ToLower());
     }
 }
