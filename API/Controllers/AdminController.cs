@@ -26,7 +26,7 @@ public class AdminController(UserManager<User> userManager) : BaseApiController
     }
 
     [Authorize(Policy = "AdminRoleRequired")]
-    [HttpGet("edit-role/{username}")]
+    [HttpPost("edit-role/{username}")]
     public async Task<ActionResult> EditUserRole(string username, string roles)
     {
         if (string.IsNullOrEmpty(roles))
