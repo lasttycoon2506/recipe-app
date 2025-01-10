@@ -8,6 +8,7 @@ import { MemberEditComponent } from './components/members/member-edit/member-edi
 import { unsavedChangesGuard } from './guards/unsaved-changes.guard';
 import { MatchesComponent } from './components/matches/matches.component';
 import { memberDetailResolver } from './resolvers/member-detail.resolver';
+import { AdminComponent } from './admin/admin.component';
 
 export const routes: Routes = [
 	{ path: '', component: HomeComponent },
@@ -36,6 +37,11 @@ export const routes: Routes = [
 	{
 		path: 'matches',
 		component: MatchesComponent,
+		canActivate: [authGuard],
+	},
+	{
+		path: 'admin',
+		component: AdminComponent,
 		canActivate: [authGuard],
 	},
 ];
