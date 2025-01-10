@@ -7,7 +7,10 @@ namespace API.Data;
 
 public class Seed
 {
-    public static async Task SeedUsers(UserManager<User> userManager)
+    public static async Task SeedUsers(
+        UserManager<User> userManager,
+        RoleManager<AppRole> roleManager
+    )
     {
         if (await userManager.Users.AnyAsync())
             return;
@@ -18,9 +21,25 @@ public class Seed
         if (users == null)
             return;
 
+        var roles = new List<AppRole>
+        {
+            new() { Name = "Admin" },
+            new() { Name = "Member" },
+        };
+
+        foreach (var role in roles)
+        {
+            await roleManager.CreateAsync(role);
+        }
+
         foreach (var user in users)
         {
             await userManager.CreateAsync(user, "Pa$sw0rd");
+            await userManager.AddToRoleAsync(user, "Member");
         }
+
+        var admin = new User { UserName = "admin", PasswordHash = "Pa$sw0rd" };
+
+        await userManager.AddToRoleAsync(admin, "Admin");
     }
 }
