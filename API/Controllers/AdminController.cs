@@ -10,7 +10,7 @@ public class AdminController(UserManager<User> userManager) : BaseApiController
 {
     [Authorize(Policy = "AdminRoleRequired")]
     [HttpGet("users-with-roles")]
-    public async Task<ActionResult> AllUsersWithRoles()
+    public async Task<ActionResult> GetUsersWithRoles()
     {
         var usersWithRoles = await userManager
             .Users.Select(user => new
@@ -23,5 +23,31 @@ public class AdminController(UserManager<User> userManager) : BaseApiController
             .ToListAsync();
 
         return Ok(usersWithRoles);
+    }
+
+    [Authorize(Policy = "AdminRoleRequired")]
+    [HttpGet("edit-role/{username}")]
+    public async Task<ActionResult> EditUserRole(string username, string roles)
+    {
+        if (string.IsNullOrEmpty(roles))
+            return BadRequest("new roles dne");
+
+        var newRoles = roles.Split(",").ToArray();
+
+        var user = await userManager.FindByNameAsync(username);
+        if (user == null)
+            return NotFound("user dne");
+
+        var existingRoles = await userManager.GetRolesAsync(user);
+
+        var result = await userManager.RemoveFromRolesAsync(user, existingRoles);
+        if (!result.Succeeded)
+            return BadRequest("unable to remove existing roles from user");
+
+        result = await userManager.AddToRolesAsync(user, newRoles);
+        if (!result.Succeeded)
+            return BadRequest("unable to add new roles to user");
+
+        return Ok(newRoles);
     }
 }
