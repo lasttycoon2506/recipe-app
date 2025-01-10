@@ -31,7 +31,7 @@ public class AccountController(
         return new UserDto
         {
             Username = newUser.UserName,
-            Token = tokenService.CreateToken(newUser),
+            Token = await tokenService.CreateToken(newUser),
         };
     }
 
@@ -53,7 +53,7 @@ public class AccountController(
         return new UserDto
         {
             Username = user.UserName,
-            Token = tokenService.CreateToken(user),
+            Token = await tokenService.CreateToken(user),
             PhotoUrl = user.Photos.FirstOrDefault(pic => pic.IsMain)?.Url,
         };
     }

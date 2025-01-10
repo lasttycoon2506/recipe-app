@@ -38,8 +38,9 @@ public class Seed
             await userManager.AddToRoleAsync(user, "Member");
         }
 
-        var admin = new User { UserName = "admin", PasswordHash = "Pa$sw0rd" };
+        var admin = new User { UserName = "admin" };
 
+        await userManager.CreateAsync(admin, "Pa$sw0rd");
         await userManager.AddToRoleAsync(admin, "Admin");
     }
 }
