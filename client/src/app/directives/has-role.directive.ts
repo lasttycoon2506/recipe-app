@@ -1,6 +1,7 @@
 import {
 	Directive,
 	inject,
+	Input,
 	OnInit,
 	TemplateRef,
 	ViewContainerRef,
@@ -12,7 +13,7 @@ import { AccountService } from '../services/account.service';
 	standalone: true,
 })
 export class HasRoleDirective implements OnInit {
-	appHasRole: string = '';
+	@Input() appHasRole: string = '';
 	private accountService = inject(AccountService);
 	viewContainerRef = inject(ViewContainerRef);
 	templateRef = inject(TemplateRef);
