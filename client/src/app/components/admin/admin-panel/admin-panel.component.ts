@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { AdminService } from '../../../services/admin.service';
-import { Member } from '../../../models/member';
+import { User } from '../../../models/user';
 
 @Component({
 	selector: 'app-admin-panel',
@@ -9,13 +9,15 @@ import { Member } from '../../../models/member';
 	templateUrl: './admin-panel.component.html',
 	styleUrl: './admin-panel.component.css',
 })
-export class AdminPanelComponent {
+export class AdminPanelComponent implements OnInit {
 	private adminService = inject(AdminService);
-	MembersWithRoles: Member[] = [];
+	usersWithRoles: User[] = [];
 
-	getMembersWithRoles() {
-		this.adminService.getMembersWithRoles().subscribe({
-			next: (members) => (this.MembersWithRoles = members),
-		});
+	ngOnInit(): void {
+		this.getUsersWithRoles();
+	}
+
+	getUsersWithRoles(): void {
+		this.adminService.getUsersWithRoles();
 	}
 }
