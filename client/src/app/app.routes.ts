@@ -8,7 +8,7 @@ import { MemberEditComponent } from './components/members/member-edit/member-edi
 import { unsavedChangesGuard } from './guards/unsaved-changes.guard';
 import { MatchesComponent } from './components/matches/matches.component';
 import { memberDetailResolver } from './resolvers/member-detail.resolver';
-import { AdminComponent } from './admin/admin.component';
+import { AdminComponent } from './components/admin/admin-component/admin.component';
 import { adminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
