@@ -7,19 +7,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
-public class LikesController(ILikesRepository likesRepository) : BaseApiController
+public class LikesController(IUnitOfWork unitOfWork) : BaseApiController
 {
     [HttpGet("list-like-ids")]
     public async Task<IEnumerable<int>> GetIdsWhoUserLikes()
     {
-        return await likesRepository.GetIdsWhoCurrentUserLikesAsync(User.GetUserId());
+        return await unitOfWork.LikesRepository.GetIdsWhoCurrentUserLikesAsync(User.GetUserId());
     }
 
     [HttpGet("list-matches")]
     public async Task<PagedList<MemberDto>> GetMatches([FromQuery] UserParams userParams)
     {
         userParams.CurrentUserId = User.GetUserId();
-        var matchedMembers = await likesRepository.GetMatchesAsync(userParams);
+        var matchedMembers = await unitOfWork.LikesRepository.GetMatchesAsync(userParams);
         Response.AddPaginationHeader(matchedMembers);
         return matchedMembers;
     }
@@ -30,7 +30,10 @@ public class LikesController(ILikesRepository likesRepository) : BaseApiControll
         if (User.GetUserId() == targetUserId)
             return BadRequest("cant like yourself!");
 
-        var existingLike = await likesRepository.GetLikeAsync(User.GetUserId(), targetUserId);
+        var existingLike = await unitOfWork.LikesRepository.GetLikeAsync(
+            User.GetUserId(),
+            targetUserId
+        );
 
         if (existingLike == null)
         {
@@ -39,14 +42,14 @@ public class LikesController(ILikesRepository likesRepository) : BaseApiControll
                 SourceUserId = User.GetUserId(),
                 TargetUserId = targetUserId,
             };
-            likesRepository.AddLike(newLike);
+            unitOfWork.LikesRepository.AddLike(newLike);
         }
         else
         {
             return BadRequest("user already liked");
         }
 
-        if (await likesRepository.SaveAsync())
+        if (await unitOfWork.Save())
             return StatusCode(201);
         return BadRequest("unable to save like in db");
     }

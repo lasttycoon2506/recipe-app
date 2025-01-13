@@ -10,16 +10,13 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers
 {
     [Authorize]
-    public class UsersController(
-        IUserRepository userRepository,
-        IMapper mapper,
-        IPhotoService photoService
-    ) : BaseApiController
+    public class UsersController(IUnitOfWork unitOfWork, IMapper mapper, IPhotoService photoService)
+        : BaseApiController
     {
         [HttpGet("{username}")]
         public async Task<ActionResult<MemberDto>> GetMember(string username)
         {
-            var member = await userRepository.GetMemberAsync(username);
+            var member = await unitOfWork.UserRepository.GetMemberAsync(username);
 
             if (member == null)
                 return NotFound();
@@ -34,7 +31,7 @@ namespace API.Controllers
         {
             userParams.CurrentUsername = User.GetUsername();
             userParams.CurrentUserId = User.GetUserId();
-            var members = await userRepository.GetMembersAsync(userParams);
+            var members = await unitOfWork.UserRepository.GetMembersAsync(userParams);
             Response.AddPaginationHeader(members);
 
             return Ok(members);
@@ -43,12 +40,12 @@ namespace API.Controllers
         [HttpPut]
         public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
         {
-            var user = await userRepository.GetUserAsync(User.GetUsername());
+            var user = await unitOfWork.UserRepository.GetUserAsync(User.GetUsername());
             if (user == null)
                 return NotFound("user dne in db");
 
             mapper.Map(memberUpdateDto, user);
-            if (await userRepository.SaveAsync())
+            if (await unitOfWork.Save())
                 return NoContent();
 
             return BadRequest("failed to update user");
@@ -57,7 +54,7 @@ namespace API.Controllers
         [HttpPost("add-pic")]
         public async Task<ActionResult<PhotoDto>> UploadPhoto(IFormFile file)
         {
-            var user = await userRepository.GetUserAsync(User.GetUsername());
+            var user = await unitOfWork.UserRepository.GetUserAsync(User.GetUsername());
             if (user == null)
                 return NotFound("user dne in db");
 
@@ -70,7 +67,7 @@ namespace API.Controllers
 
             user.Photos.Add(pic);
 
-            if (await userRepository.SaveAsync())
+            if (await unitOfWork.Save())
                 return CreatedAtAction(
                     nameof(GetMember),
                     new { username = user.UserName },
@@ -83,7 +80,7 @@ namespace API.Controllers
         [HttpPut("set-main-pic/{photoId:int}")]
         public async Task<ActionResult> SetMainPic(int photoId)
         {
-            var user = await userRepository.GetUserAsync(User.GetUsername());
+            var user = await unitOfWork.UserRepository.GetUserAsync(User.GetUsername());
             if (user == null)
                 return NotFound("user dne in db");
 
@@ -97,7 +94,7 @@ namespace API.Controllers
                 currentMainPic.IsMain = false;
             newMainPic.IsMain = true;
 
-            if (await userRepository.SaveAsync())
+            if (await unitOfWork.Save())
                 return NoContent();
             return BadRequest("unable to set new pic as main");
         }
@@ -105,7 +102,7 @@ namespace API.Controllers
         [HttpDelete("delete-pic/{photoId:int}")]
         public async Task<ActionResult> DeletePic(int photoId)
         {
-            var user = await userRepository.GetUserAsync(User.GetUsername());
+            var user = await unitOfWork.UserRepository.GetUserAsync(User.GetUsername());
             if (user == null)
                 return NotFound("user not found in db");
 
@@ -121,7 +118,7 @@ namespace API.Controllers
             }
 
             user.Photos.Remove(picToDelete);
-            if (await userRepository.SaveAsync())
+            if (await unitOfWork.Save())
                 return Ok();
             return BadRequest("error deleting from db");
         }

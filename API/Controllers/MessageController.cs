@@ -10,11 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers
 {
     [Authorize]
-    public class MessageController(
-        IMessageRepository messageRepository,
-        IUserRepository userRepository,
-        IMapper mapper
-    ) : BaseApiController
+    public class MessageController(IUnitOfWork unitOfWork, IMapper mapper) : BaseApiController
     {
         [HttpPost]
         public async Task<ActionResult<MessageDto>> CreateMessage(CreateMessageDto createMessageDto)
@@ -23,8 +19,10 @@ namespace API.Controllers
             if (username == createMessageDto.ReceiverUsername)
                 return BadRequest("cant message self!");
 
-            var sender = await userRepository.GetUserAsync(username);
-            var receiver = await userRepository.GetUserAsync(createMessageDto.ReceiverUsername);
+            var sender = await unitOfWork.UserRepository.GetUserAsync(username);
+            var receiver = await unitOfWork.UserRepository.GetUserAsync(
+                createMessageDto.ReceiverUsername
+            );
             if (sender == null || receiver == null)
                 return NotFound("sender or receiver not found");
 
@@ -37,9 +35,9 @@ namespace API.Controllers
                 Receiver = receiver,
             };
 
-            messageRepository.AddMessage(newMessage);
+            unitOfWork.MessageRepository.AddMessage(newMessage);
 
-            if (await messageRepository.SaveAsync())
+            if (await unitOfWork.Save())
                 return Ok(mapper.Map<MessageDto>(newMessage));
             return BadRequest("unable to save message to db");
         }
@@ -51,7 +49,7 @@ namespace API.Controllers
         {
             messageParams.Username = User.GetUsername();
 
-            var messages = await messageRepository.GetUserMessagesAsync(messageParams);
+            var messages = await unitOfWork.MessageRepository.GetUserMessagesAsync(messageParams);
 
             Response.AddPaginationHeader(messages);
             return messages;
@@ -62,7 +60,9 @@ namespace API.Controllers
         {
             var currentUsername = User.GetUsername();
 
-            return Ok(await messageRepository.GetMessageThreadAsync(currentUsername, username));
+            return Ok(
+                await unitOfWork.MessageRepository.GetMessageThreadAsync(currentUsername, username)
+            );
         }
     }
 }
