@@ -1,7 +1,15 @@
 @if (!memberService.paginatedMembers()?.items!.includes(this.member())) {
 	<div class="card text-bg-secondary">
 		<div class="card-body">
-			<ul class="chat">
+			<ul
+				#scrollMsgs
+				class="chat"
+				style="
+					overflow: scroll;
+					max-height: 400px;
+					scroll-behavior: auto;
+				"
+			>
 				@for (message of msgThread(); track message.id) {
 					@if (message.receiverUsername !== username()) {
 						<li class="receiver">
