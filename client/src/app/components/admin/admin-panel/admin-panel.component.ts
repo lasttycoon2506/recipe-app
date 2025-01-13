@@ -22,4 +22,6 @@ export class AdminPanelComponent implements OnInit {
 			next: (users) => (this.usersWithRoles = users),
 		});
 	}
+
+	editRole() {}
 }
