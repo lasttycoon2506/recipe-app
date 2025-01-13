@@ -1,4 +1,11 @@
-import { Component, inject, input, output, ViewChild } from '@angular/core';
+import {
+	AfterViewChecked,
+	Component,
+	inject,
+	input,
+	output,
+	ViewChild,
+} from '@angular/core';
 import { MessagesService } from '../../../services/messages.service';
 import { Message } from '../../../models/message';
 import { FormsModule, NgForm } from '@angular/forms';
@@ -12,8 +19,9 @@ import { Member } from '../../../models/member';
 	templateUrl: './member-message.component.html',
 	styleUrl: './member-message.component.css',
 })
-export class MemberMessageComponent {
+export class MemberMessageComponent implements AfterViewChecked {
 	@ViewChild('msgForm') msgForm?: NgForm;
+	@ViewChild('scrollMsgs') scrollMsgContainer: any;
 	private msgService = inject(MessagesService);
 	memberService = inject(MemberService);
 	username = input<string>('');
@@ -30,5 +38,17 @@ export class MemberMessageComponent {
 					this.newMsg.emit(postedMsg), this.msgForm?.reset();
 				},
 			});
+		this.scrollBottom();
+	}
+
+	ngAfterViewChecked(): void {
+		this.scrollBottom();
+	}
+
+	scrollBottom(): void {
+		if (this.scrollMsgContainer) {
+			this.scrollMsgContainer.nativeElement.scrollTop =
+				this.scrollMsgContainer.nativeElement.scrollHeight;
+		}
 	}
 }
