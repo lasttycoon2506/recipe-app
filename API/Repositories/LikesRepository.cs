@@ -52,9 +52,4 @@ public class LikesRepository(DataContext context, IMapper mapper) : ILikesReposi
             .Select(x => x.TargetUserId)
             .ToListAsync();
     }
-
-    public async Task<bool> SaveAsync()
-    {
-        return await context.SaveChangesAsync() > 0;
-    }
 }

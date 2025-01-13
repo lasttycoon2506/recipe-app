@@ -77,9 +77,4 @@ public class MessageRepository(DataContext context, IMapper mapper) : IMessageRe
             messageParams.PgNumber
         );
     }
-
-    public async Task<bool> SaveAsync()
-    {
-        return await context.SaveChangesAsync() > 0;
-    }
 }

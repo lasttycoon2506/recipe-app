@@ -61,9 +61,4 @@ public class UserRepository(DataContext context, IMapper mapper, ILikesRepositor
     {
         return await context.Users.FindAsync(id);
     }
-
-    public async Task<bool> SaveAsync()
-    {
-        return await context.SaveChangesAsync() > 0;
-    }
 }

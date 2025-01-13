@@ -14,5 +14,4 @@ public interface IMessageRepository
         string currentUsername,
         string receiverUsername
     );
-    Task<bool> SaveAsync();
 }

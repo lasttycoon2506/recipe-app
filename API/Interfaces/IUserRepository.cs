@@ -10,5 +10,4 @@ public interface IUserRepository
     Task<User?> GetUserAsync(string username);
     Task<MemberDto?> GetMemberAsync(string username);
     Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams);
-    Task<bool> SaveAsync();
 }
