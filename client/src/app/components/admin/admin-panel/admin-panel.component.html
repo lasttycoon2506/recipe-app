@@ -11,7 +11,28 @@
 				<td>
 					{{ user.username }}
 				</td>
-				<td>{{ user.roles }}</td>
+				<td>
+					@for (
+						role of user.roles;
+						track $index;
+						let index = $index
+					) {
+						<div class="form-check form-check-inline">
+							<input
+								class="form-check-input"
+								type="checkbox"
+								value=""
+								id="defaultCheck{{ index }}"
+							/>
+							<label
+								class="form-check-label"
+								for="defaultCheck{{ index }}"
+							>
+								{{ role }}
+							</label>
+						</div>
+					}
+				</td>
 			</tr>
 		}
 	</tbody>
