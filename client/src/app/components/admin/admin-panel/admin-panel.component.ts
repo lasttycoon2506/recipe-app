@@ -18,6 +18,8 @@ export class AdminPanelComponent implements OnInit {
 	}
 
 	getUsersWithRoles(): void {
-		this.adminService.getUsersWithRoles();
+		this.adminService
+			.getUsersWithRoles()
+			.subscribe({ next: (users) => (this.usersWithRoles = users) });
 	}
 }

@@ -1,15 +1,18 @@
 <table class="table">
-	<th>
+	<thead>
 		<tr>
-			testing
+			<th scope="col">User</th>
+			<th scope="col">Role(s)</th>
 		</tr>
-	</th>
+	</thead>
 	<tbody>
-		@for (member of MembersWithRoles; track member.id) {
-			<td>
-				{{ member.username }}
-			</td>
-			<td>{{ member.roles }}</td>
+		@for (user of usersWithRoles; track $index) {
+			<tr>
+				<td>
+					{{ user.username }}
+				</td>
+				<td>{{ user.roles }}</td>
+			</tr>
 		}
 	</tbody>
 </table>

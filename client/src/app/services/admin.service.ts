@@ -8,7 +8,7 @@ import { User } from '../models/user';
 	providedIn: 'root',
 })
 export class AdminService {
-	private baseUrl = environment;
+	private baseUrl = environment.apiUrl;
 	private http = inject(HttpClient);
 
 	getUsersWithRoles(): Observable<User[]> {
