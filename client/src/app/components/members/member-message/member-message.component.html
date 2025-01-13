@@ -1,7 +1,7 @@
 @if (!memberService.paginatedMembers()?.items!.includes(this.member())) {
 	<div class="card text-bg-secondary">
 		<div class="card-body">
-			<ul>
+			<ul class="chat">
 				@for (message of msgThread(); track message.id) {
 					@if (message.receiverUsername !== username()) {
 						<li class="receiver">
