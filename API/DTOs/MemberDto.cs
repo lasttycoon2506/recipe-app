@@ -10,4 +10,5 @@ public class MemberDto
     public DateTime LastActive { get; set; }
     public string? Experience { get; set; }
     public string? Specialty { get; set; }
+    public string? Recipe { get; set; }
 }
