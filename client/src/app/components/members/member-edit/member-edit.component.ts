@@ -32,6 +32,8 @@ export class MemberEditComponent implements OnInit {
 		}
 	}
 	member?: Member;
+	ingredients: string[] = [];
+	directions: string[] = [];
 
 	ngOnInit(): void {
 		this.loadMember();
@@ -41,7 +43,10 @@ export class MemberEditComponent implements OnInit {
 		const username = this.accountService.currentUser()?.username;
 		if (!username) return;
 		this.memberService.getMember(username).subscribe({
-			next: (member) => (this.member = member),
+			next: (member) => {
+				this.member = member;
+				this.spliceRecipe(member);
+			},
 			error: (err) => console.log(err),
 		});
 	}
@@ -56,7 +61,13 @@ export class MemberEditComponent implements OnInit {
 		});
 	}
 
-	onMemberUpdated(event: Member) {
+	onMemberUpdated(event: Member): void {
 		this.member = event;
+	}
+
+	spliceRecipe(member: Member) {
+		let recipe = member.recipe.split('Directions');
+		this.ingredients = recipe[0].split(',');
+		this.directions = recipe[1].split(',');
 	}
 }
