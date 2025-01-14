@@ -9,7 +9,7 @@ public class User : IdentityUser<int>
     public DateTime LastActive { get; set; } = DateTime.UtcNow;
     public string? Experience { get; set; }
     public string? Specialty { get; set; }
-    public Recipe? Recipe { get; set; }
+    public string? Recipe { get; set; }
     public List<UserLikes> WhoLikesUser { get; set; } = [];
     public List<UserLikes> WhoUserLikes { get; set; } = [];
     public List<Message> MessagesSent { get; set; } = [];

@@ -10,11 +10,7 @@
       }
     ],
     "Experience": "Pro",
-    "Specialty": "African",
-    "Recipe": {
-      "Ingredients": "peppers, corn, beef",
-      "Directions": "clean, chop, cook"
-    }
+    "Specialty": "African"
   },
   {
     "UserName": "johhnny52",
@@ -92,7 +88,8 @@
       }
     ],
     "Experience": "Semi-pro",
-    "Specialty": "Middle-Eastern"
+    "Specialty": "Middle-Eastern",
+    "Recipe": "Ingredients cumin, beef Directions season beef with cumin, cook"
   },
   {
     "UserName": "yummy",

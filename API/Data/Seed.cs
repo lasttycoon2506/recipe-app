@@ -34,11 +34,6 @@ public class Seed
 
         foreach (var user in users)
         {
-            user.Recipe = new Recipe
-            {
-                Ingredients = user.Recipe.Ingredients,
-                Directions = user.Recipe.Directions,
-            };
             await userManager.CreateAsync(user, "Pa$sw0rd");
             await userManager.AddToRoleAsync(user, "Member");
         }
