@@ -59,11 +59,18 @@
 								[(ngModel)]="member.experience"
 							/>
 							<h4 class="mt-3 mb-2">Recipe</h4>
-							<input
-								type="text"
-								name="recipe"
-								[(ngModel)]="member.recipe"
-							/>
+							<h6 class="mt-2 mb-1">Ingredients:</h6>
+							<textarea
+								class="form-control"
+								aria-label="With textarea"
+								>{{ member.recipe }}</textarea
+							>
+							<h6 class="mt-2 mb-2">Directions:</h6>
+							<textarea
+								class="form-control"
+								aria-label="With textarea"
+								>{{ member.recipe }}</textarea
+							>
 						</form>
 					</tab>
 					<tab heading="Pictures"
