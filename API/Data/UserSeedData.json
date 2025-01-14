@@ -10,7 +10,11 @@
       }
     ],
     "Experience": "Pro",
-    "Specialty": "African"
+    "Specialty": "African",
+    "Recipe": {
+      "Ingredients": "peppers, corn, beef",
+      "Directions": "clean, chop, cook"
+    }
   },
   {
     "UserName": "johhnny52",
