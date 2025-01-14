@@ -9,4 +9,5 @@ export type Member = {
 	lastActive: Date;
 	experience: string;
 	specialty: string;
+	recipe: string;
 };
