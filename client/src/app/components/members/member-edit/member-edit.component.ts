@@ -52,19 +52,23 @@ export class MemberEditComponent implements OnInit {
 	}
 
 	updateMember(): void {
-		let ingredientsAsStr = this.ingredients.join(',').concat(' Directions');
-		let directionsAsStr = this.directions.join(',');
+		if (!this.ingredients.includes('') && !this.directions.includes('')) {
+			let ingredientsAsStr = this.ingredients
+				.join(',')
+				.concat(' Directions');
+			let directionsAsStr = this.directions.join(',');
 
-		this.editForm!.value['recipe'] =
-			ingredientsAsStr.concat(directionsAsStr);
+			this.editForm!.value['recipe'] =
+				ingredientsAsStr.concat(directionsAsStr);
 
-		this.memberService.updateMember(this.editForm?.value).subscribe({
-			next: () => {
-				this.editForm?.reset(this.member);
-				this.toastr.success('Profile Updated!');
-			},
-			error: (err) => console.log(err),
-		});
+			this.memberService.updateMember(this.editForm?.value).subscribe({
+				next: () => {
+					this.editForm?.reset(this.member);
+					this.toastr.success('Profile Updated!');
+				},
+				error: (err) => console.log(err),
+			});
+		}
 	}
 
 	onMemberUpdated(event: Member): void {
@@ -78,7 +82,9 @@ export class MemberEditComponent implements OnInit {
 	}
 
 	addRow(): void {
+		console.log(this.ingredients);
 		this.ingredients.push('');
+		console.log(this.ingredients);
 	}
 
 	removeRow(): void {
