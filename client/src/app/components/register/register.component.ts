@@ -23,6 +23,8 @@ export class RegisterComponent implements OnInit {
 	private router = inject(Router);
 	private toastr = inject(ToastrService);
 	registerForm: FormGroup = new FormGroup({});
+	ingredients: string[] = [];
+	directions: string[] = [];
 
 	ngOnInit(): void {
 		this.initForm();
@@ -56,5 +58,13 @@ export class RegisterComponent implements OnInit {
 			next: () => this.router.navigateByUrl('/members'),
 			error: (error) => this.toastr.error(error.error),
 		});
+	}
+
+	addRow(arg0: string) {
+		throw new Error('Method not implemented.');
+	}
+
+	removeRow(arg0: string) {
+		throw new Error('Method not implemented.');
 	}
 }
