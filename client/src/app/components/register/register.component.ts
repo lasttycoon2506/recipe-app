@@ -25,6 +25,12 @@ export class RegisterComponent implements OnInit {
 	private router = inject(Router);
 	private toastr = inject(ToastrService);
 	registerForm: FormGroup = new FormGroup({});
+	get ingredients(): FormArray {
+		return this.registerForm.get('ingredients') as FormArray;
+	}
+	get directions(): FormArray {
+		return this.registerForm.get('directions') as FormArray;
+	}
 
 	ngOnInit(): void {
 		this.initForm();
@@ -56,21 +62,21 @@ export class RegisterComponent implements OnInit {
 	}
 
 	register(): void {
+		this.parseRecipe(this.ingredients, this.directions);
+
 		this.accountService.register(this.registerForm.value).subscribe({
 			next: () => this.router.navigateByUrl('/members'),
 			error: (error) => this.toastr.error(error.error),
 		});
 	}
 
-	get directions(): FormArray {
-		return this.registerForm.get('directions') as FormArray;
-	}
-
-	addDirection() {
+	addDirection(): void {
 		this.directions.push(this.formBuilder.control('', Validators.required));
 	}
 
-	removeDirection(index: number) {
+	removeDirection(index: number): void {
 		this.directions.removeAt(index);
 	}
+
+	parseRecipe(ingredients: FormArray, directions: FormArray) {}
 }

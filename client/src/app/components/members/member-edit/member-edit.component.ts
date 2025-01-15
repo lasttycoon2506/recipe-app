@@ -53,14 +53,7 @@ export class MemberEditComponent implements OnInit {
 
 	updateMember(): void {
 		if (!this.ingredients.includes('') && !this.directions.includes('')) {
-			let ingredientsAsStr = this.ingredients
-				.join(',')
-				.concat(' Directions');
-			let directionsAsStr = this.directions.join(',');
-
-			this.editForm!.value['recipe'] =
-				ingredientsAsStr.concat(directionsAsStr);
-
+			this.recipeToString();
 			this.memberService.updateMember(this.editForm?.value).subscribe({
 				next: () => {
 					this.editForm?.reset(this.member);
@@ -90,5 +83,13 @@ export class MemberEditComponent implements OnInit {
 	removeRow(section: string): void {
 		if (section === 'ingredients') this.ingredients.pop();
 		else this.directions.pop();
+	}
+
+	recipeToString() {
+		let ingredientsAsStr = this.ingredients.join(',').concat(' Directions');
+		let directionsAsStr = this.directions.join(',');
+
+		this.editForm!.value['recipe'] =
+			ingredientsAsStr.concat(directionsAsStr);
 	}
 }
