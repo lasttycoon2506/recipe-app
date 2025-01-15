@@ -58,22 +58,26 @@
 		}
 	</div>
 	<div>
-		<h4 class="mt-3 mb-2">Recipe</h4>
+		<h5 class="mt-3 mb-2">Recipe</h5>
 		<h6 class="mt-2 mb-1">Ingredients:</h6>
 		<ul>
 			@for (ingredient of ingredients; track $index; let index = $index) {
 				<li>
-					<input class="col-6" name="ingredients[{{ index }}]" />
+					<input
+						formControlName="ingredients"
+						class="col-8"
+						name="ingredients[{{ index }}]"
+					/>
 				</li>
 			}
 		</ul>
 		<button
-			class="btn btn-success col-2 mx-3"
+			class="btn btn-success col-3 mx-3"
 			(click)="addRow('ingredients')"
 		>
 			Add
 		</button>
-		<button class="btn btn-danger col-2" (click)="removeRow('directions')">
+		<button class="btn btn-danger col-3" (click)="removeRow('directions')">
 			Remove
 		</button>
 		<h6 class="mt-2 mb-2">Directions:</h6>
@@ -85,12 +89,12 @@
 			}
 		</ul>
 		<button
-			class="btn btn-success col-2 mx-3"
+			class="btn btn-success col-3 mx-3"
 			(click)="addRow('directions')"
 		>
 			Add
 		</button>
-		<button class="btn btn-danger col-2" (click)="removeRow('directions')">
+		<button class="btn btn-danger col-3" (click)="removeRow('directions')">
 			Remove
 		</button>
 	</div>
@@ -98,7 +102,7 @@
 	<div class="form-group text-center">
 		<button
 			[disabled]="registerForm.invalid"
-			class="btn btn-success"
+			class="btn btn-success mt-3 col-12"
 			type="submit"
 		>
 			Register

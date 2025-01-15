@@ -23,8 +23,8 @@ export class RegisterComponent implements OnInit {
 	private router = inject(Router);
 	private toastr = inject(ToastrService);
 	registerForm: FormGroup = new FormGroup({});
-	ingredients: string[] = [];
-	directions: string[] = [];
+	ingredients: string[] = [''];
+	directions: string[] = [''];
 
 	ngOnInit(): void {
 		this.initForm();
@@ -50,21 +50,27 @@ export class RegisterComponent implements OnInit {
 			],
 			specialty: ['', Validators.required],
 			experience: ['', Validators.required],
+			ingredients: ['', Validators.required],
+			directions: ['', Validators.required],
 		});
 	}
 
 	register(): void {
-		this.accountService.register(this.registerForm.value).subscribe({
-			next: () => this.router.navigateByUrl('/members'),
-			error: (error) => this.toastr.error(error.error),
-		});
+		if (!this.ingredients.includes('') && !this.directions.includes('')) {
+			this.accountService.register(this.registerForm.value).subscribe({
+				next: () => this.router.navigateByUrl('/members'),
+				error: (error) => this.toastr.error(error.error),
+			});
+		}
 	}
 
-	addRow(arg0: string) {
-		throw new Error('Method not implemented.');
+	addRow(section: string) {
+		if (section === 'ingredients') this.ingredients.push('');
+		else this.directions.push('');
 	}
 
-	removeRow(arg0: string) {
-		throw new Error('Method not implemented.');
+	removeRow(section: string) {
+		if (section === 'ingredients') this.ingredients.pop();
+		else this.directions.pop();
 	}
 }
