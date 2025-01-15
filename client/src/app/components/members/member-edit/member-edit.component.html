@@ -74,6 +74,15 @@
 									</li>
 								}
 							</ul>
+							<button class="btn btn-success" (click)="addRow()">
+								Add
+							</button>
+							<button
+								class="btn btn-danger"
+								(click)="removeRow()"
+							>
+								Remove
+							</button>
 							<h6 class="mt-2 mb-2">Directions:</h6>
 							<textarea class="form-control">{{
 								directions

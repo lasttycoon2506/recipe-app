@@ -65,9 +65,17 @@ export class MemberEditComponent implements OnInit {
 		this.member = event;
 	}
 
-	spliceRecipe(member: Member) {
+	spliceRecipe(member: Member): void {
 		let recipe = member.recipe.split('Directions');
 		this.ingredients = recipe[0].split(',');
 		this.directions = recipe[1].split(',');
+	}
+
+	addRow(): void {
+		this.ingredients.push('');
+	}
+
+	removeRow(): void {
+		this.ingredients.pop();
 	}
 }
