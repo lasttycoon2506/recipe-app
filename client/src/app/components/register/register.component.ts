@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import {
+	FormArray,
 	FormBuilder,
 	FormGroup,
 	ReactiveFormsModule,
@@ -9,11 +10,12 @@ import { AccountService } from '../../services/account.service';
 import { TextInputComponent } from '../forms/text-input/text-input.component';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { NgFor } from '@angular/common';
 
 @Component({
 	selector: 'app-register',
 	standalone: true,
-	imports: [ReactiveFormsModule, TextInputComponent],
+	imports: [ReactiveFormsModule, TextInputComponent, NgFor],
 	templateUrl: './register.component.html',
 	styleUrl: './register.component.css',
 })
@@ -23,8 +25,6 @@ export class RegisterComponent implements OnInit {
 	private router = inject(Router);
 	private toastr = inject(ToastrService);
 	registerForm: FormGroup = new FormGroup({});
-	ingredients: string[] = [''];
-	directions: string[] = [''];
 
 	ngOnInit(): void {
 		this.initForm();
@@ -50,27 +50,27 @@ export class RegisterComponent implements OnInit {
 			],
 			specialty: ['', Validators.required],
 			experience: ['', Validators.required],
-			ingredients: ['', Validators.required],
-			directions: ['', Validators.required],
+			ingredients: this.formBuilder.array([]),
+			directions: this.formBuilder.array([]),
 		});
 	}
 
 	register(): void {
-		if (!this.ingredients.includes('') && !this.directions.includes('')) {
-			this.accountService.register(this.registerForm.value).subscribe({
-				next: () => this.router.navigateByUrl('/members'),
-				error: (error) => this.toastr.error(error.error),
-			});
-		}
+		this.accountService.register(this.registerForm.value).subscribe({
+			next: () => this.router.navigateByUrl('/members'),
+			error: (error) => this.toastr.error(error.error),
+		});
 	}
 
-	addRow(section: string) {
-		if (section === 'ingredients') this.ingredients.push('');
-		else this.directions.push('');
+	get directions(): FormArray {
+		return this.registerForm.get('directions') as FormArray;
 	}
 
-	removeRow(section: string) {
-		if (section === 'ingredients') this.ingredients.pop();
-		else this.directions.pop();
+	addDirection() {
+		this.directions.push(this.formBuilder.control('', Validators.required));
+	}
+
+	removeDirection(index: number) {
+		this.directions.removeAt(index);
 	}
 }
