@@ -52,6 +52,12 @@ export class MemberEditComponent implements OnInit {
 	}
 
 	updateMember(): void {
+		let ingredientsAsStr = this.ingredients.join(',').concat(' Directions');
+		let directionsAsStr = this.directions.join(',');
+
+		this.editForm!.value['recipe'] =
+			ingredientsAsStr.concat(directionsAsStr);
+
 		this.memberService.updateMember(this.editForm?.value).subscribe({
 			next: () => {
 				this.editForm?.reset(this.member);
