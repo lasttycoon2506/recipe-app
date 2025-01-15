@@ -26,6 +26,8 @@ export class MemberDetailComponent implements OnInit {
 	activeTab?: TabDirective;
 	msgThread: Message[] = [];
 	disableLike: boolean = false;
+	ingredients: string[] = [];
+	directions: string[] = [];
 
 	ngOnInit(): void {
 		this.route.data.subscribe({
@@ -67,5 +69,11 @@ export class MemberDetailComponent implements OnInit {
 	like(): void {
 		this.likesService.like(this.member.id);
 		this.disableLike = true;
+	}
+
+	spliceRecipe(member: Member) {
+		let recipe = member.recipe.split('Directions');
+		this.ingredients = recipe[0].split(',');
+		this.directions = recipe[1].split(',');
 	}
 }
