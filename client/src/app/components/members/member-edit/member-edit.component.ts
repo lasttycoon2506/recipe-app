@@ -45,7 +45,7 @@ export class MemberEditComponent implements OnInit {
 		this.memberService.getMember(username).subscribe({
 			next: (member) => {
 				this.member = member;
-				this.spliceRecipe(member);
+				this.parseRecipe(member);
 			},
 			error: (err) => console.log(err),
 		});
@@ -64,6 +64,7 @@ export class MemberEditComponent implements OnInit {
 			this.memberService.updateMember(this.editForm?.value).subscribe({
 				next: () => {
 					this.editForm?.reset(this.member);
+					this.loadMember();
 					this.toastr.success('Profile Updated!');
 				},
 				error: (err) => console.log(err),
@@ -75,16 +76,14 @@ export class MemberEditComponent implements OnInit {
 		this.member = event;
 	}
 
-	spliceRecipe(member: Member): void {
+	parseRecipe(member: Member): void {
 		let recipe = member.recipe.split('Directions');
 		this.ingredients = recipe[0].split(',');
 		this.directions = recipe[1].split(',');
 	}
 
 	addRow(): void {
-		console.log(this.ingredients);
 		this.ingredients.push('');
-		console.log(this.ingredients);
 	}
 
 	removeRow(): void {
