@@ -46,8 +46,20 @@
 		<div>
 			<tabset #memberTabs>
 				<tab heading="Recipe" (selectTab)="onActivateTab($event)"
-					>recipe here</tab
-				>
+					><h3 class="mt-3">Recipe</h3>
+					<h6>Ingredients:</h6>
+					<ul>
+						@for (ingredient of ingredients; track $index) {
+							<li>{{ ingredient }}</li>
+						}
+					</ul>
+					<h5>Directions:</h5>
+					<ul>
+						@for (direction of directions; track $index) {
+							<li>{{ direction }}</li>
+						}
+					</ul>
+				</tab>
 				<tab heading="Messages" (selectTab)="onActivateTab($event)"
 					><app-member-message
 						[username]="member.username"

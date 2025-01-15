@@ -31,7 +31,10 @@ export class MemberDetailComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.route.data.subscribe({
-			next: (data) => (this.member = data['member']),
+			next: (data) => {
+				(this.member = data['member']),
+					this.spliceRecipe(data['member']);
+			},
 		});
 
 		this.route.queryParams.subscribe({
