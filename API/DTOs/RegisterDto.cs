@@ -17,4 +17,7 @@ public class RegisterDto
 
     [Required]
     public string? Specialty { get; set; }
+
+    [Required]
+    public string? Recipe { get; set; }
 }
