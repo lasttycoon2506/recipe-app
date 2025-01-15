@@ -82,11 +82,13 @@ export class MemberEditComponent implements OnInit {
 		this.directions = recipe[1].split(',');
 	}
 
-	addRow(): void {
-		this.ingredients.push('');
+	addRow(section: string): void {
+		if (section === 'ingredients') this.ingredients.push('');
+		else this.directions.push('');
 	}
 
-	removeRow(): void {
-		this.ingredients.pop();
+	removeRow(section: string): void {
+		if (section === 'ingredients') this.ingredients.pop();
+		else this.directions.pop();
 	}
 }

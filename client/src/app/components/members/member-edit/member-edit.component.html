@@ -79,13 +79,13 @@
 							</ul>
 							<button
 								class="btn btn-success col-2 mx-3"
-								(click)="addRow()"
+								(click)="addRow('ingredients')"
 							>
 								Add
 							</button>
 							<button
 								class="btn btn-danger col-2"
-								(click)="removeRow()"
+								(click)="removeRow('directions')"
 							>
 								Remove
 							</button>
@@ -98,7 +98,7 @@
 								) {
 									<li>
 										<input
-											class="col-10"
+											class="col-12"
 											name="directions[{{ index }}]"
 											[(ngModel)]="directions[index]"
 										/>
@@ -107,13 +107,13 @@
 							</ul>
 							<button
 								class="btn btn-success col-2 mx-3"
-								(click)="addRow()"
+								(click)="addRow('directions')"
 							>
 								Add
 							</button>
 							<button
 								class="btn btn-danger col-2"
-								(click)="removeRow()"
+								(click)="removeRow('directions')"
 							>
 								Remove
 							</button>
