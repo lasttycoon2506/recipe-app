@@ -70,13 +70,25 @@ export class RegisterComponent implements OnInit {
 		});
 	}
 
-	addDirection(): void {
-		this.directions.push(this.formBuilder.control('', Validators.required));
+	addRow(section: string): void {
+		if (section === 'ingredients')
+			this.ingredients.push(
+				this.formBuilder.control('', Validators.required),
+			);
+		else
+			this.directions.push(
+				this.formBuilder.control('', Validators.required),
+			);
 	}
 
-	removeDirection(index: number): void {
-		this.directions.removeAt(index);
+	removeRow(index: number, section: string): void {
+		if (section === 'ingredients') this.ingredients.removeAt(index);
+		else this.directions.removeAt(index);
 	}
 
-	parseRecipe(ingredients: FormArray, directions: FormArray) {}
+	parseRecipe(ingredients: FormArray, directions: FormArray) {
+		let ingredsToStr = ingredients.value.join(',').append(' Directions');
+		let directionsToStr = directions.value.join(',');
+		console.log(ingredsToStr.concat(directionsToStr));
+	}
 }

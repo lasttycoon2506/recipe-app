@@ -85,7 +85,7 @@ export class MemberEditComponent implements OnInit {
 		else this.directions.pop();
 	}
 
-	recipeToString() {
+	recipeToString(): void {
 		let ingredientsAsStr = this.ingredients.join(',').concat(' Directions');
 		let directionsAsStr = this.directions.join(',');
 
