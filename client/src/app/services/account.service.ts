@@ -31,6 +31,7 @@ export class AccountService {
 	}
 
 	register(model: any) {
+		model.recipe = this.parseRecipe(model.ingredients, model.directions);
 		return this.http
 			.post<User>(this.baseUrl + 'account/register', model)
 			.pipe(
@@ -50,5 +51,11 @@ export class AccountService {
 	setCurrentUser(user: User) {
 		localStorage.setItem('user', JSON.stringify(user));
 		this.currentUser.set(user);
+	}
+
+	parseRecipe(ingredients: string[], directions: string[]): string {
+		let ingredsToStr = ingredients.join(',').concat(' Directions ');
+		let directionsToStr = directions.join(',');
+		return ingredsToStr.concat(directionsToStr);
 	}
 }

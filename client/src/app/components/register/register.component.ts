@@ -62,8 +62,6 @@ export class RegisterComponent implements OnInit {
 	}
 
 	register(): void {
-		this.parseRecipe(this.ingredients, this.directions);
-
 		this.accountService.register(this.registerForm.value).subscribe({
 			next: () => this.router.navigateByUrl('/members'),
 			error: (error) => this.toastr.error(error.error),
@@ -84,11 +82,5 @@ export class RegisterComponent implements OnInit {
 	removeRow(index: number, section: string): void {
 		if (section === 'ingredients') this.ingredients.removeAt(index);
 		else this.directions.removeAt(index);
-	}
-
-	parseRecipe(ingredients: FormArray, directions: FormArray) {
-		let ingredsToStr = ingredients.value.join(',').append(' Directions');
-		let directionsToStr = directions.value.join(',');
-		console.log(ingredsToStr.concat(directionsToStr));
 	}
 }
