@@ -18,4 +18,8 @@
 		{{ label() }} cant exceed
 		{{ control.getError("maxlength").requiredLength }} chars!
 	</div>
+	<div *ngIf="control?.hasError('pattern')" class="invalid-feedback">
+		{{ label() }} must have at least 1: uppercase, lowercase, number &
+		special char.
+	</div>
 </div>

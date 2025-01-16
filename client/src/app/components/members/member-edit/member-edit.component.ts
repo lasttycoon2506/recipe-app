@@ -72,7 +72,7 @@ export class MemberEditComponent implements OnInit {
 	parseRecipe(member: Member): void {
 		let recipe = member.recipe.split('Directions');
 		this.ingredients = recipe[0].split(',');
-		this.directions = recipe[1].split(',');
+		this.directions = recipe[1].trim().split(',');
 	}
 
 	addRow(section: string): void {
