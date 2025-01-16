@@ -62,34 +62,56 @@
 		<h6 class="mt-2 mb-1">Ingredients:</h6>
 		<div formArrayName="ingredients">
 			<div *ngFor="let ingredient of ingredients.controls; let i = index">
-				<label for="ingredient{{ i }}">Ingredient {{ i + 1 }}:</label>
+				<label class="me-1" for="ingredient{{ i }}">•</label>
 				<input
+					class="col-8"
 					type="text"
 					id="ingredient{{ i }}"
 					[formControlName]="i"
 				/>
-				<button type="button" (click)="removeRow(i, 'ingredients')">
+				<button
+					class="btn btn-remove btn-danger ms-2"
+					type="button"
+					(click)="removeRow(i, 'ingredients')"
+				>
 					Remove
 				</button>
 			</div>
 		</div>
-		<button type="button" (click)="addRow('ingredients')">Add</button>
+		<button
+			class="btn btn-success col-2"
+			type="button"
+			(click)="addRow('ingredients')"
+		>
+			Add
+		</button>
 
 		<h6 class="mt-2 mb-2">Directions:</h6>
 		<div formArrayName="directions">
 			<div *ngFor="let direction of directions.controls; let i = index">
-				<label for="direction{{ i }}">Direction {{ i + 1 }}:</label>
+				<label class="me-1" for="direction{{ i }}">{{ i + 1 }}:</label>
 				<input
+					class="col-9"
 					type="text"
 					id="direction{{ i }}"
 					[formControlName]="i"
 				/>
-				<button type="button" (click)="removeRow(i, 'directions')">
+				<button
+					class="btn btn-remove btn-danger ms-2"
+					type="button"
+					(click)="removeRow(i, 'directions')"
+				>
 					Remove
 				</button>
 			</div>
 		</div>
-		<button type="button" (click)="addRow('directions')">Add</button>
+		<button
+			class="btn btn-success col-2"
+			type="button"
+			(click)="addRow('directions')"
+		>
+			Add
+		</button>
 	</div>
 
 	<div class="form-group text-center">
