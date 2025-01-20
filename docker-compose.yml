@@ -4,4 +4,6 @@ services:
     container_name: sql
     environment:
       ACCEPT_EULA: "1"
-      MSSQL_SA_PASSWORD: "PaSsw0rd"
+      MSSQL_SA_PASSWORD: "Password@1"
+    ports:
+      - "1433:1433"

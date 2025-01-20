@@ -51,15 +51,17 @@ public class DataContext(DbContextOptions options)
             .HasOne(source => source.TargetUser)
             .WithMany(target => target.WhoLikesUser)
             .HasForeignKey(source => source.TargetUserId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.NoAction);
 
         builder
             .Entity<Message>()
             .HasOne(sender => sender.Sender)
-            .WithMany(sender => sender.MessagesSent);
+            .WithMany(sender => sender.MessagesSent)
+            .OnDelete(DeleteBehavior.Restrict);
         builder
             .Entity<Message>()
             .HasOne(receiver => receiver.Receiver)
-            .WithMany(receiver => receiver.MessagesReceived);
+            .WithMany(receiver => receiver.MessagesReceived)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }
