@@ -6,7 +6,7 @@ Used [this learning resource](https://www.udemy.com/course/build-an-app-with-asp
 
 ### Features
 
--Creation of new users 
+-Creation of new users \n
 -Login/logout for user
 -Match recipes with other users 
 -View other users' profile/recipe
