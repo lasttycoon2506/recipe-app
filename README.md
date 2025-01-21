@@ -6,12 +6,12 @@ Used [this learning resource](https://www.udemy.com/course/build-an-app-with-asp
 
 ### Features
 
--Creation of new users \n
--Login/logout for user
--Match recipes with other users 
--View other users' profile/recipe
--Message other users
--Upload photo(s)
+-Creation of new users  
+-Login/logout for user  
+-Match recipes with other users  
+-View other users' profile/recipe  
+-Message other users  
+-Upload photo(s)  
 -Edit profile
 
 ## Requirements
