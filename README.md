@@ -18,6 +18,7 @@ Used [this learning resource](https://www.udemy.com/course/build-an-app-with-asp
 
 -.NET SDK (v9 used for this app)
 
+## Navigation
 ### Home
 ![image](https://github.com/user-attachments/assets/f71f40f1-900d-4289-a5a2-5568471bb86a)
 
