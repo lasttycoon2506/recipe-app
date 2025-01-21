@@ -17,3 +17,7 @@ Used [this learning resource](https://www.udemy.com/course/build-an-app-with-asp
 ## Requirements
 
 -.NET SDK (v9 used for this app)
+
+### Home
+![Screenshot 2025-01-21 114113](https://github.com/user-attachments/assets/da5bc8ce-b228-4794-8917-b38e2973b4ed)
+
