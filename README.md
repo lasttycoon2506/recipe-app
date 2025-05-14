@@ -1,5 +1,3 @@
-Used [this learning resource](https://www.udemy.com/course/build-an-app-with-aspnet-core-and-angular-from-scratch/) as a foundational guide
-
 # Overview
 
 **Recipe-Matching App using Angular/TypeScript/Bootstrap/C#/.NET/Azure-SQL**
